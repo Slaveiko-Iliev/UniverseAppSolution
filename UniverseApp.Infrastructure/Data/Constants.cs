@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UniverseApp.Infrastructure.Data
 {
-    public class EntityConstants
+    public class Constants
     {
         public static class PlanetConst
         {
@@ -32,10 +32,18 @@ namespace UniverseApp.Infrastructure.Data
 
         public static class MovieConst
         {
+            public const int TitleMinLenght = 60;
             public const int TitleMaxLenght = 60;
+            public const int DtoEpisodeIdMinLenght = 1;
+            public const int DtoEpisodeIdMaxLenght = 2;
+            public const int DescriptionMinLenght = 50;
             public const int DescriptionMaxLenght = 500;
+            public const int DirectorMinLenght = 6;
             public const int DirectorMaxLenght = 100;
+            public const int ProducerMinLenght = 6;
             public const int ProducerMaxLenght = 100;
+            public const int UrlMinLenght = 4;
+            public const int UrlMaxLenght = 70;
         }
 
         public const string FieldMinMaxLengthErrorMesssage = "The {0} must be between {2} and {1} characters long.";

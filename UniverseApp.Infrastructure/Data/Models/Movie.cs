@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using static UniverseApp.Infrastructure.Data.EntityConstants.MovieConst;
+using static UniverseApp.Infrastructure.Data.Constants.MovieConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
@@ -17,7 +17,7 @@ namespace UniverseApp.Infrastructure.Data.Models
 		[Required]
 		[MaxLength(TitleMaxLenght)]
 		[Comment("Movie Title")]
-		public required string Title { get; set; }
+		public string Title { get; set; } = null!;
 
         [Required]
 		[Comment("Movie Episode Identifier")]
@@ -31,24 +31,28 @@ namespace UniverseApp.Infrastructure.Data.Models
 		[Required]
 		[MaxLength(DirectorMaxLenght)]
 		[Comment("Movie Director")]
-		public required string Director { get; set; } // ToDo: Create Director Entity
+		public required string Director { get; set; }
 
 		[Required]
 		[MaxLength(ProducerMaxLenght)]
 		[Comment("Movie Producer")]
-		public required string Producer { get; set; } // ToDo: Create Producer Entity "Gary Kurtz, Rick McCallum"
+		public required string Producer { get; set; }
 
 		[Comment("Movie Release Date")]
 		public DateTime ReleaseDate { get; set; } // format "1977-05-25"
 
-		public ICollection<CharacterMovie> CharactersMovies { get; set; } = new HashSet<CharacterMovie>();
+		public ICollection<Character> Characters { get; set; } = new HashSet<Character>();
+
+		public ICollection<Planet> Planets { get; set; } = new HashSet<Planet>();
+
+		public ICollection<Starship> Starships { get; set; } = new HashSet<Starship>();
+
+		public ICollection<Vehicle> Vehicles { get; set; } = new HashSet<Vehicle>();
+
+		public ICollection<Specie> Species { get; set; } = new HashSet<Specie>();
+
+		[Required]
+		[MaxLength(UrlMaxLenght)]
+		public string Url { get; set; } = null!;
 	}
 }
-
-	//"planets": [],
-	//"starships": [],
-	//"vehicles": [],
-	//"species": [],
-	//"created": "2014-12-10T14:23:31.880000Z",
-	//"edited": "2014-12-20T19:49:45.256000Z",
-	//"url": "https://swapi.dev/api/films/1/"

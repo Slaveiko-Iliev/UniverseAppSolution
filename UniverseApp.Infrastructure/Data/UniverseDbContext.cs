@@ -13,13 +13,13 @@ namespace UniverseApp.Infrastructure.Data
 
         public required DbSet<Movie> Movies { get; set; }
         public required DbSet<Character> Characters { get; set; }
-        public required DbSet<CharacterMovie> CharactersMovies { get; set; }
         public required DbSet<Planet> Planets { get; set; }
+        public required DbSet<Specie> Species { get; set; }
+        public required DbSet<Starship> Starships { get; set; }
+        public required DbSet<Vehicle> Vehicles { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
-            builder.Entity<CharacterMovie>()
-				.HasKey(cm => new { cm.CharacterId, cm.MovieId });
 
 			base.OnModelCreating(builder);
 		}
