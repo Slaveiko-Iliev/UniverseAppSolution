@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static UniverseApp.Infrastructure.Data.EntityConstants;
-using static UniverseApp.Infrastructure.Data.EntityConstants.PlanetConst;
+using static UniverseApp.Infrastructure.Data.Constants;
+using static UniverseApp.Infrastructure.Data.Constants.PlanetConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
@@ -21,28 +21,36 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         [Required]
         [MaxLength(NameMaxLenght)]
-        public required string Name { get; set; }
+        [Comment("Planet Name")]
+        public string Name { get; set; } = null!;
 
         [MaxLength(NameMaxLenght)]
+        [Comment("Rotation Period of Planet")]
         public int? RotationPeriod { get; set; }
 
         [MaxLength(NameMaxLenght)]
+        [Comment("Orbital Period of Planet")]
         public int? OrbitalPeriod { get; set; }
 
         [MaxLength(NameMaxLenght)]
+        [Comment("Climate of Planet")]
         public string[]? Climate { get; set; }
 
         [MaxLength(NameMaxLenght)]
+        [Comment("Gravity of Planet")]
         public string? Gravity { get; set; }
 
         [MaxLength(NameMaxLenght)]
+        [Comment("Terrain of Planet")]
         public string[]? Terrain { get; set; }
 
         [MaxLength(NameMaxLenght)]
         [Column(TypeName = "decimal(5, 2)")]
+        [Comment("Surface Water of Planet")]
         public double? SurfaceWater { get; set; }
 
         [MaxLength(NameMaxLenght)]
+        [Comment("Population of Planet")]
         public int? Population { get; set; }
 
         public ICollection<Character> Character { get; set; } = new List<Character>();
@@ -50,9 +58,9 @@ namespace UniverseApp.Infrastructure.Data.Models
         public ICollection<Movie> Movies { get; set; } = new List<Movie>();
 
         [Required]
-        [Url]
         [MaxLength(UrlMaxLenght)]
-        public required string Url { get; set; }
+        [Comment("Planet Url")]
+        public string Url { get; set; } = null;
 
     }
 }
