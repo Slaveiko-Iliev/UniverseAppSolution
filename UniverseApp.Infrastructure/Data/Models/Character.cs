@@ -1,16 +1,71 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static UniverseApp.Infrastructure.Data.Constants.CharacterConst;
+using static UniverseApp.Infrastructure.Data.Constants.General;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
 	public class Character
 	{
+		[Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+		[Comment("Character Identifier")]
 		public int Id { get; set; }
 
-		public ICollection<CharacterMovie> CharactersMovies { get; set; } = new HashSet<CharacterMovie>();
+		[Required]
+		[MaxLength(NameMaxLenght)]
+		[Comment("Character Name")]
+		public string Name { get; set; } = null!;
+
+		[Comment("Character Height")]
+		public int? Height { get; set; }
+
+		[Comment("Character Mass")]
+		public int?Mass { get; set; }
+
+		[MaxLength(HairColorMaxLenght)]
+		[Comment("Character Hair Color")]
+		public string? HairColor { get; set; } // is nullable?
+
+		[MaxLength(SkinColorMaxLenght)]
+		[Comment("Character Skin Color")]
+		public string? SkinColor { get; set; } // is nullable?
+
+		[MaxLength(EyeColorMaxLenght)]
+		[Comment("Character Eye Color")]
+		public string? EyeColor { get; set; } // is nullable?
+
+		[MaxLength(BirthYearMaxLenght)]
+		[Comment("Character Birth Year")]
+		public string? BirthYear { get; set; } // is nullable?
+
+		[MaxLength(GenderMaxLenght)]
+		[Comment("Character Gender")]
+		public string? Gender { get; set; }
+
+		[Comment("Character Home Planet")]
+		public int? PlanetId { get; set; }
+		[ForeignKey(nameof(PlanetId))]
+		public Planet? Planet { get; set; }
+
+		public ICollection<Movie> Movies { get; set; } = new HashSet<Movie>();
+
+		public ICollection<Specie> Species { get; set; } = new HashSet<Specie>();
+
+		public ICollection<Vehicle> Vehicles { get; set; } = new HashSet<Vehicle>();
+
+		public ICollection<Starship> Starships { get; set; } = new HashSet<Starship>();
+
+		[Required]
+		[MaxLength(UrlMaxLenght)]
+		[Comment("Character Url")]
+		public string? Url { get; set; } = null!;
 	}
 }
 

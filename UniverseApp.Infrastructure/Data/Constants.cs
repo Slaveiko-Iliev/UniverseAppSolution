@@ -46,6 +46,33 @@ namespace UniverseApp.Infrastructure.Data
             public const int UrlMaxLenght = 70;
         }
 
-        public const string FieldMinMaxLengthErrorMesssage = "The {0} must be between {2} and {1} characters long.";
+        public static class CharacterConst
+        {
+            public const int NameMinLenght = 3;
+            public const int NameMaxLenght = 30;
+            public const int HeightMinLenght = 1;
+            public const int HeightMaxLenght = 3;
+            public const int MassMinLenght = 1;
+            public const int MassMaxLenght = 3;
+            public const int HairColorMinLenght = 3;
+            public const int HairColorMaxLenght = 20;
+            public const int SkinColorMinLenght = 3;
+            public const int SkinColorMaxLenght = 20;
+            public const int EyeColorMinLenght = 3;
+            public const int EyeColorMaxLenght = 20;
+            public const int BirthYearMinLenght = 4;
+            public const int BirthYearMaxLenght = 10;
+            public const int GenderMinLenght = 4;
+            public const int GenderMaxLenght = 6;
+            public const int UrlMinLenght = 4;
+            public const int UrlMaxLenght = 70;
+            public const int HomeworldMinLenght = 4;
+            public const int HomeworldMaxLenght = 50;
+        }
+
+        public static class General
+        {
+            public const string FieldMinMaxLengthErrorMesssage = "The {0} must be between {2} and {1} characters long.";
+        }
     }
 }
