@@ -70,6 +70,32 @@ namespace UniverseApp.Infrastructure.Data
             public const int HomeworldMaxLenght = 50;
         }
 
+        public static class SpecieConst
+        {
+            public const int NameMinLenght = 3;
+            public const int NameMaxLenght = 30;
+            public const int ClassificationMinLenght = 3;
+            public const int ClassificationMaxLenght = 30;
+            public const int DesignationMinLenght = 5;
+            public const int DesignationMaxLenght = 30;
+            public const int AverageHeightMinLenght = 1;
+            public const int AverageHeightMaxLenght = 3;
+            public const int SkinColorsMinLenght = 3;
+            public const int SkinColorsMaxLenght = 50;
+            public const int HairColorsMinLenght = 3;
+            public const int HairColorsMaxLenght = 50;
+            public const int EyeColorsMinLenght = 3;
+            public const int EyeColorsMaxLenght = 50;
+            public const int AverageLifespanMinLenght = 1;
+            public const int AverageLifespanMaxLenght = 3;
+            public const int LanguageMinLenght = 3;
+            public const int LanguageMaxLenght = 30;
+            public const int HomeworldMinLenght = 4;
+            public const int HomeworldMaxLenght = 50;
+            public const int UrlMinLenght = 4;
+            public const int UrlMaxLenght = 70;
+        }
+
         public static class General
         {
             public const string FieldMinMaxLengthErrorMesssage = "The {0} must be between {2} and {1} characters long.";
