@@ -8,46 +8,46 @@ using System.Text;
 using System.Threading.Tasks;
 using UniverseApp.Infrastructure.Data.Models;
 using static UniverseApp.Infrastructure.Data.Constants.PlanetConst;
-using static UniverseApp.Infrastructure.Data.Constants;
+using static UniverseApp.Infrastructure.Data.Constants.General;
 
 namespace UniverseApp.Infrastructure.Data.DTOs
 {
-    public class PlanetInfoDto
+    internal class PlanetInfoDto
     {
         [Required]
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public required string Name { get; set; }
+        internal required string Name { get; set; }
 
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public string? RotationPeriod { get; set; }
+        internal string? RotationPeriod { get; set; }
 
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public string? OrbitalPeriod { get; set; }
+        internal string? OrbitalPeriod { get; set; }
 
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public string? Climate { get; set; }
+        internal string? Climate { get; set; }
 
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public string? Gravity { get; set; }
+        internal string? Gravity { get; set; }
 
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public string? Terrain { get; set; }
+        internal string? Terrain { get; set; }
 
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public string? SurfaceWater { get; set; }
+        internal string? SurfaceWater { get; set; }
 
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public string? Population { get; set; }
+        internal string? Population { get; set; }
 
         [MaxLength(ResidentsMaxLenght)]
-        public string[]? Residents { get; set; }
+        internal string[]? Residents { get; set; }
 
         [MaxLength(FilmsMaxLenght)]
-        public string[]? Films { get; set; }
+        internal string[]? Films { get; set; }
 
         [Required]
         [Url]
         [StringLength(UrlMaxLenght, MinimumLength = UrlMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public required string Url { get; set; }
+        internal required string Url { get; set; }
     }
 }
