@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static UniverseApp.Infrastructure.Data.Constants.General;
+using System.ComponentModel.DataAnnotations.Schema;
 using static UniverseApp.Infrastructure.Data.Constants.SpecieConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
@@ -55,7 +49,9 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         [MaxLength(HomeworldMaxLenght)]
         [Comment("Specie Homeworld")]
-        public string? Homeworld { get; set; } //is nullable?
+        public int? PlanetId { get; set; } //is nullable?
+        [ForeignKey(nameof(PlanetId))]
+        public Planet? Planet { get; set; }
 
         [MaxLength(LanguageMaxLenght)]
         [Comment("Specie Language")]
