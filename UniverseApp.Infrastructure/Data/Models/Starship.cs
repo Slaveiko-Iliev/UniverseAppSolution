@@ -13,5 +13,9 @@ namespace UniverseApp.Infrastructure.Data.Models
         [MaxLength(MGLTMaxLenght)]
         [Comment("Starship MGLT")]
         public int? MGLT { get; set; }
+
+        [Required]
+        [Comment("Whether the Entity has been deleted")]
+        public bool IsDeleted { get; set; } = false;
     }
 }

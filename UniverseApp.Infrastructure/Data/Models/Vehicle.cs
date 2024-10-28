@@ -65,5 +65,9 @@ namespace UniverseApp.Infrastructure.Data.Models
         [MaxLength(UrlMaxLenght)]
         [Comment("Vehicle URL")]
         public string Url { get; set; } = null!;
+
+        [Required]
+        [Comment("Whether the Entity has been deleted")]
+        public bool IsDeleted { get; set; } = false;
     }
 }

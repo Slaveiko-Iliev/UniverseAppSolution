@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static UniverseApp.Infrastructure.Data.Constants;
+using System.ComponentModel.DataAnnotations.Schema;
 using static UniverseApp.Infrastructure.Data.Constants.PlanetConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
@@ -60,7 +54,11 @@ namespace UniverseApp.Infrastructure.Data.Models
         [Required]
         [MaxLength(UrlMaxLenght)]
         [Comment("Planet Url")]
-        public string Url { get; set; } = null;
+        public string Url { get; set; } = null!;
+
+        [Required]
+        [Comment("Whether the Entity has been deleted")]
+        public bool IsDeleted { get; set; } = false;
 
     }
 }
