@@ -1,21 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static UniverseApp.Infrastructure.Data.Constants.StarshipConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
-    public class Starship
+    public class Starship : Vehicle
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Comment("Starship Identifier")]
-        public int Id { get; set; }
+        [MaxLength(HyperdriveRatingMaxLenght)]
+        [Comment("Starship Hyperdrive Rating")]
+        public double? HyperdriveRating { get; set; }
 
-        public ICollection<Movie> Movies { get; set; } = new HashSet<Movie>();
+        [MaxLength(MGLTMaxLenght)]
+        [Comment("Starship MGLT")]
+        public int? MGLT { get; set; }
     }
 }

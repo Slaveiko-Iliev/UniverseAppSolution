@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UniverseApp.Infrastructure.Data
+﻿namespace UniverseApp.Infrastructure.Data
 {
     public class Constants
     {
@@ -94,6 +88,42 @@ namespace UniverseApp.Infrastructure.Data
             public const int HomeworldMaxLenght = 50;
             public const int UrlMinLenght = 4;
             public const int UrlMaxLenght = 70;
+        }
+
+        public static class VehicleConst
+        {
+            public const int NameMinLenght = 3;
+            public const int NameMaxLenght = 40;
+            public const int ModelMinLenght = 3;
+            public const int ModelMaxLenght = 40;
+            public const int ManufacturerMinLenght = 3;
+            public const int ManufacturerMaxLenght = 50;
+            public const int CostInCreditsMinLenght = 1;
+            public const int CostInCreditsMaxLenght = 15;
+            public const int LengthMinLenght = 1;
+            public const int LengthMaxLenght = 7;
+            public const int MaxAtmospheringSpeedMinLenght = 1;
+            public const int MaxAtmospheringSpeedMaxLenght = 4;
+            public const int CrewMinLenght = 1;
+            public const int CrewMaxLenght = 10;
+            public const int PassengersMinLenght = 1;
+            public const int PassengersMaxLenght = 10;
+            public const int CargoCapacityMinLenght = 1;
+            public const int CargoCapacityMaxLenght = 15;
+            public const int ConsumablesMinLenght = 5;
+            public const int ConsumablesMaxLenght = 20;
+            public const int ClassMinLenght = 3;
+            public const int ClassMaxLenght = 15;
+            public const int UrlMinLenght = 4;
+            public const int UrlMaxLenght = 70;
+        }
+
+        public static class StarshipConst
+        {
+            public const int HyperdriveRatingMinLenght = 1;
+            public const int HyperdriveRatingMaxLenght = 3;
+            public const int MGLTMinLenght = 1;
+            public const int MGLTMaxLenght = 3;
         }
 
         public static class General
