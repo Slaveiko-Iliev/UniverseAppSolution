@@ -57,7 +57,7 @@ namespace UniverseApp.Infrastructure.Data.Models
         [Comment("Vehicle Class")]
         public string? Class { get; set; }
 
-        public ICollection<Character> Pilots { get; set; } = new HashSet<Character>();
+        public ICollection<Character> Characters { get; set; } = new HashSet<Character>();
 
         public ICollection<Movie> Movies { get; set; } = new HashSet<Movie>();
 

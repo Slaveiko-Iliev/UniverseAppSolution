@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using UniverseApp.Infrastructure.Configurations;
 
 namespace UniverseApp.Infrastructure.Extension
 {
