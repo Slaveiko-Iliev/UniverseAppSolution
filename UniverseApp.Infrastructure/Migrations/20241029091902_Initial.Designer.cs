@@ -12,7 +12,7 @@ using UniverseApp.Infrastructure.Data;
 namespace UniverseApp.Infrastructure.Migrations
 {
     [DbContext(typeof(UniverseDbContext))]
-    [Migration("20241024131525_Initial")]
+    [Migration("20241029091902_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -38,6 +38,51 @@ namespace UniverseApp.Infrastructure.Migrations
                     b.HasIndex("MoviesId");
 
                     b.ToTable("CharacterMovie");
+                });
+
+            modelBuilder.Entity("CharacterSpecie", b =>
+                {
+                    b.Property<int>("CharactersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpeciesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CharactersId", "SpeciesId");
+
+                    b.HasIndex("SpeciesId");
+
+                    b.ToTable("CharacterSpecie");
+                });
+
+            modelBuilder.Entity("CharacterStarship", b =>
+                {
+                    b.Property<int>("CharactersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StarshipsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CharactersId", "StarshipsId");
+
+                    b.HasIndex("StarshipsId");
+
+                    b.ToTable("CharacterStarship");
+                });
+
+            modelBuilder.Entity("CharacterVehicle", b =>
+                {
+                    b.Property<int>("CharactersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VehiclesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CharactersId", "VehiclesId");
+
+                    b.HasIndex("VehiclesId");
+
+                    b.ToTable("CharacterVehicle");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -332,6 +377,10 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Character Height");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasComment("Whether the Entity has been deleted");
+
                     b.Property<int?>("Mass")
                         .HasColumnType("int")
                         .HasComment("Character Mass");
@@ -386,6 +435,10 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Movie Episode Identifier");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasComment("Whether the Entity has been deleted");
+
                     b.Property<string>("Producer")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -430,6 +483,10 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasComment("Gravity of Planet");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasComment("Whether the Entity has been deleted");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -479,12 +536,67 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Specie Identifier");
 
-                    b.Property<int?>("CharacterId")
-                        .HasColumnType("int");
+                    b.Property<string>("AverageHeight")
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)")
+                        .HasComment("Specie Average Height");
+
+                    b.Property<string>("AverageLifespan")
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)")
+                        .HasComment("Specie Average Lifespan");
+
+                    b.Property<string>("Classification")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasComment("Specie Classification");
+
+                    b.Property<string>("Designation")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasComment("Specie Designation");
+
+                    b.Property<string>("EyeColors")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("Specie EyeColor");
+
+                    b.Property<string>("HairColors")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("Specie HairColor");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasComment("Whether the Entity has been deleted");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasComment("Specie Name");
+
+                    b.Property<int?>("PlanetId")
+                        .HasMaxLength(50)
+                        .HasColumnType("int")
+                        .HasComment("Specie Homeworld");
+
+                    b.Property<string>("SkinColors")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("Specie SkinColor");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)")
+                        .HasComment("Specie Url");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CharacterId");
+                    b.HasIndex("PlanetId");
 
                     b.ToTable("Species");
                 });
@@ -493,14 +605,85 @@ namespace UniverseApp.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int")
-                        .HasComment("Starship Identifier");
+                        .HasComment("Vehicle Identifier");
 
-                    b.Property<int?>("CharacterId")
-                        .HasColumnType("int");
+                    b.Property<int?>("CargoCapacity")
+                        .HasMaxLength(15)
+                        .HasColumnType("int")
+                        .HasComment("Vehicle Cargo Capacity");
+
+                    b.Property<string>("Class")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)")
+                        .HasComment("Vehicle Class");
+
+                    b.Property<string>("Consumables")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasComment("Vehicle Consumables");
+
+                    b.Property<int?>("CostInCredits")
+                        .HasMaxLength(15)
+                        .HasColumnType("int")
+                        .HasComment("Vehicle Cost In Credits");
+
+                    b.Property<int?>("Crew")
+                        .HasMaxLength(10)
+                        .HasColumnType("int")
+                        .HasComment("Vehicle Crew");
+
+                    b.Property<double?>("HyperdriveRating")
+                        .HasMaxLength(3)
+                        .HasColumnType("float")
+                        .HasComment("Starship Hyperdrive Rating");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasComment("Whether the Entity has been deleted");
+
+                    b.Property<double?>("Length")
+                        .HasMaxLength(7)
+                        .HasColumnType("float")
+                        .HasComment("Vehicle Length");
+
+                    b.Property<int?>("MGLT")
+                        .HasMaxLength(3)
+                        .HasColumnType("int")
+                        .HasComment("Starship MGLT");
+
+                    b.Property<string>("Manufacturer")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("Vehicle Manufacturer");
+
+                    b.Property<int?>("MaxAtmospheringSpeed")
+                        .HasMaxLength(4)
+                        .HasColumnType("int")
+                        .HasComment("Vehicle Max Atmosphering Speed");
+
+                    b.Property<string>("Model")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasComment("Vehicle Model");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasComment("Vehicle Name");
+
+                    b.Property<int?>("Passengers")
+                        .HasMaxLength(10)
+                        .HasColumnType("int")
+                        .HasComment("Vehicle Passengers");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)")
+                        .HasComment("Vehicle URL");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CharacterId");
 
                     b.ToTable("Starships");
                 });
@@ -511,12 +694,73 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Vehicle Identifier");
 
-                    b.Property<int?>("CharacterId")
-                        .HasColumnType("int");
+                    b.Property<int?>("CargoCapacity")
+                        .HasMaxLength(15)
+                        .HasColumnType("int")
+                        .HasComment("Vehicle Cargo Capacity");
+
+                    b.Property<string>("Class")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)")
+                        .HasComment("Vehicle Class");
+
+                    b.Property<string>("Consumables")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasComment("Vehicle Consumables");
+
+                    b.Property<int?>("CostInCredits")
+                        .HasMaxLength(15)
+                        .HasColumnType("int")
+                        .HasComment("Vehicle Cost In Credits");
+
+                    b.Property<int?>("Crew")
+                        .HasMaxLength(10)
+                        .HasColumnType("int")
+                        .HasComment("Vehicle Crew");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasComment("Whether the Entity has been deleted");
+
+                    b.Property<double?>("Length")
+                        .HasMaxLength(7)
+                        .HasColumnType("float")
+                        .HasComment("Vehicle Length");
+
+                    b.Property<string>("Manufacturer")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("Vehicle Manufacturer");
+
+                    b.Property<int?>("MaxAtmospheringSpeed")
+                        .HasMaxLength(4)
+                        .HasColumnType("int")
+                        .HasComment("Vehicle Max Atmosphering Speed");
+
+                    b.Property<string>("Model")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasComment("Vehicle Model");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasComment("Vehicle Name");
+
+                    b.Property<int?>("Passengers")
+                        .HasMaxLength(10)
+                        .HasColumnType("int")
+                        .HasComment("Vehicle Passengers");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)")
+                        .HasComment("Vehicle URL");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CharacterId");
 
                     b.ToTable("Vehicles");
                 });
@@ -532,6 +776,51 @@ namespace UniverseApp.Infrastructure.Migrations
                     b.HasOne("UniverseApp.Infrastructure.Data.Models.Movie", null)
                         .WithMany()
                         .HasForeignKey("MoviesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CharacterSpecie", b =>
+                {
+                    b.HasOne("UniverseApp.Infrastructure.Data.Models.Character", null)
+                        .WithMany()
+                        .HasForeignKey("CharactersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UniverseApp.Infrastructure.Data.Models.Specie", null)
+                        .WithMany()
+                        .HasForeignKey("SpeciesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CharacterStarship", b =>
+                {
+                    b.HasOne("UniverseApp.Infrastructure.Data.Models.Character", null)
+                        .WithMany()
+                        .HasForeignKey("CharactersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UniverseApp.Infrastructure.Data.Models.Starship", null)
+                        .WithMany()
+                        .HasForeignKey("StarshipsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CharacterVehicle", b =>
+                {
+                    b.HasOne("UniverseApp.Infrastructure.Data.Models.Character", null)
+                        .WithMany()
+                        .HasForeignKey("CharactersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UniverseApp.Infrastructure.Data.Models.Vehicle", null)
+                        .WithMany()
+                        .HasForeignKey("VehiclesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -658,32 +947,11 @@ namespace UniverseApp.Infrastructure.Migrations
 
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Specie", b =>
                 {
-                    b.HasOne("UniverseApp.Infrastructure.Data.Models.Character", null)
-                        .WithMany("Species")
-                        .HasForeignKey("CharacterId");
-                });
+                    b.HasOne("UniverseApp.Infrastructure.Data.Models.Planet", "Planet")
+                        .WithMany()
+                        .HasForeignKey("PlanetId");
 
-            modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Starship", b =>
-                {
-                    b.HasOne("UniverseApp.Infrastructure.Data.Models.Character", null)
-                        .WithMany("Starships")
-                        .HasForeignKey("CharacterId");
-                });
-
-            modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Vehicle", b =>
-                {
-                    b.HasOne("UniverseApp.Infrastructure.Data.Models.Character", null)
-                        .WithMany("Vehicles")
-                        .HasForeignKey("CharacterId");
-                });
-
-            modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Character", b =>
-                {
-                    b.Navigation("Species");
-
-                    b.Navigation("Starships");
-
-                    b.Navigation("Vehicles");
+                    b.Navigation("Planet");
                 });
 
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Planet", b =>

@@ -21,7 +21,7 @@ namespace UniverseApp.Infrastructure.Data.DTOs
         [Required]
         [JsonPropertyName("episode_id")]
         [StringLength(DtoEpisodeIdMaxLenght, MinimumLength = DtoEpisodeIdMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        internal int EpisodeId { get; set; }
+        internal required string EpisodeId { get; set; }
 
         [Required]
         [JsonPropertyName("opening_crawl")]

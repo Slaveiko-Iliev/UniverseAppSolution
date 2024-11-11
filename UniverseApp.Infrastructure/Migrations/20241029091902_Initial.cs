@@ -61,7 +61,8 @@ namespace UniverseApp.Infrastructure.Migrations
                     Director = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, comment: "Movie Director"),
                     Producer = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, comment: "Movie Producer"),
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Movie Release Date"),
-                    Url = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false)
+                    Url = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, comment: "Whether the Entity has been deleted")
                 },
                 constraints: table =>
                 {
@@ -82,11 +83,62 @@ namespace UniverseApp.Infrastructure.Migrations
                     Terrain = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true, comment: "Terrain of Planet"),
                     SurfaceWater = table.Column<decimal>(type: "decimal(5,2)", maxLength: 50, nullable: true, comment: "Surface Water of Planet"),
                     Population = table.Column<int>(type: "int", maxLength: 50, nullable: true, comment: "Population of Planet"),
-                    Url = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false, comment: "Planet Url")
+                    Url = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false, comment: "Planet Url"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, comment: "Whether the Entity has been deleted")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Planets", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Starships",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false, comment: "Vehicle Identifier"),
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false, comment: "Vehicle Name"),
+                    Model = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true, comment: "Vehicle Model"),
+                    Manufacturer = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true, comment: "Vehicle Manufacturer"),
+                    CostInCredits = table.Column<int>(type: "int", maxLength: 15, nullable: true, comment: "Vehicle Cost In Credits"),
+                    Length = table.Column<double>(type: "float", maxLength: 7, nullable: true, comment: "Vehicle Length"),
+                    MaxAtmospheringSpeed = table.Column<int>(type: "int", maxLength: 4, nullable: true, comment: "Vehicle Max Atmosphering Speed"),
+                    Crew = table.Column<int>(type: "int", maxLength: 10, nullable: true, comment: "Vehicle Crew"),
+                    Passengers = table.Column<int>(type: "int", maxLength: 10, nullable: true, comment: "Vehicle Passengers"),
+                    CargoCapacity = table.Column<int>(type: "int", maxLength: 15, nullable: true, comment: "Vehicle Cargo Capacity"),
+                    Consumables = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true, comment: "Vehicle Consumables"),
+                    Class = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true, comment: "Vehicle Class"),
+                    Url = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false, comment: "Vehicle URL"),
+                    HyperdriveRating = table.Column<double>(type: "float", maxLength: 3, nullable: true, comment: "Starship Hyperdrive Rating"),
+                    MGLT = table.Column<int>(type: "int", maxLength: 3, nullable: true, comment: "Starship MGLT"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, comment: "Whether the Entity has been deleted")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Starships", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Vehicles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false, comment: "Vehicle Identifier"),
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false, comment: "Vehicle Name"),
+                    Model = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true, comment: "Vehicle Model"),
+                    Manufacturer = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true, comment: "Vehicle Manufacturer"),
+                    CostInCredits = table.Column<int>(type: "int", maxLength: 15, nullable: true, comment: "Vehicle Cost In Credits"),
+                    Length = table.Column<double>(type: "float", maxLength: 7, nullable: true, comment: "Vehicle Length"),
+                    MaxAtmospheringSpeed = table.Column<int>(type: "int", maxLength: 4, nullable: true, comment: "Vehicle Max Atmosphering Speed"),
+                    Crew = table.Column<int>(type: "int", maxLength: 10, nullable: true, comment: "Vehicle Crew"),
+                    Passengers = table.Column<int>(type: "int", maxLength: 10, nullable: true, comment: "Vehicle Passengers"),
+                    CargoCapacity = table.Column<int>(type: "int", maxLength: 15, nullable: true, comment: "Vehicle Cargo Capacity"),
+                    Consumables = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true, comment: "Vehicle Consumables"),
+                    Class = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true, comment: "Vehicle Class"),
+                    Url = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false, comment: "Vehicle URL"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, comment: "Whether the Entity has been deleted")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vehicles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,7 +261,8 @@ namespace UniverseApp.Infrastructure.Migrations
                     BirthYear = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true, comment: "Character Birth Year"),
                     Gender = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true, comment: "Character Gender"),
                     PlanetId = table.Column<int>(type: "int", nullable: true, comment: "Character Home Planet"),
-                    Url = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false, comment: "Character Url")
+                    Url = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false, comment: "Character Url"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, comment: "Whether the Entity has been deleted")
                 },
                 constraints: table =>
                 {
@@ -246,102 +299,30 @@ namespace UniverseApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CharacterMovie",
-                columns: table => new
-                {
-                    CharactersId = table.Column<int>(type: "int", nullable: false),
-                    MoviesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CharacterMovie", x => new { x.CharactersId, x.MoviesId });
-                    table.ForeignKey(
-                        name: "FK_CharacterMovie_Characters_CharactersId",
-                        column: x => x.CharactersId,
-                        principalTable: "Characters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CharacterMovie_Movies_MoviesId",
-                        column: x => x.MoviesId,
-                        principalTable: "Movies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Species",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false, comment: "Specie Identifier"),
-                    CharacterId = table.Column<int>(type: "int", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false, comment: "Specie Name"),
+                    Classification = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false, comment: "Specie Classification"),
+                    Designation = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false, comment: "Specie Designation"),
+                    AverageHeight = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true, comment: "Specie Average Height"),
+                    SkinColors = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true, comment: "Specie SkinColor"),
+                    HairColors = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true, comment: "Specie HairColor"),
+                    EyeColors = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true, comment: "Specie EyeColor"),
+                    AverageLifespan = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true, comment: "Specie Average Lifespan"),
+                    PlanetId = table.Column<int>(type: "int", maxLength: 50, nullable: true, comment: "Specie Homeworld"),
+                    Url = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false, comment: "Specie Url"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, comment: "Whether the Entity has been deleted")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Species", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Species_Characters_CharacterId",
-                        column: x => x.CharacterId,
-                        principalTable: "Characters",
+                        name: "FK_Species_Planets_PlanetId",
+                        column: x => x.PlanetId,
+                        principalTable: "Planets",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Starships",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false, comment: "Starship Identifier"),
-                    CharacterId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Starships", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Starships_Characters_CharacterId",
-                        column: x => x.CharacterId,
-                        principalTable: "Characters",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Vehicles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false, comment: "Vehicle Identifier"),
-                    CharacterId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Vehicles", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Vehicles_Characters_CharacterId",
-                        column: x => x.CharacterId,
-                        principalTable: "Characters",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MovieSpecie",
-                columns: table => new
-                {
-                    MoviesId = table.Column<int>(type: "int", nullable: false),
-                    SpeciesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MovieSpecie", x => new { x.MoviesId, x.SpeciesId });
-                    table.ForeignKey(
-                        name: "FK_MovieSpecie_Movies_MoviesId",
-                        column: x => x.MoviesId,
-                        principalTable: "Movies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MovieSpecie_Species_SpeciesId",
-                        column: x => x.SpeciesId,
-                        principalTable: "Species",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -388,6 +369,126 @@ namespace UniverseApp.Infrastructure.Migrations
                         name: "FK_MovieVehicle_Vehicles_VehiclesId",
                         column: x => x.VehiclesId,
                         principalTable: "Vehicles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CharacterMovie",
+                columns: table => new
+                {
+                    CharactersId = table.Column<int>(type: "int", nullable: false),
+                    MoviesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CharacterMovie", x => new { x.CharactersId, x.MoviesId });
+                    table.ForeignKey(
+                        name: "FK_CharacterMovie_Characters_CharactersId",
+                        column: x => x.CharactersId,
+                        principalTable: "Characters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CharacterMovie_Movies_MoviesId",
+                        column: x => x.MoviesId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CharacterStarship",
+                columns: table => new
+                {
+                    CharactersId = table.Column<int>(type: "int", nullable: false),
+                    StarshipsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CharacterStarship", x => new { x.CharactersId, x.StarshipsId });
+                    table.ForeignKey(
+                        name: "FK_CharacterStarship_Characters_CharactersId",
+                        column: x => x.CharactersId,
+                        principalTable: "Characters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CharacterStarship_Starships_StarshipsId",
+                        column: x => x.StarshipsId,
+                        principalTable: "Starships",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CharacterVehicle",
+                columns: table => new
+                {
+                    CharactersId = table.Column<int>(type: "int", nullable: false),
+                    VehiclesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CharacterVehicle", x => new { x.CharactersId, x.VehiclesId });
+                    table.ForeignKey(
+                        name: "FK_CharacterVehicle_Characters_CharactersId",
+                        column: x => x.CharactersId,
+                        principalTable: "Characters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CharacterVehicle_Vehicles_VehiclesId",
+                        column: x => x.VehiclesId,
+                        principalTable: "Vehicles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CharacterSpecie",
+                columns: table => new
+                {
+                    CharactersId = table.Column<int>(type: "int", nullable: false),
+                    SpeciesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CharacterSpecie", x => new { x.CharactersId, x.SpeciesId });
+                    table.ForeignKey(
+                        name: "FK_CharacterSpecie_Characters_CharactersId",
+                        column: x => x.CharactersId,
+                        principalTable: "Characters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CharacterSpecie_Species_SpeciesId",
+                        column: x => x.SpeciesId,
+                        principalTable: "Species",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MovieSpecie",
+                columns: table => new
+                {
+                    MoviesId = table.Column<int>(type: "int", nullable: false),
+                    SpeciesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MovieSpecie", x => new { x.MoviesId, x.SpeciesId });
+                    table.ForeignKey(
+                        name: "FK_MovieSpecie_Movies_MoviesId",
+                        column: x => x.MoviesId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MovieSpecie_Species_SpeciesId",
+                        column: x => x.SpeciesId,
+                        principalTable: "Species",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -442,6 +543,21 @@ namespace UniverseApp.Infrastructure.Migrations
                 column: "PlanetId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CharacterSpecie_SpeciesId",
+                table: "CharacterSpecie",
+                column: "SpeciesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CharacterStarship_StarshipsId",
+                table: "CharacterStarship",
+                column: "StarshipsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CharacterVehicle_VehiclesId",
+                table: "CharacterVehicle",
+                column: "VehiclesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MoviePlanet_PlanetsId",
                 table: "MoviePlanet",
                 column: "PlanetsId");
@@ -462,19 +578,9 @@ namespace UniverseApp.Infrastructure.Migrations
                 column: "VehiclesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Species_CharacterId",
+                name: "IX_Species_PlanetId",
                 table: "Species",
-                column: "CharacterId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Starships_CharacterId",
-                table: "Starships",
-                column: "CharacterId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_CharacterId",
-                table: "Vehicles",
-                column: "CharacterId");
+                column: "PlanetId");
         }
 
         /// <inheritdoc />
@@ -499,6 +605,15 @@ namespace UniverseApp.Infrastructure.Migrations
                 name: "CharacterMovie");
 
             migrationBuilder.DropTable(
+                name: "CharacterSpecie");
+
+            migrationBuilder.DropTable(
+                name: "CharacterStarship");
+
+            migrationBuilder.DropTable(
+                name: "CharacterVehicle");
+
+            migrationBuilder.DropTable(
                 name: "MoviePlanet");
 
             migrationBuilder.DropTable(
@@ -517,6 +632,9 @@ namespace UniverseApp.Infrastructure.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Characters");
+
+            migrationBuilder.DropTable(
                 name: "Species");
 
             migrationBuilder.DropTable(
@@ -527,9 +645,6 @@ namespace UniverseApp.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Vehicles");
-
-            migrationBuilder.DropTable(
-                name: "Characters");
 
             migrationBuilder.DropTable(
                 name: "Planets");
