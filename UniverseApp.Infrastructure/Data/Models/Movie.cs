@@ -31,12 +31,12 @@ namespace UniverseApp.Infrastructure.Data.Models
         [Required]
         [MaxLength(DirectorMaxLenght)]
         [Comment("Movie Director")]
-        public required string Director { get; set; }
+        public required string[] Director { get; set; }
 
         [Required]
         [MaxLength(ProducerMaxLenght)]
         [Comment("Movie Producer")]
-        public required string Producer { get; set; }
+        public required string[] Producer { get; set; }
 
         [Comment("Movie Release Date")]
         public DateTime ReleaseDate { get; set; } // format "1977-05-25"
