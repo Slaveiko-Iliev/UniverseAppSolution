@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using UniverseApp.Core.Services;
+using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
 using UniverseApp.Infrastructure.Data;
 
@@ -16,6 +18,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<IHomeService, HomeService>();
 
 var app = builder.Build();
 
