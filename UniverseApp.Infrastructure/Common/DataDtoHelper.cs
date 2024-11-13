@@ -3,7 +3,7 @@ using UniverseApp.Infrastructure.Data.DTOs;
 
 namespace UniverseApp.Infrastructure.Common
 {
-    internal class DataDtoHelper
+    internal static class DataDtoHelper
     {
         internal static async Task<List<T>> GetEntityDtoInfoAsync<T>()
         {
@@ -21,7 +21,8 @@ namespace UniverseApp.Infrastructure.Common
                 "VehicleInfoDto" => url = "https://swapi.dev/api/vehicles",
                 "SpecieInfoDto" => url = "https://swapi.dev/api/species",
                 "MovieInfoDto" => url = "https://swapi.dev/api/films",
-                "CharacterInfoDto" => url = "https://swapi.dev/api/people"
+                "CharacterInfoDto" => url = "https://swapi.dev/api/people",
+                _ => url = "https://swapi.dev/api"
             };
 
             var option = new JsonSerializerOptions
