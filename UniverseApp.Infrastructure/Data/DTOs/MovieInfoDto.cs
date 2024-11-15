@@ -7,8 +7,8 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using UniverseApp.Infrastructure.Data.Models;
-using static UniverseApp.Infrastructure.Data.Constants.General;
-using static UniverseApp.Infrastructure.Data.Constants.MovieConst;
+using static UniverseApp.Infrastructure.Common.Constants.General;
+using static UniverseApp.Infrastructure.Common.Constants.MovieConst;
 
 namespace UniverseApp.Infrastructure.Data.DTOs
 {

@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniverseApp.Infrastructure.Data.Models;
-using static UniverseApp.Infrastructure.Data.Constants.PlanetConst;
-using static UniverseApp.Infrastructure.Data.Constants.General;
+using static UniverseApp.Infrastructure.Common.Constants.PlanetConst;
+using static UniverseApp.Infrastructure.Common.Constants.General;
 
 namespace UniverseApp.Infrastructure.Data.DTOs
 {

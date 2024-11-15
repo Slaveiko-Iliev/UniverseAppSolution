@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static UniverseApp.Infrastructure.Data.Constants.SpecieConst;
+using static UniverseApp.Infrastructure.Common.Constants.SpecieConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {

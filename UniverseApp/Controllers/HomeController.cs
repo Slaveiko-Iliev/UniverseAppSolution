@@ -1,27 +1,32 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using UniverseApp.Core.Models.Home;
+using UniverseApp.Core.Services.Contracts;
+using UniverseApp.Infrastructure.Data.Models;
 using UniverseApp.Models;
 
 namespace UniverseApp.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHomeService _homeService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHomeService homeService)
         {
             _logger = logger;
+            _homeService = homeService;
         }
 
-        public IActionResult Index()
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = await _homeService.GetBriefMoviesInfoAsync();
+            return View(model);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
-using static UniverseApp.Infrastructure.Data.Constants.MovieConst;
+using static UniverseApp.Infrastructure.Common.Constants.MovieConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
@@ -26,17 +25,17 @@ namespace UniverseApp.Infrastructure.Data.Models
         [Required]
         [MaxLength(DescriptionMaxLenght)]
         [Comment("Movie Description")]
-        public required string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         [Required]
         [MaxLength(DirectorMaxLenght)]
         [Comment("Movie Director")]
-        public required string[] Director { get; set; }
+        public string[] Director { get; set; } = null!;
 
         [Required]
         [MaxLength(ProducerMaxLenght)]
         [Comment("Movie Producer")]
-        public required string[] Producer { get; set; }
+        public string[] Producer { get; set; } = null!;
 
         [Comment("Movie Release Date")]
         public DateTime ReleaseDate { get; set; } // format "1977-05-25"
@@ -54,6 +53,10 @@ namespace UniverseApp.Infrastructure.Data.Models
         [Required]
         [MaxLength(UrlMaxLenght)]
         public string Url { get; set; } = null!;
+
+        [Required]
+        [MaxLength(UrlMaxLenght)]
+        public string ImageUrl { get; set; } = null!;
 
         [Required]
         [Comment("Whether the Entity has been deleted")]

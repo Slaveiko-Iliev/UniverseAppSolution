@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniverseApp.Infrastructure.Data.Models;
-using static UniverseApp.Infrastructure.Data.Constants.CharacterConst;
-using static UniverseApp.Infrastructure.Data.Constants.General;
+using static UniverseApp.Infrastructure.Common.Constants.CharacterConst;
+using static UniverseApp.Infrastructure.Common.Constants.General;
 using System.Text.Json.Serialization;
 
 namespace UniverseApp.Infrastructure.Data.DTOs

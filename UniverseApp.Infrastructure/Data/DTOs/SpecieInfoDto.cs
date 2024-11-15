@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using static UniverseApp.Infrastructure.Data.Constants.General;
-using static UniverseApp.Infrastructure.Data.Constants.SpecieConst;
+using static UniverseApp.Infrastructure.Common.Constants.General;
+using static UniverseApp.Infrastructure.Common.Constants.SpecieConst;
 
 namespace UniverseApp.Infrastructure.Data.DTOs
 {

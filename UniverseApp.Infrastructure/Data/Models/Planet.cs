@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static UniverseApp.Infrastructure.Data.Constants.PlanetConst;
+using static UniverseApp.Infrastructure.Common.Constants.PlanetConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {

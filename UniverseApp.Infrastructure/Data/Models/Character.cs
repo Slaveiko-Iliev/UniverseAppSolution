@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static UniverseApp.Infrastructure.Data.Constants.CharacterConst;
+using static UniverseApp.Infrastructure.Common.Constants.CharacterConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {

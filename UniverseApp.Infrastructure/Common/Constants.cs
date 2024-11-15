@@ -1,4 +1,4 @@
-﻿namespace UniverseApp.Infrastructure.Data
+﻿namespace UniverseApp.Infrastructure.Common
 {
     public class Constants
     {
@@ -21,7 +21,7 @@
             public const int ResidentsMaxLenght = 300;
             public const int FilmsMaxLenght = 300;
             public const int UrlMinLenght = 4;
-            public const int UrlMaxLenght = 70;
+            public const int UrlMaxLenght = 100;
         }
 
         public static class MovieConst
@@ -37,7 +37,7 @@
             public const int ProducerMinLenght = 6;
             public const int ProducerMaxLenght = 100;
             public const int UrlMinLenght = 4;
-            public const int UrlMaxLenght = 70;
+            public const int UrlMaxLenght = 100;
         }
 
         public static class CharacterConst
@@ -59,7 +59,7 @@
             public const int GenderMinLenght = 4;
             public const int GenderMaxLenght = 6;
             public const int UrlMinLenght = 4;
-            public const int UrlMaxLenght = 70;
+            public const int UrlMaxLenght = 100;
             public const int HomeworldMinLenght = 4;
             public const int HomeworldMaxLenght = 50;
         }
@@ -87,7 +87,7 @@
             public const int HomeworldMinLenght = 4;
             public const int HomeworldMaxLenght = 50;
             public const int UrlMinLenght = 4;
-            public const int UrlMaxLenght = 70;
+            public const int UrlMaxLenght = 100;
         }
 
         public static class VehicleConst
@@ -115,7 +115,7 @@
             public const int ClassMinLenght = 3;
             public const int ClassMaxLenght = 15;
             public const int UrlMinLenght = 4;
-            public const int UrlMaxLenght = 70;
+            public const int UrlMaxLenght = 100;
         }
 
         public static class StarshipConst
