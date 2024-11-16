@@ -19,6 +19,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IHomeService, HomeService>();
+builder.Services.AddScoped<IPlanetService, PlanetService>();
 
 var app = builder.Build();
 
