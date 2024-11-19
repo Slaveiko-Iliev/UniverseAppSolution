@@ -30,12 +30,12 @@ namespace UniverseApp.Infrastructure.Data.Models
         [Required]
         [MaxLength(DirectorMaxLenght)]
         [Comment("Movie Director")]
-        public string[] Director { get; set; } = null!;
+        public string Director { get; set; } = null!;
 
         [Required]
         [MaxLength(ProducerMaxLenght)]
         [Comment("Movie Producer")]
-        public string[] Producer { get; set; } = null!;
+        public string Producer { get; set; } = null!;
 
         [Comment("Movie Release Date")]
         public DateTime ReleaseDate { get; set; } // format "1977-05-25"
@@ -56,6 +56,7 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         [Required]
         [MaxLength(UrlMaxLenght)]
+        [Comment("Movie Image Url")]
         public string ImageUrl { get; set; } = null!;
 
         [Required]
