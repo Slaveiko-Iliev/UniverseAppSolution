@@ -18,6 +18,10 @@
             public const int SurfaceWaterMaxLenght = 7;
             public const int PopulationMinLenght = 1;
             public const int PopulationMaxLenght = 15;
+            public const int CharacterIdsMinLenght = 1;
+            public const int CharacterIdsMaxLenght = 100;
+            public const int MovieIdsMinLenght = 1;
+            public const int MovieIdsMaxLenght = 100;
             public const int ResidentsMaxLenght = 300;
             public const int FilmsMaxLenght = 300;
             public const int UrlMinLenght = 4;
@@ -129,6 +133,7 @@
         public static class General
         {
             public const string FieldMinMaxLengthErrorMesssage = "The {0} must be between {2} and {1} characters long.";
+            public const string RequiredFieldErrorMesssage = "The {0} field is required.";
         }
     }
 }
