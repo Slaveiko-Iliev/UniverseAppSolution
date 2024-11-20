@@ -19,7 +19,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IServiceHelper, ServicesHelper>();
 builder.Services.AddScoped<IHomeService, HomeService>();
-builder.Services.AddScoped<IPlanetService, PlanetService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 var app = builder.Build();
 

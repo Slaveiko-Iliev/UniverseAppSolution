@@ -34,7 +34,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("MoviesId");
 
-                    b.ToTable("CharacterMovie");
+                    b.ToTable("CharacterMovie", (string)null);
                 });
 
             modelBuilder.Entity("CharacterSpecie", b =>
@@ -49,7 +49,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("SpeciesId");
 
-                    b.ToTable("CharacterSpecie");
+                    b.ToTable("CharacterSpecie", (string)null);
                 });
 
             modelBuilder.Entity("CharacterStarship", b =>
@@ -64,7 +64,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("StarshipsId");
 
-                    b.ToTable("CharacterStarship");
+                    b.ToTable("CharacterStarship", (string)null);
                 });
 
             modelBuilder.Entity("CharacterVehicle", b =>
@@ -79,7 +79,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("VehiclesId");
 
-                    b.ToTable("CharacterVehicle");
+                    b.ToTable("CharacterVehicle", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -296,7 +296,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("PlanetsId");
 
-                    b.ToTable("MoviePlanet");
+                    b.ToTable("MoviePlanet", (string)null);
                 });
 
             modelBuilder.Entity("MovieSpecie", b =>
@@ -311,7 +311,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("SpeciesId");
 
-                    b.ToTable("MovieSpecie");
+                    b.ToTable("MovieSpecie", (string)null);
                 });
 
             modelBuilder.Entity("MovieStarship", b =>
@@ -326,7 +326,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("StarshipsId");
 
-                    b.ToTable("MovieStarship");
+                    b.ToTable("MovieStarship", (string)null);
                 });
 
             modelBuilder.Entity("MovieVehicle", b =>
@@ -341,7 +341,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("VehiclesId");
 
-                    b.ToTable("MovieVehicle");
+                    b.ToTable("MovieVehicle", (string)null);
                 });
 
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Character", b =>
@@ -407,7 +407,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("PlanetId");
 
-                    b.ToTable("Characters");
+                    b.ToTable("Characters", (string)null);
                 });
 
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Movie", b =>
@@ -464,7 +464,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movies", t =>
+                    b.ToTable("Movies", null, t =>
                         {
                             t.HasComment("Movie Entity");
                         });
@@ -528,7 +528,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Planets");
+                    b.ToTable("Planets", (string)null);
                 });
 
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Specie", b =>
@@ -599,7 +599,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("PlanetId");
 
-                    b.ToTable("Species");
+                    b.ToTable("Species", (string)null);
                 });
 
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Starship", b =>
@@ -686,7 +686,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Starships");
+                    b.ToTable("Starships", (string)null);
                 });
 
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Vehicle", b =>
@@ -763,7 +763,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vehicles");
+                    b.ToTable("Vehicles", (string)null);
                 });
 
             modelBuilder.Entity("CharacterMovie", b =>

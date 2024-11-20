@@ -13,13 +13,9 @@ namespace UniverseApp.Core.Services
             _repository = repository;
         }
 
-        public string[] SplitInput(string input) =>
-            input != null
-            ? input
-                .Split(", ", StringSplitOptions.RemoveEmptyEntries)
-            : new string[0];
+        public string[] SplitInput(string input) => input != null ? input.Split(", ", StringSplitOptions.RemoveEmptyEntries) : new string[0];
 
-        public int[] GetParsedIds(string input)
+        public ICollection<int> GetParsedIds(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -28,17 +24,12 @@ namespace UniverseApp.Core.Services
 
             return input
                 .Split(", ", StringSplitOptions.RemoveEmptyEntries)
-                .Select(int.Parse)
+                .Select(i => int.TryParse(i, out int id) ? id : )
                 .ToArray();
         }
 
-        public async Task<ICollection<T>> GetEntitiesByIds<T>(ICollection<int> ids) where T : class
+        public async Task<ICollection<T>> GetEntitiesByIds<T>(int[] ids) where T : class
         {
-            if (_repository.AllReadOnly<T>().Count() == 0)
-            {
-                return Array.Empty<T>();
-            }
-
             return await _repository.AllReadOnly<T>().Where(x => ids.Contains((int)x.GetType().GetProperty("Id").GetValue(x))).ToArrayAsync();
         }
     }
