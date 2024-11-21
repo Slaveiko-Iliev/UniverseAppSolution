@@ -20,6 +20,7 @@ builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IServiceHelper, ServicesHelper>();
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IPlanetService, PlanetService>();
 
 var app = builder.Build();
 

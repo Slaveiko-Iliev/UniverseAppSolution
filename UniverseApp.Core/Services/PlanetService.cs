@@ -18,17 +18,30 @@ namespace UniverseApp.Core.Services
 
         public async Task AddPlanetAsync(PlanetFormModel model)
         {
+            int? rotationPeriod = model.RotationPeriod != null
+                ? int.Parse(model.RotationPeriod)
+                : null;
+            int? orbitalPeriod = model.OrbitalPeriod != null
+                ? int.Parse(model.OrbitalPeriod)
+                : null;
+            double? surfaceWater = model.SurfaceWater != null
+                ? double.Parse(model.SurfaceWater)
+                : null;
+            int? population = model.Population != null
+                ? int.Parse(model.Population)
+                : null;
+
             var newPlanet = new Planet()
             {
                 Id = _repository.AllReadOnly<Planet>().Count() + 1,
                 Name = model.Name,
-                RotationPeriod = model.RotationPeriod,
-                OrbitalPeriod = model.OrbitalPeriod,
+                RotationPeriod = rotationPeriod,
+                OrbitalPeriod = orbitalPeriod,
                 Climate = _serviceHelper.SplitInput(model.Climate!),
                 Gravity = model.Gravity,
                 Terrain = _serviceHelper.SplitInput(model.Terrain!),
-                SurfaceWater = model.SurfaceWater,
-                Population = model.Population,
+                SurfaceWater = surfaceWater,
+                Population = population,
                 Characters = model.CharacterIds != null
                     ? await _serviceHelper.GetEntitiesByIds<Character>(_serviceHelper.GetParsedIds(model.CharacterIds))
                     : [],
