@@ -134,6 +134,8 @@
         {
             public const string FieldMinMaxLengthErrorMesssage = "The {0} must be between {2} and {1} characters long.";
             public const string RequiredFieldErrorMesssage = "The {0} field is required.";
+            public const string NumberFieldErrorMesssage = "The {0} field must be an integer.";
+            public const string DecimalNumberFieldErrorMesssage = "The {0} field must be a decimal number.";
         }
     }
 }

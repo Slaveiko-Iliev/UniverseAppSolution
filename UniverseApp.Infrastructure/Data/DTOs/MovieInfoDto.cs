@@ -20,7 +20,7 @@ namespace UniverseApp.Infrastructure.Data.DTOs
 
         [Required]
         [JsonPropertyName("episode_id")]
-        [StringLength(DtoEpisodeIdMaxLenght, MinimumLength = DtoEpisodeIdMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        [StringLength(EpisodeIdMaxLenght, MinimumLength = EpisodeIdMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
         internal required string EpisodeId { get; set; }
 
         [Required]

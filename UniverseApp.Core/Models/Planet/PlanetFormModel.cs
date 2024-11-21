@@ -11,12 +11,14 @@ namespace UniverseApp.Core.Models.Planet
         public string Name { get; set; } = string.Empty;
 
         [StringLength(RotationOrbitalPeriodMaxLenght, MinimumLength = RotationOrbitalPeriodMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        [RegularExpression(@"^\d*$", ErrorMessage = NumberFieldErrorMesssage)]
         [Display(Name = "Rotation Period")]
-        public int? RotationPeriod { get; set; }
+        public string? RotationPeriod { get; set; }
 
         [StringLength(RotationOrbitalPeriodMaxLenght, MinimumLength = RotationOrbitalPeriodMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        [RegularExpression(@"^\d*$", ErrorMessage = NumberFieldErrorMesssage)]
         [Display(Name = "Orbital Period")]
-        public int? OrbitalPeriod { get; set; }
+        public string? OrbitalPeriod { get; set; }
 
         [StringLength(ClimateMaxLenght, MinimumLength = ClimateMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
         public string? Climate { get; set; }
@@ -28,11 +30,13 @@ namespace UniverseApp.Core.Models.Planet
         public string? Terrain { get; set; }
 
         [StringLength(SurfaceWaterMaxLenght, MinimumLength = SurfaceWaterMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        [RegularExpression(@"^\d*,?\d*$", ErrorMessage = DecimalNumberFieldErrorMesssage)]
         [Display(Name = "Surface Water")]
-        public double? SurfaceWater { get; set; }
+        public string? SurfaceWater { get; set; }
 
         [StringLength(PopulationMaxLenght, MinimumLength = PopulationMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public int? Population { get; set; }
+        [RegularExpression(@"^\d*$", ErrorMessage = NumberFieldErrorMesssage)]
+        public string? Population { get; set; }
 
         [StringLength(CharacterIdsMaxLenght, MinimumLength = CharacterIdsMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
         public string? CharacterIds { get; set; }
