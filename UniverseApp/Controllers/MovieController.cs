@@ -27,14 +27,20 @@ namespace UniverseApp.Controllers
                 return View(model);
             }
 
-            await _movieService.AddMovieAsync(model);
-            return RedirectToAction(nameof(Details));
+            int newMovieId = await _movieService.AddMovieAsync(model);
+            return RedirectToAction(nameof(Details), newMovieId);
         }
 
-        public async Task<IActionResult> Details()
+        public async Task<IActionResult> All()
         {
             var movies = await _movieService.GetAllMoviesAsync();
             return View(movies);
+        }
+
+        public async Task<IActionResult> Details(int newMovieId)
+        {
+            var movie = await _movieService.GetMovieByIdAsync(newMovieId);
+            return View();
         }
     }
 }

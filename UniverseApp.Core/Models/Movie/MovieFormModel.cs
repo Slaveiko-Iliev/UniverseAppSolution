@@ -38,21 +38,6 @@ namespace UniverseApp.Core.Models.Movie
         //[RegularExpression("^(\\d{4})-(\\d{2})-(\\d{2})$")]
         public string ReleaseDate { get; set; } = string.Empty;
 
-        //[RegularExpression("(?:^(\\d+)(, \\d+)*$)")]
-        public int[]? Characters { get; set; } = [];
-
-        //[RegularExpression("(?:^(\\d+)(, \\d+)*$)")]
-        public int[]? Planets { get; set; } = [];
-
-        //[RegularExpression("(?:^(\\d+)(, \\d+)*$)")]
-        public int[]? Starships { get; set; } =  [];
-
-        //[RegularExpression("(?:^(\\d+)(, \\d+)*$)")]
-        public int[]? Vehicles { get; set; } = [];
-
-        //[RegularExpression("(?:^(\\d+)(, \\d+)*$)")]
-        public int[]? Species { get; set; } = [];
-
         [StringLength(UrlMaxLenght, MinimumLength = UrlMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
         [Url]
         public string? Url { get; set; }

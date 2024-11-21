@@ -15,5 +15,7 @@ namespace UniverseApp.Infrastructure.Common
         Task AddAsync<TEntity>(TEntity entity) where TEntity : class;
 
         Task<int> SaveChangesAsync();
+
+        Task<TEntity> GetEntityByIdAsync<TEntity>(int id) where TEntity : class;
     }
 }

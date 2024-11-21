@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,5 +42,9 @@ namespace UniverseApp.Infrastructure.Common
 
         public async Task<int> SaveChangesAsync() =>
             await _context.SaveChangesAsync();
+
+        public async Task<TEntity> GetEntityByIdAsync<TEntity>(int id) where TEntity : class =>
+            (await DbSet<TEntity>()
+                .FindAsync(id))!;
     }
 }

@@ -18,7 +18,7 @@ namespace UniverseApp.Core.Services
             _serviceHelper = serviceHelper;
         }
 
-        public async Task AddMovieAsync(MovieFormModel model)
+        public async Task<int> AddMovieAsync(MovieFormModel model)
         {
             var movie = new Movie
             {
@@ -35,19 +35,21 @@ namespace UniverseApp.Core.Services
 
             await _repository.AddAsync(movie);
             await _repository.SaveChangesAsync();
+
+            return movie.Id;
         }
 
-        public async Task<IEnumerable<MovieViewModel>> GetAllMoviesAsync()
+        public async Task<IEnumerable<MovieAllViewModel>> GetAllMoviesAsync()
         {
             var movies = await _repository
                 .AllReadOnly<Movie>()
                 .ToListAsync();
 
-            var movieViewModels = new List<MovieViewModel>();
+            var movieViewModels = new List<MovieAllViewModel>();
 
             foreach (var m in movies)
             {
-                var movieViewModel = new MovieViewModel
+                var movieViewModel = new MovieAllViewModel
                 {
                     Id = m.Id,
                     Title = m.Title,
@@ -64,6 +66,27 @@ namespace UniverseApp.Core.Services
             }
 
             return movieViewModels;
+        }
+
+        public async Task<MovieDetailsViewModel> GetMovieByIdAsync(int newMovieId)
+        {
+            var movie = await _repository
+                .GetEntityByIdAsync<Movie>(newMovieId);
+
+            var movieDetails = new MovieDetailsViewModel
+            {
+                Id = movie.Id,
+                Title = movie.Title,
+                EpisodeId = movie.EpisodeId,
+                Description = movie.Description,
+                Director = movie.Director,
+                Producer = movie.Producer,
+                ReleaseDate = movie.ReleaseDate.ToString("yyyy-MM-dd"),
+                Url = movie.Url,
+                ImageUrl = movie.ImageUrl
+            };
+
+            return movieDetails;
         }
     }
 }
