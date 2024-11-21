@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using UniverseApp.Core.Models.Movie;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
@@ -17,6 +18,25 @@ namespace UniverseApp.Core.Services
             _serviceHelper = serviceHelper;
         }
 
+        public async Task AddMovieAsync(MovieFormModel model)
+        {
+            var movie = new Movie
+            {
+                Id = _repository.All<Movie>().Count() + 1,
+                Title = model.Title,
+                EpisodeId = model.EpisodeId,
+                Description = model.Description,
+                Director = model.Director,
+                Producer = model.Producer,
+                ReleaseDate = DateTime.Parse(model.ReleaseDate),
+                Url = model.Url,
+                ImageUrl = model.ImageUrl
+            };
+
+            await _repository.AddAsync(movie);
+            await _repository.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<MovieViewModel>> GetAllMoviesAsync()
         {
             var movies = await _repository
@@ -27,26 +47,15 @@ namespace UniverseApp.Core.Services
 
             foreach (var m in movies)
             {
-                var characters = await _serviceHelper.GetIdsOfEntitiesAsync<Character>(m.Characters);
-                var planets = await _serviceHelper.GetIdsOfEntitiesAsync<Planet>(m.Planets);
-                var starships = await _serviceHelper.GetIdsOfEntitiesAsync<Starship>(m.Starships);
-                var vehicles = await _serviceHelper.GetIdsOfEntitiesAsync<Vehicle>(m.Vehicles);
-                var species = await _serviceHelper.GetIdsOfEntitiesAsync<Specie>(m.Species);
-
                 var movieViewModel = new MovieViewModel
                 {
                     Id = m.Id,
                     Title = m.Title,
                     EpisodeId = m.EpisodeId,
                     Description = m.Description,
-                    Director = string.Join(", ", m.Director),
-                    Producer = string.Join(", ", m.Producer),
+                    Director = m.Director,
+                    Producer = m.Producer,
                     ReleaseDate = m.ReleaseDate.ToString("yyyy-MM-dd"),
-                    Characters = characters,
-                    Planets = planets,
-                    Starships = starships,
-                    Vehicles = vehicles,
-                    Species = species,
                     Url = m.Url,
                     ImageUrl = m.ImageUrl
                 };

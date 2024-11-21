@@ -26,10 +26,10 @@
 
         public static class MovieConst
         {
-            public const int TitleMinLenght = 60;
+            public const int TitleMinLenght = 5;
             public const int TitleMaxLenght = 60;
-            public const int DtoEpisodeIdMinLenght = 1;
-            public const int DtoEpisodeIdMaxLenght = 2;
+            public const int EpisodeIdMinLenght = 1;
+            public const int EpisodeIdMaxLenght = 2;
             public const int DescriptionMinLenght = 50;
             public const int DescriptionMaxLenght = 500;
             public const int DirectorMinLenght = 6;
@@ -129,6 +129,7 @@
         public static class General
         {
             public const string FieldMinMaxLengthErrorMesssage = "The {0} must be between {2} and {1} characters long.";
+            public const string RequiredField = "The field {0} is required.";
         }
     }
 }

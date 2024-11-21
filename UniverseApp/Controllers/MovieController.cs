@@ -16,10 +16,22 @@ namespace UniverseApp.Controllers
         public IActionResult Add()
         {
             var model = new MovieFormModel();
-            return View();
+            return View(model);
         }
 
-        public async Task<IActionResult> All()
+        [HttpPost]
+        public async Task<IActionResult> Add(MovieFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await _movieService.AddMovieAsync(model);
+            return RedirectToAction(nameof(Details));
+        }
+
+        public async Task<IActionResult> Details()
         {
             var movies = await _movieService.GetAllMoviesAsync();
             return View(movies);

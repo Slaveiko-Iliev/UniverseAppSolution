@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace UniverseApp.Core.Services.Contracts
 {
     public interface IMovieService
     {
+        Task AddMovieAsync(MovieFormModel model);
         Task<IEnumerable<MovieViewModel>> GetAllMoviesAsync();
     }
 }

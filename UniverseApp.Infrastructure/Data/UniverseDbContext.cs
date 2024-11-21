@@ -21,11 +21,7 @@ namespace UniverseApp.Infrastructure.Data
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
-            builder.Seed();
-
             base.OnModelCreating(builder);
-
-            
 		}
 
 	}

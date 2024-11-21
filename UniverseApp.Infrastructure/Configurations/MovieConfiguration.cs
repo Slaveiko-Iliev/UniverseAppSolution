@@ -17,12 +17,12 @@ namespace UniverseApp.Infrastructure.Configurations
             var movies = movieTotImport
                 .Select(m => new Movie()
                 {
-                    Id = GetEntityIdFromUrl(m.Url),
+                    //Id = GetEntityIdFromUrl(m.Url),
                     Title = m.Title,
-                    EpisodeId = int.Parse(m.EpisodeId),
+                    EpisodeId = m.EpisodeId,
                     Description = m.Description,
-                    Director = m.Director.Split(", ", StringSplitOptions.RemoveEmptyEntries),
-                    Producer = m.Producer.Split(", ", StringSplitOptions.RemoveEmptyEntries),
+                    Director = m.Director,
+                    Producer = m.Producer,
                     ReleaseDate = DateTime.Parse(m.ReleaseDate),
                     Url = m.Url
                 })

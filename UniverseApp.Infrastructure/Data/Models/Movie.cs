@@ -19,8 +19,9 @@ namespace UniverseApp.Infrastructure.Data.Models
         public string Title { get; set; } = null!;
 
         [Required]
+        [MaxLength(EpisodeIdMaxLenght)]
         [Comment("Movie Episode Identifier")]
-        public int EpisodeId { get; set; }
+        public string EpisodeId { get; set; } = null!;
 
         [Required]
         [MaxLength(DescriptionMaxLenght)]
