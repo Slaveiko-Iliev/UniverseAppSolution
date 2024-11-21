@@ -63,10 +63,9 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         public ICollection<Movie> Movies { get; set; } = new HashSet<Movie>();
 
-        [Required]
         [MaxLength(UrlMaxLenght)]
         [Comment("Vehicle URL")]
-        public string Url { get; set; } = null!;
+        public string? Url { get; set; } = null!;
 
         [MaxLength(HyperdriveRatingMaxLenght)]
         [Comment("Starship Hyperdrive Rating")]

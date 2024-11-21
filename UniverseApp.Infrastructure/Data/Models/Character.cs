@@ -56,7 +56,6 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         public ICollection<Starship> Starships { get; set; } = new HashSet<Starship>();
 
-        [Required]
         [MaxLength(UrlMaxLenght)]
         [Comment("Character Url")]
         public string? Url { get; set; } = null!;

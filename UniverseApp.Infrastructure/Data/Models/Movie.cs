@@ -51,9 +51,8 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         public ICollection<Specie> Species { get; set; } = new HashSet<Specie>();
 
-        [Required]
         [MaxLength(UrlMaxLenght)]
-        public string Url { get; set; } = null!;
+        public string? Url { get; set; }
 
         [Required]
         [MaxLength(UrlMaxLenght)]
