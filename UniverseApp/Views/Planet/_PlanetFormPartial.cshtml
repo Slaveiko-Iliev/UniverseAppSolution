@@ -1,0 +1,67 @@
+﻿@model PlanetFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Name...">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RotationPeriod"></label>
+                <input asp-for="RotationPeriod" class="form-control" placeholder="Rotation Period...">
+                <span asp-validation-for="RotationPeriod" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrbitalPeriod"></label>
+                <input asp-for="OrbitalPeriod" rows="4" class="form-control" placeholder="Orbital Period..."></input>
+                <span asp-validation-for="OrbitalPeriod" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Climate"></label>
+                <input asp-for="Climate" class="form-control" placeholder="Climate...">
+                <span asp-validation-for="Climate" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gravity"></label>
+                <input asp-for="Gravity" class="form-control" placeholder="Gravity...">
+                <span asp-validation-for="Gravity" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Terrain"></label>
+                <input asp-for="Terrain" class="form-control" placeholder="Terrain...">
+                <span asp-validation-for="Terrain" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurfaceWater"></label>
+                <input asp-for="SurfaceWater" class="form-control" placeholder="Surface Water...">
+                <span asp-validation-for="SurfaceWater" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Population"></label>
+                <input asp-for="Population" class="form-control" placeholder="Population...">
+                <span asp-validation-for="Population" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CharacterIds"></label>
+                <input asp-for="CharacterIds" class="form-control" placeholder="CharacterIds...">
+                <span asp-validation-for="CharacterIds" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieIds"></label>
+                <input asp-for="MovieIds" class="form-control" placeholder="MovieIds...">
+                <span asp-validation-for="MovieIds" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Url"></label>
+                <input asp-for="Url" class="form-control" placeholder="PlanetUrl...">
+                <span asp-validation-for="Url" class="small text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

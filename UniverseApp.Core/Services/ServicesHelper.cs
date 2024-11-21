@@ -24,18 +24,13 @@ namespace UniverseApp.Core.Services
 
             return input
                 .Split(", ", StringSplitOptions.RemoveEmptyEntries)
-                .Select(int.Parse)
+                .Select(i => int.TryParse(i, out int id) ? id : )
                 .ToArray();
         }
 
-        public async Task<ICollection<T>> GetEntitiesByIds<T>(int[] ids) where T : class =>
-            await _repository
-                .AllReadOnly<T>()
-                .Where(x => ids.Contains((int)x.GetType().GetProperty("Id").GetValue(x)))
-                .ToArrayAsync();
-
-        public async Task<int[]> GetIdsOfEntitiesAsync<T>(ICollection<T> entities) where T : class =>
-            await Task.FromResult(entities.Select(x => (int)x.GetType().GetProperty("Id").GetValue(x))
-                .ToArray());
+        public async Task<ICollection<T>> GetEntitiesByIds<T>(int[] ids) where T : class
+        {
+            return await _repository.AllReadOnly<T>().Where(x => ids.Contains((int)x.GetType().GetProperty("Id").GetValue(x))).ToArrayAsync();
+        }
     }
 }
