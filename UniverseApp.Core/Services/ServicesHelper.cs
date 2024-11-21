@@ -15,7 +15,7 @@ namespace UniverseApp.Core.Services
 
         public string[] SplitInput(string input) => input != null ? input.Split(", ", StringSplitOptions.RemoveEmptyEntries) : new string[0];
 
-        public ICollection<int> GetParsedIds(string input)
+        public int[] GetParsedIds(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -24,7 +24,7 @@ namespace UniverseApp.Core.Services
 
             return input
                 .Split(", ", StringSplitOptions.RemoveEmptyEntries)
-                .Select(i => int.TryParse(i, out int id) ? id : )
+                .Select(int.Parse)
                 .ToArray();
         }
 
