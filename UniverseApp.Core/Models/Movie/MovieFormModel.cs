@@ -35,7 +35,7 @@ namespace UniverseApp.Core.Models.Movie
         public string Producer { get; set; } = string.Empty;
 
         [Display(Name = "Release Date")]
-        //[RegularExpression("^(\\d{4})-(\\d{2})-(\\d{2})$")]
+        [RegularExpression("^(\\d{4})-(\\d{2})-(\\d{2})$")]
         public string ReleaseDate { get; set; } = string.Empty;
 
         [StringLength(UrlMaxLenght, MinimumLength = UrlMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]

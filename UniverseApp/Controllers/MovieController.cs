@@ -45,11 +45,40 @@ namespace UniverseApp.Controllers
                 return NotFound();
             }
 
+            var movie = await _movieService.GetMovieDetailsByIdAsync(id);
+
+            return View(movie);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (await _movieService.ExistByIdAsync(id) == false)
+            {
+                return NotFound();
+            }
+
             var movie = await _movieService.GetMovieByIdAsync(id);
 
             return View(movie);
         }
 
-        
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, MovieFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (await _movieService.ExistByIdAsync(id) == false)
+            {
+                return NotFound();
+            }
+
+            await _movieService.EditMovieAsync(id, model);
+
+            return RedirectToAction(nameof(Details), new { id });
+        }
     }
 }

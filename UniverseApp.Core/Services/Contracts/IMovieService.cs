@@ -11,8 +11,10 @@ namespace UniverseApp.Core.Services.Contracts
     public interface IMovieService
     {
         Task<int> AddMovieAsync(MovieFormModel model);
+        Task EditMovieAsync(int id, MovieFormModel model);
         Task<bool> ExistByIdAsync(int id);
         Task<IEnumerable<MovieAllViewModel>> GetAllMoviesAsync();
-        Task<MovieDetailsViewModel> GetMovieByIdAsync(int newMovieId);
+        Task<MovieFormModel> GetMovieByIdAsync(int id);
+        Task<MovieDetailsViewModel> GetMovieDetailsByIdAsync(int id);
     }
 }
