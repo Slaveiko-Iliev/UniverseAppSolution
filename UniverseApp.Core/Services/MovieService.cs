@@ -39,6 +39,11 @@ namespace UniverseApp.Core.Services
             return movie.Id;
         }
 
+        public Task<bool> ExistByIdAsync(int id) =>
+            _repository
+                .AllReadOnly<Movie>()
+                .AnyAsync(m => m.Id == id);
+
         public async Task<IEnumerable<MovieAllViewModel>> GetAllMoviesAsync()
         {
             var movies = await _repository
@@ -73,6 +78,12 @@ namespace UniverseApp.Core.Services
             var movie = await _repository
                 .GetEntityByIdAsync<Movie>(newMovieId);
 
+            var charactersNames = _repository.GetEntitiesNames<Character>(movie.Characters);
+            var planetsNames = _repository.GetEntitiesNames<Planet>(movie.Planets);
+            var starshipsNames = _repository.GetEntitiesNames<Starship>(movie.Starships);
+            var vehiclesNames = _repository.GetEntitiesNames<Vehicle>(movie.Vehicles);
+            var speciesNames = _repository.GetEntitiesNames<Specie>(movie.Species);
+
             var movieDetails = new MovieDetailsViewModel
             {
                 Id = movie.Id,
@@ -82,6 +93,11 @@ namespace UniverseApp.Core.Services
                 Director = movie.Director,
                 Producer = movie.Producer,
                 ReleaseDate = movie.ReleaseDate.ToString("yyyy-MM-dd"),
+                CharactersNames = charactersNames,
+                PlanetsNames = planetsNames,
+                StarshipsNames = starshipsNames,
+                VehiclesNames = vehiclesNames,
+                SpeciesNames = speciesNames,
                 Url = movie.Url,
                 ImageUrl = movie.ImageUrl
             };

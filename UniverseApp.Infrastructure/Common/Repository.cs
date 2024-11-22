@@ -46,5 +46,13 @@ namespace UniverseApp.Infrastructure.Common
         public async Task<TEntity> GetEntityByIdAsync<TEntity>(int id) where TEntity : class =>
             (await DbSet<TEntity>()
                 .FindAsync(id))!;
+
+        public HashSet<string> GetEntitiesNames<TEntity>(ICollection<TEntity> characters) where TEntity : class
+        {
+            return DbSet<TEntity>()
+                .Where(x => characters.Contains(x))
+                .Select(x => (x.GetType().GetProperty("Name")!.GetValue(x) as string)!)
+                .ToHashSet();
+        }
     }
 }

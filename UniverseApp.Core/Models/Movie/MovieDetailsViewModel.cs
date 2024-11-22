@@ -10,19 +10,14 @@ namespace UniverseApp.Core.Models.Movie
     {
         public int Id { get; set; }
 
-        //[RegularExpression("(?:^(\\d+)(, \\d+)*$)")]
-        public int[]? Characters { get; set; } = [];
+        public ICollection<string> CharactersNames { get; set; } = new HashSet<string>();
 
-        //[RegularExpression("(?:^(\\d+)(, \\d+)*$)")]
-        public int[]? Planets { get; set; } = [];
+        public ICollection<string> PlanetsNames { get; set; } = new HashSet<string>();
 
-        //[RegularExpression("(?:^(\\d+)(, \\d+)*$)")]
-        public int[]? Starships { get; set; } = [];
+        public ICollection<string> StarshipsNames { get; set; } = new HashSet<string>();
 
-        //[RegularExpression("(?:^(\\d+)(, \\d+)*$)")]
-        public int[]? Vehicles { get; set; } = [];
+        public ICollection<string> VehiclesNames { get; set; } = new HashSet<string>();
 
-        //[RegularExpression("(?:^(\\d+)(, \\d+)*$)")]
-        public int[]? Species { get; set; } = [];
+        public ICollection<string> SpeciesNames { get; set; } = new HashSet<string>();
     }
 }

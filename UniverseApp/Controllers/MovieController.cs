@@ -13,6 +13,7 @@ namespace UniverseApp.Controllers
             _movieService = movieService;
         }
 
+        [HttpGet]
         public IActionResult Add()
         {
             var model = new MovieFormModel();
@@ -37,10 +38,18 @@ namespace UniverseApp.Controllers
             return View(movies);
         }
 
-        public async Task<IActionResult> Details(int newMovieId)
+        public async Task<IActionResult> Details(int id)
         {
-            var movie = await _movieService.GetMovieByIdAsync(newMovieId);
-            return View();
+            if(await _movieService.ExistByIdAsync(id) == false)
+            {
+                return NotFound();
+            }
+
+            var movie = await _movieService.GetMovieByIdAsync(id);
+
+            return View(movie);
         }
+
+        
     }
 }
