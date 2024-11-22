@@ -105,7 +105,7 @@ namespace UniverseApp.Core.Services
             return movieDetails;
         }
 
-        public async Task<MovieFormModel> GetMovieByIdAsync(int id)
+        public async Task<MovieFormModel> GetMovieFormByIdAsync(int id)
         {
             var movie = await _repository
                 .GetEntityByIdAsync<Movie>(id);
@@ -139,6 +139,16 @@ namespace UniverseApp.Core.Services
             movie.Url = model.Url;
             movie.ImageUrl = model.ImageUrl;
 
+            await _repository.SaveChangesAsync();
+        }
+
+        public async Task DeleteMovieAsync(int id)
+        {
+            var movie = await _repository
+                .All<Movie>()
+                .FirstAsync(m => m.Id == id);
+
+            movie.IsDeleted = true;
             await _repository.SaveChangesAsync();
         }
     }

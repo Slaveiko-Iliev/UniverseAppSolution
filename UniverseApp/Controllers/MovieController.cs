@@ -42,7 +42,7 @@ namespace UniverseApp.Controllers
         {
             if(await _movieService.ExistByIdAsync(id) == false)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             var movie = await _movieService.GetMovieDetailsByIdAsync(id);
@@ -55,10 +55,10 @@ namespace UniverseApp.Controllers
         {
             if (await _movieService.ExistByIdAsync(id) == false)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            var movie = await _movieService.GetMovieByIdAsync(id);
+            var movie = await _movieService.GetMovieFormByIdAsync(id);
 
             return View(movie);
         }
@@ -73,12 +73,38 @@ namespace UniverseApp.Controllers
 
             if (await _movieService.ExistByIdAsync(id) == false)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             await _movieService.EditMovieAsync(id, model);
 
             return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await _movieService.ExistByIdAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            MovieFormModel movie = await _movieService.GetMovieFormByIdAsync(id);
+
+            return View(movie);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, MovieFormModel model)
+        {
+            if (await _movieService.ExistByIdAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            await _movieService.DeleteMovieAsync(id);
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

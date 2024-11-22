@@ -14,7 +14,8 @@ namespace UniverseApp.Core.Services.Contracts
         Task EditMovieAsync(int id, MovieFormModel model);
         Task<bool> ExistByIdAsync(int id);
         Task<IEnumerable<MovieAllViewModel>> GetAllMoviesAsync();
-        Task<MovieFormModel> GetMovieByIdAsync(int id);
+        Task<MovieFormModel> GetMovieFormByIdAsync(int id);
         Task<MovieDetailsViewModel> GetMovieDetailsByIdAsync(int id);
+        Task DeleteMovieAsync(int id);
     }
 }
