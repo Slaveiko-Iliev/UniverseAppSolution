@@ -1,0 +1,22 @@
+﻿@model List<string>
+@{
+    var row = Math.Ceiling((double)Model.Count() / 4);
+}
+
+<div class="container text-center">
+    @{
+        for (int i = 0; i < row; i++)
+        {
+            <div class="row">
+                @{
+                    for (int j = i * 4; j < (i + 1) * 4 && j < Model.Count; j++)
+                    {
+                        <div class="col">
+                            @Model[j]
+                        </div>
+                    }
+                }
+            </div>
+        }
+    }
+</div>
