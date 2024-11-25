@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using UniverseApp.Core.Models.Movie;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
@@ -7,149 +6,168 @@ using UniverseApp.Infrastructure.Data.Models;
 
 namespace UniverseApp.Core.Services
 {
-    public class MovieService : IMovieService
-    {
-        private readonly IRepository _repository;
-        private readonly IServiceHelper _serviceHelper;
+	public class MovieService : IMovieService
+	{
+		private readonly IRepository _repository;
+		private readonly IServiceHelper _serviceHelper;
 
-        public MovieService(IRepository repository, IServiceHelper serviceHelper)
-        {
-            _repository = repository;
-            _serviceHelper = serviceHelper;
-        }
+		public MovieService(IRepository repository, IServiceHelper serviceHelper)
+		{
+			_repository = repository;
+			_serviceHelper = serviceHelper;
+		}
 
-        public async Task<int> AddMovieAsync(MovieFormModel model)
-        {
-            var movie = new Movie
-            {
-                Id = _repository.All<Movie>().Count() + 1,
-                Title = model.Title,
-                EpisodeId = model.EpisodeId,
-                Description = model.Description,
-                Director = model.Director,
-                Producer = model.Producer,
-                ReleaseDate = DateTime.Parse(model.ReleaseDate),
-                Url = model.Url,
-                ImageUrl = model.ImageUrl
-            };
+		public async Task<int> AddMovieAsync(MovieFormModel model)
+		{
+			var movie = new Movie
+			{
+				Id = _repository.All<Movie>().Count() + 1,
+				Title = model.Title,
+				EpisodeId = model.EpisodeId,
+				Description = model.Description,
+				Director = model.Director,
+				Producer = model.Producer,
+				ReleaseDate = DateTime.Parse(model.ReleaseDate),
+				Url = model.Url,
+				ImageUrl = model.ImageUrl
+			};
 
-            await _repository.AddAsync(movie);
-            await _repository.SaveChangesAsync();
+			await _repository.AddAsync(movie);
+			await _repository.SaveChangesAsync();
 
-            return movie.Id;
-        }
+			return movie.Id;
+		}
 
-        public Task<bool> ExistByIdAsync(int id) =>
-            _repository
-                .AllReadOnly<Movie>()
-                .AnyAsync(m => m.Id == id);
+		public Task<bool> ExistByIdAsync(int id) =>
+			_repository
+				.AllReadOnly<Movie>()
+				.AnyAsync(m => m.Id == id);
 
-        public async Task<IEnumerable<MovieAllViewModel>> GetAllMoviesAsync()
-        {
-            var movies = await _repository
-                .AllReadOnly<Movie>()
-                .ToListAsync();
+		public async Task<MovieQueryServiceModel> GetAllMoviesAsync(string searchCharacter, string searchPlanet, int currentPage, int moviesPerPage)
+		{
+			var movies = _repository
+				.AllReadOnly<Movie>();
 
-            var movieViewModels = new List<MovieAllViewModel>();
+			if (!string.IsNullOrEmpty(searchCharacter))
+			{
+				movies = movies
+					.Where(m => m.Characters.Any(c => c.Name == searchCharacter));
+			}
 
-            foreach (var m in movies)
-            {
-                var movieViewModel = new MovieAllViewModel
-                {
-                    Id = m.Id,
-                    Title = m.Title,
-                    EpisodeId = m.EpisodeId,
-                    Description = m.Description,
-                    Director = m.Director,
-                    Producer = m.Producer,
-                    ReleaseDate = m.ReleaseDate.ToString("yyyy-MM-dd"),
-                    Url = m.Url,
-                    ImageUrl = m.ImageUrl
-                };
+			if (!string.IsNullOrEmpty(searchPlanet))
+			{
+				movies = movies
+					.Where(m => m.Planets.Any(p => p.Name == searchPlanet));
+			}
 
-                movieViewModels.Add(movieViewModel);
-            }
+			var totalMoviesCount = await movies.CountAsync();
 
-            return movieViewModels;
-        }
+			movies = movies
+				.OrderBy(m => m.Id)
+				.Skip((currentPage - 1) * moviesPerPage)
+				.Take(moviesPerPage);
 
-        public async Task<MovieDetailsViewModel> GetMovieDetailsByIdAsync(int id)
-        {
-            var movie = await _repository
-                .GetEntityByIdAsync<Movie>(id);
+			var movieViewModels = await movies
+				.Select(m => new MovieAllViewModel
+				{
+					Id = m.Id,
+					Title = m.Title,
+					EpisodeId = m.EpisodeId,
+					Description = m.Description,
+					Director = m.Director,
+					Producer = m.Producer,
+					ReleaseDate = m.ReleaseDate.ToString("yyyy-MM-dd"),
+					Url = m.Url,
+					ImageUrl = m.ImageUrl
+				})
+				.ToListAsync();
 
-            var charactersNames = _repository.GetEntitiesNames<Character>(movie.Characters);
-            var planetsNames = _repository.GetEntitiesNames<Planet>(movie.Planets);
-            var starshipsNames = _repository.GetEntitiesNames<Starship>(movie.Starships);
-            var vehiclesNames = _repository.GetEntitiesNames<Vehicle>(movie.Vehicles);
-            var speciesNames = _repository.GetEntitiesNames<Specie>(movie.Species);
+			var movieAllQueryModels = new MovieQueryServiceModel()
+			{
+				TotalMoviesCount = totalMoviesCount,
+				Movies = movieViewModels
+			};
 
-            var movieDetails = new MovieDetailsViewModel
-            {
-                Id = movie.Id,
-                Title = movie.Title,
-                EpisodeId = movie.EpisodeId,
-                Description = movie.Description,
-                Director = movie.Director,
-                Producer = movie.Producer,
-                ReleaseDate = movie.ReleaseDate.ToString("yyyy-MM-dd"),
-                CharactersNames = charactersNames,
-                PlanetsNames = planetsNames,
-                StarshipsNames = starshipsNames,
-                VehiclesNames = vehiclesNames,
-                SpeciesNames = speciesNames,
-                Url = movie.Url,
-                ImageUrl = movie.ImageUrl
-            };
+			return movieAllQueryModels;
+		}
 
-            return movieDetails;
-        }
+		public async Task<MovieDetailsViewModel> GetMovieDetailsByIdAsync(int id)
+		{
+			var movie = await _repository
+				.GetEntityByIdAsync<Movie>(id);
 
-        public async Task<MovieFormModel> GetMovieFormByIdAsync(int id)
-        {
-            var movie = await _repository
-                .GetEntityByIdAsync<Movie>(id);
+			var charactersNames = await _repository.GetEntitiesNames<Character>(movie.Characters);
+			var planetsNames = await _repository.GetEntitiesNames<Planet>(movie.Planets);
+			var starshipsNames = await _repository.GetEntitiesNames<Starship>(movie.Starships);
+			var vehiclesNames = await _repository.GetEntitiesNames<Vehicle>(movie.Vehicles);
+			var speciesNames = await _repository.GetEntitiesNames<Specie>(movie.Species);
 
-            var movieFormModel = new MovieFormModel
-            {
-                Title = movie.Title,
-                EpisodeId = movie.EpisodeId,
-                Description = movie.Description,
-                Director = movie.Director,
-                Producer = movie.Producer,
-                ReleaseDate = movie.ReleaseDate.ToString("yyyy-MM-dd"),
-                Url = movie.Url,
-                ImageUrl = movie.ImageUrl
-            };
+			var movieDetails = new MovieDetailsViewModel
+			{
+				Id = movie.Id,
+				Title = movie.Title,
+				EpisodeId = movie.EpisodeId,
+				Description = movie.Description,
+				Director = movie.Director,
+				Producer = movie.Producer,
+				ReleaseDate = movie.ReleaseDate.ToString("yyyy-MM-dd"),
+				CharactersNames = charactersNames,
+				PlanetsNames = planetsNames,
+				StarshipsNames = starshipsNames,
+				VehiclesNames = vehiclesNames,
+				SpeciesNames = speciesNames,
+				Url = movie.Url,
+				ImageUrl = movie.ImageUrl
+			};
 
-            return movieFormModel;
-        }
+			return movieDetails;
+		}
 
-        public async Task EditMovieAsync(int id, MovieFormModel model)
-        {
-            var movie = await _repository
-                .GetEntityByIdAsync<Movie>(id);
+		public async Task<MovieFormModel> GetMovieFormByIdAsync(int id)
+		{
+			var movie = await _repository
+				.GetEntityByIdAsync<Movie>(id);
 
-            movie.Title = model.Title;
-            movie.EpisodeId = model.EpisodeId;
-            movie.Description = model.Description;
-            movie.Director = model.Director;
-            movie.Producer = model.Producer;
-            movie.ReleaseDate = DateTime.Parse(model.ReleaseDate);
-            movie.Url = model.Url;
-            movie.ImageUrl = model.ImageUrl;
+			var movieFormModel = new MovieFormModel
+			{
+				Title = movie.Title,
+				EpisodeId = movie.EpisodeId,
+				Description = movie.Description,
+				Director = movie.Director,
+				Producer = movie.Producer,
+				ReleaseDate = movie.ReleaseDate.ToString("yyyy-MM-dd"),
+				Url = movie.Url,
+				ImageUrl = movie.ImageUrl
+			};
 
-            await _repository.SaveChangesAsync();
-        }
+			return movieFormModel;
+		}
 
-        public async Task DeleteMovieAsync(int id)
-        {
-            var movie = await _repository
-                .All<Movie>()
-                .FirstAsync(m => m.Id == id);
+		public async Task EditMovieAsync(int id, MovieFormModel model)
+		{
+			var movie = await _repository
+				.GetEntityByIdAsync<Movie>(id);
 
-            movie.IsDeleted = true;
-            await _repository.SaveChangesAsync();
-        }
-    }
+			movie.Title = model.Title;
+			movie.EpisodeId = model.EpisodeId;
+			movie.Description = model.Description;
+			movie.Director = model.Director;
+			movie.Producer = model.Producer;
+			movie.ReleaseDate = DateTime.Parse(model.ReleaseDate);
+			movie.Url = model.Url;
+			movie.ImageUrl = model.ImageUrl;
+
+			await _repository.SaveChangesAsync();
+		}
+
+		public async Task DeleteMovieAsync(int id)
+		{
+			var movie = await _repository
+				.All<Movie>()
+				.FirstAsync(m => m.Id == id);
+
+			movie.IsDeleted = true;
+			await _repository.SaveChangesAsync();
+		}
+	}
 }

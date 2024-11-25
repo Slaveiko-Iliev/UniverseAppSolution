@@ -4,107 +4,111 @@ using UniverseApp.Core.Services.Contracts;
 
 namespace UniverseApp.Controllers
 {
-    public class MovieController : BaseController
-    {
-        private readonly IMovieService _movieService;
+	public class MovieController : BaseController
+	{
+		private readonly IMovieService _movieService;
 
-        public MovieController(IMovieService movieService)
-        {
-            _movieService = movieService;
-        }
+		public MovieController(IMovieService movieService)
+		{
+			_movieService = movieService;
+		}
 
-        [HttpGet]
-        public IActionResult Add()
-        {
-            var model = new MovieFormModel();
-            return View(model);
-        }
+		[HttpGet]
+		public IActionResult Add()
+		{
+			var model = new MovieFormModel();
+			return View(model);
+		}
 
-        [HttpPost]
-        public async Task<IActionResult> Add(MovieFormModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+		[HttpPost]
+		public async Task<IActionResult> Add(MovieFormModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
 
-            int newMovieId = await _movieService.AddMovieAsync(model);
-            return RedirectToAction(nameof(Details), newMovieId);
-        }
+			int newMovieId = await _movieService.AddMovieAsync(model);
+			return RedirectToAction(nameof(Details), newMovieId);
+		}
 
-        public async Task<IActionResult> All()
-        {
-            var movies = await _movieService.GetAllMoviesAsync();
-            return View(movies);
-        }
+		public async Task<IActionResult> All([FromQuery] MovieAllQueryModel model)
+		{
+			var queryResult = await _movieService.GetAllMoviesAsync(model.SearchCharacter, model.SearchPlanet, model.CurrentPage, MovieAllQueryModel.MoviesPerPage);
 
-        public async Task<IActionResult> Details(int id)
-        {
-            if(await _movieService.ExistByIdAsync(id) == false)
-            {
-                return BadRequest();
-            }
+			model.Movies = queryResult.Movies;
+			model.TotalMoviesCount = queryResult.TotalMoviesCount;
 
-            var movie = await _movieService.GetMovieDetailsByIdAsync(id);
+			return View(model);
+		}
 
-            return View(movie);
-        }
+		public async Task<IActionResult> Details(int id)
+		{
+			if (await _movieService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
 
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            if (await _movieService.ExistByIdAsync(id) == false)
-            {
-                return BadRequest();
-            }
+			var movie = await _movieService.GetMovieDetailsByIdAsync(id);
 
-            var movie = await _movieService.GetMovieFormByIdAsync(id);
+			return View(movie);
+		}
 
-            return View(movie);
-        }
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			if (await _movieService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(int id, MovieFormModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+			var movie = await _movieService.GetMovieFormByIdAsync(id);
 
-            if (await _movieService.ExistByIdAsync(id) == false)
-            {
-                return BadRequest();
-            }
+			return View(movie);
+		}
 
-            await _movieService.EditMovieAsync(id, model);
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, MovieFormModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
 
-            return RedirectToAction(nameof(Details), new { id });
-        }
+			if (await _movieService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
 
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
-        {
-            if (await _movieService.ExistByIdAsync(id) == false)
-            {
-                return BadRequest();
-            }
+			await _movieService.EditMovieAsync(id, model);
 
-            MovieFormModel movie = await _movieService.GetMovieFormByIdAsync(id);
+			return RedirectToAction(nameof(Details), new { id });
+		}
 
-            return View(movie);
-        }
+		[HttpGet]
+		public async Task<IActionResult> Delete(int id)
+		{
+			if (await _movieService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
 
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id, MovieFormModel model)
-        {
-            if (await _movieService.ExistByIdAsync(id) == false)
-            {
-                return BadRequest();
-            }
+			MovieFormModel movie = await _movieService.GetMovieFormByIdAsync(id);
 
-            await _movieService.DeleteMovieAsync(id);
+			return View(movie);
+		}
 
-            return RedirectToAction(nameof(All));
-        }
-    }
+		[HttpPost]
+		public async Task<IActionResult> Delete(int id, MovieFormModel model)
+		{
+			if (await _movieService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			await _movieService.DeleteMovieAsync(id);
+
+			return RedirectToAction(nameof(All));
+		}
+	}
 }
