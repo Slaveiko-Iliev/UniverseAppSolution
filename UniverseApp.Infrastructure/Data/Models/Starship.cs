@@ -7,6 +7,9 @@ using static UniverseApp.Infrastructure.Common.Constants.VehicleConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
+	[Include("Characters")]
+    [Include("Movies")]
+	[Comment("Starship Entity")]
     public class Starship
     {
         [Key]

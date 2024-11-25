@@ -5,6 +5,9 @@ using static UniverseApp.Infrastructure.Common.Constants.SpecieConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
+	[Include("Characters")]
+	[Include("Movies")]
+	[Comment("Specie Entity")]
     public class Specie
     {
         [Key]

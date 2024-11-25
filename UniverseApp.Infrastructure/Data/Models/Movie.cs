@@ -5,6 +5,11 @@ using static UniverseApp.Infrastructure.Common.Constants.MovieConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
+	[Include("Characters")]
+	[Include("Planets")]
+	[Include("Starships")]
+	[Include("Vehicles")]
+	[Include("Species")]
     [Comment("Movie Entity")]
     public class Movie
     {
@@ -39,7 +44,7 @@ namespace UniverseApp.Infrastructure.Data.Models
         public string Producer { get; set; } = null!;
 
         [Comment("Movie Release Date")]
-        public DateTime ReleaseDate { get; set; } // format "1977-05-25"
+        public DateTime ReleaseDate { get; set; }
 
         public ICollection<Character> Characters { get; set; } = new HashSet<Character>();
 

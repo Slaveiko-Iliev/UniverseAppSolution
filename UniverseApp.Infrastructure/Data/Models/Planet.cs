@@ -5,7 +5,10 @@ using static UniverseApp.Infrastructure.Common.Constants.PlanetConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
-    public class Planet
+	[Include("Characters")]
+	[Include("Movies")]
+    [Comment("Planet Entity")]
+	public class Planet
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

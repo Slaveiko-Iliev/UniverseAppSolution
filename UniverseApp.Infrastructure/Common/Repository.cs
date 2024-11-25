@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UniverseApp.Infrastructure.Data;
@@ -43,11 +44,23 @@ namespace UniverseApp.Infrastructure.Common
         public async Task<int> SaveChangesAsync() =>
             await _context.SaveChangesAsync();
 
-        public async Task<TEntity> GetEntityByIdAsync<TEntity>(int id) where TEntity : class =>
-            (await DbSet<TEntity>()
-                .FindAsync(id))!;
+		private IQueryable<TEntity> ApplyIncludes<TEntity>(IQueryable<TEntity> query) where TEntity : class
+		{
+			var includeAttributes = typeof(TEntity).GetCustomAttributes<IncludeAttribute>();
+			foreach (var includeAttribute in includeAttributes)
+			{
+				query = query.Include(includeAttribute.NavigationProperty);
+			}
+			return query;
+		}
 
-        public HashSet<string> GetEntitiesNames<TEntity>(ICollection<TEntity> characters) where TEntity : class
+		public async Task<TEntity> GetEntityByIdAsync<TEntity>(int id) where TEntity : class
+		{
+			var query = ApplyIncludes(DbSet<TEntity>());
+			return await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
+		}
+
+		public HashSet<string> GetEntitiesNames<TEntity>(ICollection<TEntity> characters) where TEntity : class
         {
             return DbSet<TEntity>()
                 .Where(x => characters.Contains(x))

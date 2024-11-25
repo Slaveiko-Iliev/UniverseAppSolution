@@ -5,7 +5,12 @@ using static UniverseApp.Infrastructure.Common.Constants.CharacterConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
-    public class Character
+	[Include("Movies")]
+	[Include("Species")]
+	[Include("Vehicles")]
+	[Include("Starships")]
+    [Comment("Character Entity")]
+	public class Character
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

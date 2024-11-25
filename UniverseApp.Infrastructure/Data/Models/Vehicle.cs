@@ -5,6 +5,9 @@ using static UniverseApp.Infrastructure.Common.Constants.VehicleConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
+    [Include("Characters")]
+    [Include("Movies")]
+    [Comment("Vehicle Entity")]
     public class Vehicle
     {
         [Key]
