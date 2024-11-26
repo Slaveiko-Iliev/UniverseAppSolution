@@ -1,17 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
+using UniverseApp.Infrastructure.Common;
 using static UniverseApp.Infrastructure.Common.Constants.MovieConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
-	[Include("Characters")]
-	[Include("Planets")]
-	[Include("Starships")]
-	[Include("Vehicles")]
-	[Include("Species")]
+    [Include("Characters")]
+    [Include("Planets")]
+    [Include("Starships")]
+    [Include("Vehicles")]
+    [Include("Species")]
     [Comment("Movie Entity")]
-    public class Movie
+    public class Movie : IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
