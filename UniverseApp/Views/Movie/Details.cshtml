@@ -80,6 +80,12 @@
                     </div>
                 </div>
             </div>
+            <a asp-controller="Movie" asp-action="All" asp-route-id="@Model.Id"
+               class="btn btn-primary">Back</a>
+            <a asp-controller="Movie" asp-action="Edit" asp-route-id="@Model.Id"
+               class="btn btn-primary">Edit</a>
+            <a asp-controller="Movie" asp-action="Delete" asp-route-id="@Model.Id"
+               class="btn btn-primary">Delete</a>
         </div>
     </div>
 </div>
