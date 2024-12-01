@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using UniverseApp.Infrastructure.Common;
+using UniverseApp.Infrastructure.Models;
 
 public class CheckIsDeletedAttribute<T> : Attribute, IAsyncActionFilter where T : class, IEntity
 {
