@@ -3,9 +3,9 @@ using UniverseApp.Infrastructure.Data.DTOs;
 
 namespace UniverseApp.Infrastructure.Common
 {
-    internal static class DataDtoHelper
+    public static class DataDtoHelper
     {
-        internal static async Task<List<T>> GetEntityDtoInfoAsync<T>()
+        public static async Task<List<T>> GetEntityDtoInfoAsync<T>()
         {
             List<T> entityDtoList = new List<T>();
 
@@ -16,13 +16,13 @@ namespace UniverseApp.Infrastructure.Common
 
             string url = (typeof(T).Name) switch
             {
-                "PlanetInfoDto" => url = "https://swapi.dev/api/planets",
-                "StarshipInfoDto" => url = "https://swapi.dev/api/starships",
-                "VehicleInfoDto" => url = "https://swapi.dev/api/vehicles",
-                "SpecieInfoDto" => url = "https://swapi.dev/api/species",
-                "MovieInfoDto" => url = "https://swapi.dev/api/films",
-                "CharacterInfoDto" => url = "https://swapi.dev/api/people",
-                _ => url = "https://swapi.dev/api"
+                "PlanetInfoDto" => "https://swapi.dev/api/planets",
+                "StarshipInfoDto" => "https://swapi.dev/api/starships",
+                "VehicleInfoDto" => "https://swapi.dev/api/vehicles",
+                "SpecieInfoDto" => "https://swapi.dev/api/species",
+                "MovieInfoDto" => "https://swapi.dev/api/films",
+                "CharacterInfoDto" => "https://swapi.dev/api/people",
+                _ => "https://swapi.dev/api"
             };
 
             var option = new JsonSerializerOptions
@@ -30,9 +30,9 @@ namespace UniverseApp.Infrastructure.Common
 
             while (result != null && result.Next != null)
             {
-                var responce = await client.GetAsync(url);
-                var responceContent = await responce.Content.ReadAsStringAsync();
-                result = JsonSerializer.Deserialize<ResultTDto<T>>(responceContent, option);
+                var response = await client.GetAsync(url);
+                var responseContent = await response.Content.ReadAsStringAsync();
+                result = JsonSerializer.Deserialize<ResultTDto<T>>(responseContent, option);
                 entityDtoList.AddRange(result!.Results);
                 url = result.Next;
             }

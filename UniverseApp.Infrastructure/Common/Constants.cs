@@ -35,7 +35,7 @@
             public const int EpisodeIdMinLenght = 1;
             public const int EpisodeIdMaxLenght = 2;
             public const int DescriptionMinLenght = 50;
-            public const int DescriptionMaxLenght = 500;
+            public const int DescriptionMaxLenght = 800;
             public const int DirectorMinLenght = 6;
             public const int DirectorMaxLenght = 100;
             public const int ProducerMinLenght = 6;
