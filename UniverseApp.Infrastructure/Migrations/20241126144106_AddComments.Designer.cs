@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniverseApp.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using UniverseApp.Infrastructure.Data;
 namespace UniverseApp.Infrastructure.Migrations
 {
     [DbContext(typeof(UniverseDbContext))]
-    partial class UniverseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241126144106_AddComments")]
+    partial class AddComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("MoviesId");
 
-                    b.ToTable("CharacterMovie", (string)null);
+                    b.ToTable("CharacterMovie");
                 });
 
             modelBuilder.Entity("CharacterSpecie", b =>
@@ -49,7 +52,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("SpeciesId");
 
-                    b.ToTable("CharacterSpecie", (string)null);
+                    b.ToTable("CharacterSpecie");
                 });
 
             modelBuilder.Entity("CharacterStarship", b =>
@@ -64,7 +67,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("StarshipsId");
 
-                    b.ToTable("CharacterStarship", (string)null);
+                    b.ToTable("CharacterStarship");
                 });
 
             modelBuilder.Entity("CharacterVehicle", b =>
@@ -79,7 +82,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("VehiclesId");
 
-                    b.ToTable("CharacterVehicle", (string)null);
+                    b.ToTable("CharacterVehicle");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -296,7 +299,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("PlanetsId");
 
-                    b.ToTable("MoviePlanet", (string)null);
+                    b.ToTable("MoviePlanet");
                 });
 
             modelBuilder.Entity("MovieSpecie", b =>
@@ -311,7 +314,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("SpeciesId");
 
-                    b.ToTable("MovieSpecie", (string)null);
+                    b.ToTable("MovieSpecie");
                 });
 
             modelBuilder.Entity("MovieStarship", b =>
@@ -326,7 +329,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("StarshipsId");
 
-                    b.ToTable("MovieStarship", (string)null);
+                    b.ToTable("MovieStarship");
                 });
 
             modelBuilder.Entity("MovieVehicle", b =>
@@ -341,7 +344,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("VehiclesId");
 
-                    b.ToTable("MovieVehicle", (string)null);
+                    b.ToTable("MovieVehicle");
                 });
 
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Character", b =>
@@ -406,7 +409,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("PlanetId");
 
-                    b.ToTable("Characters", null, t =>
+                    b.ToTable("Characters", t =>
                         {
                             t.HasComment("Character Entity");
                         });
@@ -468,7 +471,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movies", null, t =>
+                    b.ToTable("Movies", t =>
                         {
                             t.HasComment("Movie Entity");
                         });
@@ -532,7 +535,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Planets", null, t =>
+                    b.ToTable("Planets", t =>
                         {
                             t.HasComment("Planet Entity");
                         });
@@ -605,7 +608,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("PlanetId");
 
-                    b.ToTable("Species", null, t =>
+                    b.ToTable("Species", t =>
                         {
                             t.HasComment("Specie Entity");
                         });
@@ -694,7 +697,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Starships", null, t =>
+                    b.ToTable("Starships", t =>
                         {
                             t.HasComment("Starship Entity");
                         });
@@ -773,7 +776,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vehicles", null, t =>
+                    b.ToTable("Vehicles", t =>
                         {
                             t.HasComment("Vehicle Entity");
                         });
