@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UniverseApp.Core.Models.Movie;
 using UniverseApp.Core.Models.Planet;
+using UniverseApp.Core.Services;
 using UniverseApp.Core.Services.Contracts;
 
 namespace UniverseApp.Controllers
@@ -44,6 +46,14 @@ namespace UniverseApp.Controllers
             return RedirectToAction("All");
         }
 
+        public async Task<IActionResult> All([FromQuery] PlanetAllQueryModel model)
+        {
+            PlanetQueryServiceModel queryResult = await _planetService.GetAllPlanetsAsync(model.SearchCharacter, model.SearchMovie, model.CurrentPage, PlanetAllQueryModel.PlanetsPerPage);
 
+            model.Planets = queryResult.Planets;
+            model.TotalPlanetsCount = queryResult.TotalPlanetsCount;
+
+            return View(model);
+        }
     }
 }

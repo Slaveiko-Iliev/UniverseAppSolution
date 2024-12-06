@@ -1,4 +1,6 @@
-﻿using UniverseApp.Core.Models.Planet;
+﻿using Microsoft.EntityFrameworkCore;
+using UniverseApp.Core.Models.Movie;
+using UniverseApp.Core.Models.Planet;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
 using UniverseApp.Infrastructure.Data.Models;
@@ -52,6 +54,54 @@ namespace UniverseApp.Core.Services
 
             await _repository.AddAsync(newPlanet);
             await _repository.SaveChangesAsync();
+        }
+
+        public async Task<PlanetQueryServiceModel> GetAllPlanetsAsync(string? searchCharacter, string? searchMovie, int currentPage, int planetsPerPage)
+        {
+            var planets = _repository
+                .AllReadOnly<Planet>();
+
+            if (!string.IsNullOrEmpty(searchCharacter))
+            {
+                planets = planets
+                    .Where(m => m.Characters.Any(c => c.Name == searchCharacter));
+            }
+
+            if (!string.IsNullOrEmpty(searchMovie))
+            {
+                planets = planets
+                    .Where(m => m.Movies.Any(p => p.Title == searchMovie));
+            }
+
+            var totalPlanetsCount = await planets.CountAsync();
+
+            planets = planets
+                .OrderBy(m => m.Id)
+                .Skip((currentPage - 1) * planetsPerPage)
+                .Take(planetsPerPage);
+
+            var planetViewModels = await planets
+                .Select(m => new PlanetAllViewModel
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    RotationPeriod = m.RotationPeriod.ToString(),
+                    OrbitalPeriod = m.OrbitalPeriod.ToString(),
+                    Climate = string.Join(", ",m.Climate) ?? string.Empty,
+                    Gravity = m.Gravity,
+                    Terrain = string.Join(", ", m.Terrain) ?? string.Empty,
+                    SurfaceWater = m.SurfaceWater.ToString(),
+                    Population = m.Population.ToString(),
+                })
+                .ToListAsync();
+
+            var planetAllQueryModels = new PlanetQueryServiceModel()
+            {
+                TotalPlanetsCount = totalPlanetsCount,
+                Planets = planetViewModels
+            };
+
+            return planetAllQueryModels;
         }
     }
 }
