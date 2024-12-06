@@ -9,12 +9,10 @@ namespace UniverseApp.Core.Services
     public class MovieService : IMovieService
     {
         private readonly IRepository _repository;
-        private readonly IServiceHelper _serviceHelper;
 
-        public MovieService(IRepository repository, IServiceHelper serviceHelper)
+        public MovieService(IRepository repository)
         {
             _repository = repository;
-            _serviceHelper = serviceHelper;
         }
 
         public async Task<int> AddMovieAsync(MovieFormModel model)
@@ -179,7 +177,8 @@ namespace UniverseApp.Core.Services
             {
                 Title = movie.Title,
                 Director = movie.Director,
-                ReleaseDate = movie.ReleaseDate.ToString("yyyy-MM-dd")
+                ReleaseDate = movie.ReleaseDate.ToString("yyyy-MM-dd"),
+                ImageUrl = movie.ImageUrl
             };
 
             return movieDeleteModel;
