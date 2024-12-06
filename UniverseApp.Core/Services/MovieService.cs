@@ -44,7 +44,8 @@ namespace UniverseApp.Core.Services
         public async Task<MovieQueryServiceModel> GetAllMoviesAsync(string searchCharacter, string searchPlanet, int currentPage, int moviesPerPage)
         {
             var movies = _repository
-                .AllReadOnly<Movie>();
+                .AllReadOnly<Movie>()
+                .Where(m => !m.IsDeleted);
 
             if (!string.IsNullOrEmpty(searchCharacter))
             {

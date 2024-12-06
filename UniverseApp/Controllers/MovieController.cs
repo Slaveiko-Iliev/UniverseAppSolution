@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UniverseApp.Core.Models.Movie;
 using UniverseApp.Core.Services.Contracts;
+using UniverseApp.Infrastructure.Data.Models;
 
 namespace UniverseApp.Controllers
 {
@@ -42,6 +43,7 @@ namespace UniverseApp.Controllers
             return View(model);
         }
 
+        [CheckIsDeleted<Movie>]
         public async Task<IActionResult> Details(int id)
         {
             if (await _movieService.ExistByIdAsync(id) == false)
@@ -55,6 +57,7 @@ namespace UniverseApp.Controllers
         }
 
         [HttpGet]
+        [CheckIsDeleted<Movie>]
         public async Task<IActionResult> Edit(int id)
         {
             if (await _movieService.ExistByIdAsync(id) == false)
@@ -68,6 +71,7 @@ namespace UniverseApp.Controllers
         }
 
         [HttpPost]
+        [CheckIsDeleted<Movie>]
         public async Task<IActionResult> Edit(int id, MovieFormModel model)
         {
             if (!ModelState.IsValid)
@@ -86,6 +90,7 @@ namespace UniverseApp.Controllers
         }
 
         [HttpGet]
+        [CheckIsDeleted<Movie>]
         public async Task<IActionResult> Delete(int id)
         {
             if (await _movieService.ExistByIdAsync(id) == false)
@@ -99,6 +104,7 @@ namespace UniverseApp.Controllers
         }
 
         [HttpPost]
+        [CheckIsDeleted<Movie>]
         public async Task<IActionResult> Delete(int id, MovieDeleteViewModel model)
         {
             if (await _movieService.ExistByIdAsync(model.Id) == false)

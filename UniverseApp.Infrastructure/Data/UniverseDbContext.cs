@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UniverseApp.Infrastructure.Data.Models;
+using UniverseApp.Infrastructure.Extension;
 
 namespace UniverseApp.Infrastructure.Data
 {
@@ -18,10 +19,11 @@ namespace UniverseApp.Infrastructure.Data
         public required DbSet<Starship> Starships { get; set; }
         public required DbSet<Vehicle> Vehicles { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder builder)
-		{
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Seed();
             base.OnModelCreating(builder);
-		}
+        }
 
     }
 }

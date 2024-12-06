@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniverseApp.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using UniverseApp.Infrastructure.Data;
 namespace UniverseApp.Infrastructure.Migrations
 {
     [DbContext(typeof(UniverseDbContext))]
-    partial class UniverseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241126144106_AddComments")]
+    partial class AddComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("MoviesId");
 
-                    b.ToTable("CharacterMovie", (string)null);
+                    b.ToTable("CharacterMovie");
                 });
 
             modelBuilder.Entity("CharacterSpecie", b =>
@@ -49,7 +52,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("SpeciesId");
 
-                    b.ToTable("CharacterSpecie", (string)null);
+                    b.ToTable("CharacterSpecie");
                 });
 
             modelBuilder.Entity("CharacterStarship", b =>
@@ -64,7 +67,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("StarshipsId");
 
-                    b.ToTable("CharacterStarship", (string)null);
+                    b.ToTable("CharacterStarship");
                 });
 
             modelBuilder.Entity("CharacterVehicle", b =>
@@ -79,7 +82,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("VehiclesId");
 
-                    b.ToTable("CharacterVehicle", (string)null);
+                    b.ToTable("CharacterVehicle");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -296,7 +299,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("PlanetsId");
 
-                    b.ToTable("MoviePlanet", (string)null);
+                    b.ToTable("MoviePlanet");
                 });
 
             modelBuilder.Entity("MovieSpecie", b =>
@@ -311,7 +314,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("SpeciesId");
 
-                    b.ToTable("MovieSpecie", (string)null);
+                    b.ToTable("MovieSpecie");
                 });
 
             modelBuilder.Entity("MovieStarship", b =>
@@ -326,7 +329,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("StarshipsId");
 
-                    b.ToTable("MovieStarship", (string)null);
+                    b.ToTable("MovieStarship");
                 });
 
             modelBuilder.Entity("MovieVehicle", b =>
@@ -341,7 +344,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("VehiclesId");
 
-                    b.ToTable("MovieVehicle", (string)null);
+                    b.ToTable("MovieVehicle");
                 });
 
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Character", b =>
@@ -406,7 +409,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("PlanetId");
 
-                    b.ToTable("Characters", null, t =>
+                    b.ToTable("Characters", t =>
                         {
                             t.HasComment("Character Entity");
                         });
@@ -420,8 +423,8 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(800)
-                        .HasColumnType("nvarchar(800)")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
                         .HasComment("Movie Description");
 
                     b.Property<string>("Director")
@@ -468,89 +471,9 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movies", null, t =>
+                    b.ToTable("Movies", t =>
                         {
                             t.HasComment("Movie Entity");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 5,
-                            Description = "It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire's\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire's\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy....",
-                            Director = "George Lucas",
-                            EpisodeId = "4",
-                            ImageUrl = "",
-                            IsDeleted = false,
-                            Producer = "Gary Kurtz, Rick McCallum",
-                            ReleaseDate = new DateTime(1977, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "A New Hope",
-                            Url = "https://swapi.dev/api/films/1/"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Description = "It is a dark time for the\r\nRebellion. Although the Death\r\nStar has been destroyed,\r\nImperial troops have driven the\r\nRebel forces from their hidden\r\nbase and pursued them across\r\nthe galaxy.\r\n\r\nEvading the dreaded Imperial\r\nStarfleet, a group of freedom\r\nfighters led by Luke Skywalker\r\nhas established a new secret\r\nbase on the remote ice world\r\nof Hoth.\r\n\r\nThe evil lord Darth Vader,\r\nobsessed with finding young\r\nSkywalker, has dispatched\r\nthousands of remote probes into\r\nthe far reaches of space....",
-                            Director = "Irvin Kershner",
-                            EpisodeId = "5",
-                            ImageUrl = "",
-                            IsDeleted = false,
-                            Producer = "Gary Kurtz, Rick McCallum",
-                            ReleaseDate = new DateTime(1980, 5, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Empire Strikes Back",
-                            Url = "https://swapi.dev/api/films/2/"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Description = "Luke Skywalker has returned to\r\nhis home planet of Tatooine in\r\nan attempt to rescue his\r\nfriend Han Solo from the\r\nclutches of the vile gangster\r\nJabba the Hutt.\r\n\r\nLittle does Luke know that the\r\nGALACTIC EMPIRE has secretly\r\nbegun construction on a new\r\narmored space station even\r\nmore powerful than the first\r\ndreaded Death Star.\r\n\r\nWhen completed, this ultimate\r\nweapon will spell certain doom\r\nfor the small band of rebels\r\nstruggling to restore freedom\r\nto the galaxy...",
-                            Director = "Richard Marquand",
-                            EpisodeId = "6",
-                            ImageUrl = "",
-                            IsDeleted = false,
-                            Producer = "Howard G. Kazanjian, George Lucas, Rick McCallum",
-                            ReleaseDate = new DateTime(1983, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Return of the Jedi",
-                            Url = "https://swapi.dev/api/films/3/"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Description = "Turmoil has engulfed the\r\nGalactic Republic. The taxation\r\nof trade routes to outlying star\r\nsystems is in dispute.\r\n\r\nHoping to resolve the matter\r\nwith a blockade of deadly\r\nbattleships, the greedy Trade\r\nFederation has stopped all\r\nshipping to the small planet\r\nof Naboo.\r\n\r\nWhile the Congress of the\r\nRepublic endlessly debates\r\nthis alarming chain of events,\r\nthe Supreme Chancellor has\r\nsecretly dispatched two Jedi\r\nKnights, the guardians of\r\npeace and justice in the\r\ngalaxy, to settle the conflict....",
-                            Director = "George Lucas",
-                            EpisodeId = "1",
-                            ImageUrl = "",
-                            IsDeleted = false,
-                            Producer = "Rick McCallum",
-                            ReleaseDate = new DateTime(1999, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Phantom Menace",
-                            Url = "https://swapi.dev/api/films/4/"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Description = "There is unrest in the Galactic\r\nSenate. Several thousand solar\r\nsystems have declared their\r\nintentions to leave the Republic.\r\n\r\nThis separatist movement,\r\nunder the leadership of the\r\nmysterious Count Dooku, has\r\nmade it difficult for the limited\r\nnumber of Jedi Knights to maintain \r\npeace and order in the galaxy.\r\n\r\nSenator Amidala, the former\r\nQueen of Naboo, is returning\r\nto the Galactic Senate to vote\r\non the critical issue of creating\r\nan ARMY OF THE REPUBLIC\r\nto assist the overwhelmed\r\nJedi....",
-                            Director = "George Lucas",
-                            EpisodeId = "2",
-                            ImageUrl = "",
-                            IsDeleted = false,
-                            Producer = "Rick McCallum",
-                            ReleaseDate = new DateTime(2002, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Attack of the Clones",
-                            Url = "https://swapi.dev/api/films/5/"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Description = "War! The Republic is crumbling\r\nunder attacks by the ruthless\r\nSith Lord, Count Dooku.\r\nThere are heroes on both sides.\r\nEvil is everywhere.\r\n\r\nIn a stunning move, the\r\nfiendish droid leader, General\r\nGrievous, has swept into the\r\nRepublic capital and kidnapped\r\nChancellor Palpatine, leader of\r\nthe Galactic Senate.\r\n\r\nAs the Separatist Droid Army\r\nattempts to flee the besieged\r\ncapital with their valuable\r\nhostage, two Jedi Knights lead a\r\ndesperate mission to rescue the\r\ncaptive Chancellor....",
-                            Director = "George Lucas",
-                            EpisodeId = "3",
-                            ImageUrl = "",
-                            IsDeleted = false,
-                            Producer = "Rick McCallum",
-                            ReleaseDate = new DateTime(2005, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Revenge of the Sith",
-                            Url = "https://swapi.dev/api/films/6/"
                         });
                 });
 
@@ -612,7 +535,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Planets", null, t =>
+                    b.ToTable("Planets", t =>
                         {
                             t.HasComment("Planet Entity");
                         });
@@ -685,7 +608,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasIndex("PlanetId");
 
-                    b.ToTable("Species", null, t =>
+                    b.ToTable("Species", t =>
                         {
                             t.HasComment("Specie Entity");
                         });
@@ -774,7 +697,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Starships", null, t =>
+                    b.ToTable("Starships", t =>
                         {
                             t.HasComment("Starship Entity");
                         });
@@ -853,7 +776,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vehicles", null, t =>
+                    b.ToTable("Vehicles", t =>
                         {
                             t.HasComment("Vehicle Entity");
                         });
