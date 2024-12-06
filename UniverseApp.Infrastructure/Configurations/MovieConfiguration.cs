@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Text.RegularExpressions;
 using UniverseApp.Infrastructure.Data.DTOs;
 using UniverseApp.Infrastructure.Data.Models;
-using static UniverseApp.Infrastructure.Common.DataDtoHelper;
+using static UniverseApp.Infrastructure.Common.SeedDtoDataHelper;
 
 namespace UniverseApp.Infrastructure.Configurations
 {
@@ -11,12 +10,12 @@ namespace UniverseApp.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Movie> builder)
         {
-            var movieTotImport = GetEntityDtoInfoAsync<MovieInfoDto>().Result;
+            var moviesToImport = GetEntityDtoInfoAsync<MovieInfoDto>().Result;
 
-            var movies = movieTotImport
+            var movies = moviesToImport
                 .Select(m => new Movie()
                 {
-                    Id = GetEntityIdFromUrl(m.Url) + 4,
+                    Id = GetEntityIdFromUrl(m.Url),
                     Title = m.Title,
                     EpisodeId = m.EpisodeId.ToString(),
                     Description = m.Description,
@@ -30,14 +29,6 @@ namespace UniverseApp.Infrastructure.Configurations
                 .ToList();
 
             builder.HasData(movies);
-        }
-
-        public int GetEntityIdFromUrl(string url)
-        {
-            string pattern = @"(\d+)";
-            Regex regex = new Regex(pattern);
-            Match match = regex.Match(url);
-            return int.Parse(match.Value);
         }
     }
 }

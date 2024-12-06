@@ -1,9 +1,10 @@
 ﻿using System.Text.Json;
+using System.Text.RegularExpressions;
 using UniverseApp.Infrastructure.Data.DTOs;
 
 namespace UniverseApp.Infrastructure.Common
 {
-    public static class DataDtoHelper
+    public static class SeedDtoDataHelper
     {
         public static async Task<List<T>> GetEntityDtoInfoAsync<T>()
         {
@@ -39,5 +40,23 @@ namespace UniverseApp.Infrastructure.Common
 
             return entityDtoList;
         }
+
+        public static int GetEntityIdFromUrl(string url)
+        {
+            string pattern = @"(\d+)";
+            Regex regex = new Regex(pattern);
+            Match match = regex.Match(url);
+
+            return int.Parse(match.Value);
+        }
+
+        public static string[] SplitInput(string input) =>
+            input.Split(", ", StringSplitOptions.RemoveEmptyEntries) ?? [];
+
+        public static int? TryParseInputToInt(string input) =>
+            int.TryParse(input, out int result) ? result : null;
+
+        public static double? TryParseInputToDouble(string input) =>
+            double.TryParse(input, out double result) ? result : null;
     }
 }

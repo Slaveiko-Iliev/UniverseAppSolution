@@ -5,7 +5,7 @@ using static UniverseApp.Infrastructure.Common.Constants.SpecieConst;
 
 namespace UniverseApp.Infrastructure.Data.DTOs
 {
-    internal class SpecieInfoDto
+    public class SpecieInfoDto
     {
         [Required]
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]

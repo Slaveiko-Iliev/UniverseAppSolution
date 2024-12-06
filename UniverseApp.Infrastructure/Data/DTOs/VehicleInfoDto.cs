@@ -49,7 +49,7 @@ namespace UniverseApp.Infrastructure.Data.DTOs
         public string[]? Pilots { get; set; }
 
         [JsonPropertyName("films")]
-        public ICollection<Movie> Movies { get; set; } = new HashSet<Movie>();
+        public string[]? Movies { get; set; }
 
         [Required]
         [StringLength(UrlMaxLenght, MinimumLength = UrlMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]

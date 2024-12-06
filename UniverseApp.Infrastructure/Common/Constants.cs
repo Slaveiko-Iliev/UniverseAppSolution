@@ -8,10 +8,12 @@
             public const int NameMaxLenght = 50;
             public const int RotationOrbitalPeriodMinLenght = 1;
             public const int RotationOrbitalPeriodMaxLenght = 7;
+            public const int DiameterMinLenght = 1;
+            public const int DiameterMaxLenght = 7;
             public const int ClimateMinLenght = 3;
-            public const int ClimateMaxLenght = 30;
+            public const int ClimateMaxLenght = 40;
             public const int GravityMinLenght = 10;
-            public const int GravityMaxLenght = 20;
+            public const int GravityMaxLenght = 40;
             public const int TerrainMinLenght = 4;
             public const int TerrainMaxLenght = 60;
             public const int SurfaceWaterMinLenght = 1;
@@ -22,8 +24,9 @@
             public const int CharacterIdsMaxLenght = 100;
             public const int MovieIdsMinLenght = 1;
             public const int MovieIdsMaxLenght = 100;
+            public const int ResidentsMinLenght = 1;
             public const int ResidentsMaxLenght = 300;
-            public const int FilmsMaxLenght = 300;
+            public const int FilmsMaxLenght = 1000;
             public const int UrlMinLenght = 4;
             public const int UrlMaxLenght = 100;
         }
@@ -61,7 +64,7 @@
             public const int BirthYearMinLenght = 4;
             public const int BirthYearMaxLenght = 10;
             public const int GenderMinLenght = 4;
-            public const int GenderMaxLenght = 6;
+            public const int GenderMaxLenght = 15;
             public const int UrlMinLenght = 4;
             public const int UrlMaxLenght = 100;
             public const int HomeworldMinLenght = 4;
@@ -77,7 +80,7 @@
             public const int DesignationMinLenght = 5;
             public const int DesignationMaxLenght = 30;
             public const int AverageHeightMinLenght = 1;
-            public const int AverageHeightMaxLenght = 3;
+            public const int AverageHeightMaxLenght = 10;
             public const int SkinColorsMinLenght = 3;
             public const int SkinColorsMaxLenght = 50;
             public const int HairColorsMinLenght = 3;
@@ -85,7 +88,7 @@
             public const int EyeColorsMinLenght = 3;
             public const int EyeColorsMaxLenght = 50;
             public const int AverageLifespanMinLenght = 1;
-            public const int AverageLifespanMaxLenght = 3;
+            public const int AverageLifespanMaxLenght = 15;
             public const int LanguageMinLenght = 3;
             public const int LanguageMaxLenght = 30;
             public const int HomeworldMinLenght = 4;
@@ -101,7 +104,7 @@
             public const int ModelMinLenght = 3;
             public const int ModelMaxLenght = 40;
             public const int ManufacturerMinLenght = 3;
-            public const int ManufacturerMaxLenght = 50;
+            public const int ManufacturerMaxLenght = 100;
             public const int CostInCreditsMinLenght = 1;
             public const int CostInCreditsMaxLenght = 15;
             public const int LengthMinLenght = 1;
@@ -117,7 +120,7 @@
             public const int ConsumablesMinLenght = 5;
             public const int ConsumablesMaxLenght = 20;
             public const int ClassMinLenght = 3;
-            public const int ClassMaxLenght = 15;
+            public const int ClassMaxLenght = 25;
             public const int UrlMinLenght = 4;
             public const int UrlMaxLenght = 100;
         }

@@ -1,53 +1,49 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UniverseApp.Infrastructure.Data.Models;
-using static UniverseApp.Infrastructure.Common.Constants.PlanetConst;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using static UniverseApp.Infrastructure.Common.Constants.General;
+using static UniverseApp.Infrastructure.Common.Constants.PlanetConst;
 
 namespace UniverseApp.Infrastructure.Data.DTOs
 {
-    internal class PlanetInfoDto
+    public class PlanetInfoDto
     {
         [Required]
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        internal required string Name { get; set; }
+        public required string Name { get; set; }
 
-        [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        internal string? RotationPeriod { get; set; }
+        [StringLength(RotationOrbitalPeriodMaxLenght, MinimumLength = RotationOrbitalPeriodMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        [JsonPropertyName("rotation_period")]
+        public string? RotationPeriod { get; set; }
 
-        [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        internal string? OrbitalPeriod { get; set; }
+        [StringLength(RotationOrbitalPeriodMaxLenght, MinimumLength = RotationOrbitalPeriodMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        [JsonPropertyName("orbital_period")]
+        public string? OrbitalPeriod { get; set; }
 
-        [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        internal string? Climate { get; set; }
+        [StringLength(DiameterMaxLenght, MinimumLength = DiameterMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        public string? Diameter { get; set; }
 
-        [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        internal string? Gravity { get; set; }
+        [StringLength(ClimateMaxLenght, MinimumLength = ClimateMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        public string? Climate { get; set; }
 
-        [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        internal string? Terrain { get; set; }
+        [StringLength(GravityMaxLenght, MinimumLength = GravityMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        public string? Gravity { get; set; }
 
-        [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        internal string? SurfaceWater { get; set; }
+        [StringLength(TerrainMaxLenght, MinimumLength = TerrainMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        public string? Terrain { get; set; }
 
-        [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        internal string? Population { get; set; }
+        [StringLength(SurfaceWaterMaxLenght, MinimumLength = SurfaceWaterMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        [JsonPropertyName("surface_water")]
+        public string? SurfaceWater { get; set; }
 
-        [MaxLength(ResidentsMaxLenght)]
-        internal string[]? Residents { get; set; }
+        [StringLength(PopulationMaxLenght, MinimumLength = PopulationMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
+        public string? Population { get; set; }
 
         [MaxLength(FilmsMaxLenght)]
-        internal string[]? Films { get; set; }
+        public string[]? Films { get; set; }
 
         [Required]
         [Url]
         [StringLength(UrlMaxLenght, MinimumLength = UrlMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        internal required string Url { get; set; }
+        public required string Url { get; set; }
     }
 }

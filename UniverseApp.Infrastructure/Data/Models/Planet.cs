@@ -29,6 +29,10 @@ namespace UniverseApp.Infrastructure.Data.Models
         [Comment("Orbital Period of Planet")]
         public int? OrbitalPeriod { get; set; }
 
+        [MaxLength(DiameterMaxLenght)]
+        [Comment("Diameter of Planet")]
+        public int? Diameter { get; set; }
+
         [MaxLength(ClimateMaxLenght)]
         [Comment("Climate of Planet")]
         public string[]? Climate { get; set; }

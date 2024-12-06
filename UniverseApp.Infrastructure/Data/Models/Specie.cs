@@ -58,6 +58,7 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         [MaxLength(LanguageMaxLenght)]
         [Comment("Specie Language")]
+        public string? Language { get; set; }
 
         public ICollection<Character> Characters { get; set; } = new HashSet<Character>();
 

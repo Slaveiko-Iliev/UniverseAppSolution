@@ -8,11 +8,11 @@ namespace UniverseApp.Infrastructure.Extension
         public static void Seed(this ModelBuilder builder)
         {
             builder.ApplyConfiguration(new MovieConfiguration());
-            //builder.ApplyConfiguration(new CharacterConfiguration());
-            //builder.ApplyConfiguration(new MovieConfiguration());
-            //builder.ApplyConfiguration(new MovieConfiguration());
-            //builder.ApplyConfiguration(new MovieConfiguration());
-            //builder.ApplyConfiguration(new MovieConfiguration());
+            builder.ApplyConfiguration(new PlanetConfiguration());
+            builder.ApplyConfiguration(new CharacterConfiguration());
+            builder.ApplyConfiguration(new SpecieConfiguration());
+            builder.ApplyConfiguration(new VehicleConfiguration());
+            builder.ApplyConfiguration(new StarshipConfiguration());
         }
     }
 }
