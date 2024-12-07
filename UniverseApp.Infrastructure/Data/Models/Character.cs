@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static UniverseApp.Infrastructure.Common.Constants.CharacterConst;
+using static UniverseApp.Infrastructure.Constants.ModelsConstants.CharacterConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
-	[Include("Movies")]
+    [Include("Movies")]
 	[Include("Species")]
 	[Include("Vehicles")]
 	[Include("Starships")]

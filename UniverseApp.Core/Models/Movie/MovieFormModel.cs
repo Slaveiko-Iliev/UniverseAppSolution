@@ -6,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniverseApp.Infrastructure.Data.Models;
-using static UniverseApp.Infrastructure.Common.Constants.MovieConst;
-using static UniverseApp.Infrastructure.Common.Constants.General;
+using static UniverseApp.Infrastructure.Constants.ModelsConstants.MovieConst;
+using static UniverseApp.Infrastructure.Constants.ModelsConstants.General;
 
 namespace UniverseApp.Core.Models.Movie
 {

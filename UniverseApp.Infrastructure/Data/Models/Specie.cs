@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static UniverseApp.Infrastructure.Common.Constants.SpecieConst;
+using static UniverseApp.Infrastructure.Constants.ModelsConstants.SpecieConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
-	[Include("Characters")]
+    [Include("Characters")]
 	[Include("Movies")]
 	[Comment("Specie Entity")]
     public class Specie

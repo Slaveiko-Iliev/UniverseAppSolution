@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static UniverseApp.Infrastructure.Common.Constants.PlanetConst;
+using static UniverseApp.Infrastructure.Constants.ModelsConstants.PlanetConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
-	[Include("Characters")]
+    [Include("Characters")]
 	[Include("Movies")]
     [Comment("Planet Entity")]
 	public class Planet

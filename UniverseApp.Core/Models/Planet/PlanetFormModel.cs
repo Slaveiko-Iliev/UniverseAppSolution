@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static UniverseApp.Infrastructure.Common.Constants.General;
-using static UniverseApp.Infrastructure.Common.Constants.PlanetConst;
+using static UniverseApp.Infrastructure.Constants.ModelsConstants.General;
+using static UniverseApp.Infrastructure.Constants.ModelsConstants.PlanetConst;
 
 namespace UniverseApp.Core.Models.Planet
 {
