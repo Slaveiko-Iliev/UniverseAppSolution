@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UniverseApp.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedData : Migration
+    public partial class SeedEntitiesData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -157,95 +157,6 @@ namespace UniverseApp.Infrastructure.Migrations
                 oldMaxLength: 6,
                 oldNullable: true,
                 oldComment: "Character Gender");
-
-            migrationBuilder.InsertData(
-                table: "Characters",
-                columns: new[] { "Id", "BirthYear", "EyeColor", "Gender", "HairColor", "Height", "IsDeleted", "Mass", "Name", "PlanetId", "SkinColor", "Url" },
-                values: new object[,]
-                {
-                    { 1, "19BBY", "blue", "male", "blond", 172, false, 77, "Luke Skywalker", null, "fair", "https://swapi.dev/api/people/1/" },
-                    { 2, "112BBY", "yellow", "n/a", "n/a", 167, false, 75, "C-3PO", null, "gold", "https://swapi.dev/api/people/2/" },
-                    { 3, "33BBY", "red", "n/a", "n/a", 96, false, 32, "R2-D2", null, "white, blue", "https://swapi.dev/api/people/3/" },
-                    { 4, "41.9BBY", "yellow", "male", "none", 202, false, 136, "Darth Vader", null, "white", "https://swapi.dev/api/people/4/" },
-                    { 5, "19BBY", "brown", "female", "brown", 150, false, 49, "Leia Organa", null, "light", "https://swapi.dev/api/people/5/" },
-                    { 6, "52BBY", "blue", "male", "brown, grey", 178, false, 120, "Owen Lars", null, "light", "https://swapi.dev/api/people/6/" },
-                    { 7, "47BBY", "blue", "female", "brown", 165, false, 75, "Beru Whitesun lars", null, "light", "https://swapi.dev/api/people/7/" },
-                    { 8, "unknown", "red", "n/a", "n/a", 97, false, 32, "R5-D4", null, "white, red", "https://swapi.dev/api/people/8/" },
-                    { 9, "24BBY", "brown", "male", "black", 183, false, 84, "Biggs Darklighter", null, "light", "https://swapi.dev/api/people/9/" },
-                    { 10, "57BBY", "blue-gray", "male", "auburn, white", 182, false, 77, "Obi-Wan Kenobi", null, "fair", "https://swapi.dev/api/people/10/" },
-                    { 11, "41.9BBY", "blue", "male", "blond", 188, false, 84, "Anakin Skywalker", null, "fair", "https://swapi.dev/api/people/11/" },
-                    { 12, "64BBY", "blue", "male", "auburn, grey", 180, false, null, "Wilhuff Tarkin", null, "fair", "https://swapi.dev/api/people/12/" },
-                    { 13, "200BBY", "blue", "male", "brown", 228, false, 112, "Chewbacca", null, "unknown", "https://swapi.dev/api/people/13/" },
-                    { 14, "29BBY", "brown", "male", "brown", 180, false, 80, "Han Solo", null, "fair", "https://swapi.dev/api/people/14/" },
-                    { 15, "44BBY", "black", "male", "n/a", 173, false, 74, "Greedo", null, "green", "https://swapi.dev/api/people/15/" },
-                    { 16, "600BBY", "orange", "hermaphrodite", "n/a", 175, false, null, "Jabba Desilijic Tiure", null, "green-tan, brown", "https://swapi.dev/api/people/16/" },
-                    { 18, "21BBY", "hazel", "male", "brown", 170, false, 77, "Wedge Antilles", null, "fair", "https://swapi.dev/api/people/18/" },
-                    { 19, "unknown", "blue", "male", "brown", 180, false, 110, "Jek Tono Porkins", null, "fair", "https://swapi.dev/api/people/19/" },
-                    { 20, "896BBY", "brown", "male", "white", 66, false, 17, "Yoda", null, "green", "https://swapi.dev/api/people/20/" },
-                    { 21, "82BBY", "yellow", "male", "grey", 170, false, 75, "Palpatine", null, "pale", "https://swapi.dev/api/people/21/" },
-                    { 22, "31.5BBY", "brown", "male", "black", 183, false, null, "Boba Fett", null, "fair", "https://swapi.dev/api/people/22/" },
-                    { 23, "15BBY", "red", "none", "none", 200, false, 140, "IG-88", null, "metal", "https://swapi.dev/api/people/23/" },
-                    { 24, "53BBY", "red", "male", "none", 190, false, 113, "Bossk", null, "green", "https://swapi.dev/api/people/24/" },
-                    { 25, "31BBY", "brown", "male", "black", 177, false, 79, "Lando Calrissian", null, "dark", "https://swapi.dev/api/people/25/" },
-                    { 26, "37BBY", "blue", "male", "none", 175, false, 79, "Lobot", null, "light", "https://swapi.dev/api/people/26/" },
-                    { 27, "41BBY", "orange", "male", "none", 180, false, 83, "Ackbar", null, "brown mottle", "https://swapi.dev/api/people/27/" },
-                    { 28, "48BBY", "blue", "female", "auburn", 150, false, null, "Mon Mothma", null, "fair", "https://swapi.dev/api/people/28/" },
-                    { 29, "unknown", "brown", "male", "brown", null, false, null, "Arvel Crynyd", null, "fair", "https://swapi.dev/api/people/29/" },
-                    { 30, "8BBY", "brown", "male", "brown", 88, false, 20, "Wicket Systri Warrick", null, "brown", "https://swapi.dev/api/people/30/" },
-                    { 31, "unknown", "black", "male", "none", 160, false, 68, "Nien Nunb", null, "grey", "https://swapi.dev/api/people/31/" },
-                    { 32, "92BBY", "blue", "male", "brown", 193, false, 89, "Qui-Gon Jinn", null, "fair", "https://swapi.dev/api/people/32/" },
-                    { 33, "unknown", "red", "male", "none", 191, false, 90, "Nute Gunray", null, "mottled green", "https://swapi.dev/api/people/33/" },
-                    { 34, "91BBY", "blue", "male", "blond", 170, false, null, "Finis Valorum", null, "fair", "https://swapi.dev/api/people/34/" },
-                    { 35, "46BBY", "brown", "female", "brown", 185, false, 45, "Padmé Amidala", null, "light", "https://swapi.dev/api/people/35/" },
-                    { 36, "52BBY", "orange", "male", "none", 196, false, 66, "Jar Jar Binks", null, "orange", "https://swapi.dev/api/people/36/" },
-                    { 37, "unknown", "orange", "male", "none", 224, false, 82, "Roos Tarpals", null, "grey", "https://swapi.dev/api/people/37/" },
-                    { 38, "unknown", "orange", "male", "none", 206, false, null, "Rugor Nass", null, "green", "https://swapi.dev/api/people/38/" },
-                    { 39, "unknown", "blue", "male", "brown", 183, false, null, "Ric Olié", null, "fair", "https://swapi.dev/api/people/39/" },
-                    { 40, "unknown", "yellow", "male", "black", 137, false, null, "Watto", null, "blue, grey", "https://swapi.dev/api/people/40/" },
-                    { 41, "unknown", "orange", "male", "none", 112, false, 40, "Sebulba", null, "grey, red", "https://swapi.dev/api/people/41/" },
-                    { 42, "62BBY", "brown", "male", "black", 183, false, null, "Quarsh Panaka", null, "dark", "https://swapi.dev/api/people/42/" },
-                    { 43, "72BBY", "brown", "female", "black", 163, false, null, "Shmi Skywalker", null, "fair", "https://swapi.dev/api/people/43/" },
-                    { 44, "54BBY", "yellow", "male", "none", 175, false, 80, "Darth Maul", null, "red", "https://swapi.dev/api/people/44/" },
-                    { 45, "unknown", "pink", "male", "none", 180, false, null, "Bib Fortuna", null, "pale", "https://swapi.dev/api/people/45/" },
-                    { 46, "48BBY", "hazel", "female", "none", 178, false, 55, "Ayla Secura", null, "blue", "https://swapi.dev/api/people/46/" },
-                    { 47, "unknown", "unknown", "male", "none", 79, false, 15, "Ratts Tyerel", null, "grey, blue", "https://swapi.dev/api/people/47/" },
-                    { 48, "unknown", "yellow", "male", "none", 94, false, 45, "Dud Bolt", null, "blue, grey", "https://swapi.dev/api/people/48/" },
-                    { 49, "unknown", "black", "male", "none", 122, false, null, "Gasgano", null, "white, blue", "https://swapi.dev/api/people/49/" },
-                    { 50, "unknown", "orange", "male", "none", 163, false, 65, "Ben Quadinaros", null, "grey, green, yellow", "https://swapi.dev/api/people/50/" },
-                    { 51, "72BBY", "brown", "male", "none", 188, false, 84, "Mace Windu", null, "dark", "https://swapi.dev/api/people/51/" },
-                    { 52, "92BBY", "yellow", "male", "white", 198, false, 82, "Ki-Adi-Mundi", null, "pale", "https://swapi.dev/api/people/52/" },
-                    { 53, "unknown", "black", "male", "none", 196, false, 87, "Kit Fisto", null, "green", "https://swapi.dev/api/people/53/" },
-                    { 54, "unknown", "brown", "male", "black", 171, false, null, "Eeth Koth", null, "brown", "https://swapi.dev/api/people/54/" },
-                    { 55, "unknown", "blue", "female", "none", 184, false, 50, "Adi Gallia", null, "dark", "https://swapi.dev/api/people/55/" },
-                    { 56, "unknown", "orange", "male", "none", 188, false, null, "Saesee Tiin", null, "pale", "https://swapi.dev/api/people/56/" },
-                    { 57, "unknown", "yellow", "male", "none", 264, false, null, "Yarael Poof", null, "white", "https://swapi.dev/api/people/57/" },
-                    { 58, "22BBY", "black", "male", "none", 188, false, 80, "Plo Koon", null, "orange", "https://swapi.dev/api/people/58/" },
-                    { 59, "unknown", "blue", "male", "none", 196, false, null, "Mas Amedda", null, "blue", "https://swapi.dev/api/people/59/" },
-                    { 60, "unknown", "brown", "male", "black", 185, false, 85, "Gregar Typho", null, "dark", "https://swapi.dev/api/people/60/" },
-                    { 61, "unknown", "brown", "female", "brown", 157, false, null, "Cordé", null, "light", "https://swapi.dev/api/people/61/" },
-                    { 62, "82BBY", "blue", "male", "brown", 183, false, null, "Cliegg Lars", null, "fair", "https://swapi.dev/api/people/62/" },
-                    { 63, "unknown", "yellow", "male", "none", 183, false, 80, "Poggle the Lesser", null, "green", "https://swapi.dev/api/people/63/" },
-                    { 64, "58BBY", "blue", "female", "black", 170, false, null, "Luminara Unduli", null, "yellow", "https://swapi.dev/api/people/64/" },
-                    { 65, "40BBY", "blue", "female", "black", 166, false, 50, "Barriss Offee", null, "yellow", "https://swapi.dev/api/people/65/" },
-                    { 66, "unknown", "brown", "female", "brown", 165, false, null, "Dormé", null, "light", "https://swapi.dev/api/people/66/" },
-                    { 67, "102BBY", "brown", "male", "white", 193, false, 80, "Dooku", null, "fair", "https://swapi.dev/api/people/67/" },
-                    { 68, "67BBY", "brown", "male", "black", 191, false, null, "Bail Prestor Organa", null, "tan", "https://swapi.dev/api/people/68/" },
-                    { 69, "66BBY", "brown", "male", "black", 183, false, 79, "Jango Fett", null, "tan", "https://swapi.dev/api/people/69/" },
-                    { 70, "unknown", "yellow", "female", "blonde", 168, false, 55, "Zam Wesell", null, "fair, green, yellow", "https://swapi.dev/api/people/70/" },
-                    { 71, "unknown", "yellow", "male", "none", 198, false, 102, "Dexter Jettster", null, "brown", "https://swapi.dev/api/people/71/" },
-                    { 72, "unknown", "black", "male", "none", 229, false, 88, "Lama Su", null, "grey", "https://swapi.dev/api/people/72/" },
-                    { 73, "unknown", "black", "female", "none", 213, false, null, "Taun We", null, "grey", "https://swapi.dev/api/people/73/" },
-                    { 74, "unknown", "blue", "female", "white", 167, false, null, "Jocasta Nu", null, "fair", "https://swapi.dev/api/people/74/" },
-                    { 75, "unknown", "red, blue", "female", "none", 96, false, null, "R4-P17", null, "silver, red", "https://swapi.dev/api/people/75/" },
-                    { 76, "unknown", "unknown", "male", "none", 193, false, 48, "Wat Tambor", null, "green, grey", "https://swapi.dev/api/people/76/" },
-                    { 77, "unknown", "gold", "male", "none", 191, false, null, "San Hill", null, "grey", "https://swapi.dev/api/people/77/" },
-                    { 78, "unknown", "black", "female", "none", 178, false, 57, "Shaak Ti", null, "red, blue, white", "https://swapi.dev/api/people/78/" },
-                    { 79, "unknown", "green, yellow", "male", "none", 216, false, 159, "Grievous", null, "brown, white", "https://swapi.dev/api/people/79/" },
-                    { 80, "unknown", "blue", "male", "brown", 234, false, 136, "Tarfful", null, "brown", "https://swapi.dev/api/people/80/" },
-                    { 81, "unknown", "brown", "male", "brown", 188, false, 79, "Raymus Antilles", null, "light", "https://swapi.dev/api/people/81/" },
-                    { 82, "unknown", "white", "female", "none", 178, false, 48, "Sly Moore", null, "pale", "https://swapi.dev/api/people/82/" },
-                    { 83, "unknown", "black", "male", "none", 206, false, 80, "Tion Medon", null, "grey", "https://swapi.dev/api/people/83/" }
-                });
 
             migrationBuilder.InsertData(
                 table: "Movies",
@@ -419,6 +330,95 @@ namespace UniverseApp.Infrastructure.Migrations
                     { 72, null, "droid tank", "none", 49000, 0, false, 10.960000000000001, "Techno Union", 100, "NR-N99 Persuader-class droid enforcer", "Corporate Alliance tank droid", 4, "https://swapi.dev/api/vehicles/72/" },
                     { 73, 0, "airspeeder", "none", 60000, 0, false, 12.300000000000001, "Baktoid Fleet Ordnance, Haor Chall Engineering", 820, "HMP droid gunship", "Droid gunship", 0, "https://swapi.dev/api/vehicles/73/" },
                     { 76, 20, "walker", "1 day", 40000, 1, false, 3.2000000000000002, "Kuat Drive Yards", 90, "All Terrain Recon Transport", "AT-RT", 0, "https://swapi.dev/api/vehicles/76/" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Characters",
+                columns: new[] { "Id", "BirthYear", "EyeColor", "Gender", "HairColor", "Height", "IsDeleted", "Mass", "Name", "PlanetId", "SkinColor", "Url" },
+                values: new object[,]
+                {
+                    { 1, "19BBY", "blue", "male", "blond", 172, false, 77, "Luke Skywalker", 1, "fair", "https://swapi.dev/api/people/1/" },
+                    { 2, "112BBY", "yellow", "n/a", "n/a", 167, false, 75, "C-3PO", 1, "gold", "https://swapi.dev/api/people/2/" },
+                    { 3, "33BBY", "red", "n/a", "n/a", 96, false, 32, "R2-D2", 8, "white, blue", "https://swapi.dev/api/people/3/" },
+                    { 4, "41.9BBY", "yellow", "male", "none", 202, false, 136, "Darth Vader", 1, "white", "https://swapi.dev/api/people/4/" },
+                    { 5, "19BBY", "brown", "female", "brown", 150, false, 49, "Leia Organa", 2, "light", "https://swapi.dev/api/people/5/" },
+                    { 6, "52BBY", "blue", "male", "brown, grey", 178, false, 120, "Owen Lars", 1, "light", "https://swapi.dev/api/people/6/" },
+                    { 7, "47BBY", "blue", "female", "brown", 165, false, 75, "Beru Whitesun lars", 1, "light", "https://swapi.dev/api/people/7/" },
+                    { 8, "unknown", "red", "n/a", "n/a", 97, false, 32, "R5-D4", 1, "white, red", "https://swapi.dev/api/people/8/" },
+                    { 9, "24BBY", "brown", "male", "black", 183, false, 84, "Biggs Darklighter", 1, "light", "https://swapi.dev/api/people/9/" },
+                    { 10, "57BBY", "blue-gray", "male", "auburn, white", 182, false, 77, "Obi-Wan Kenobi", 20, "fair", "https://swapi.dev/api/people/10/" },
+                    { 11, "41.9BBY", "blue", "male", "blond", 188, false, 84, "Anakin Skywalker", 1, "fair", "https://swapi.dev/api/people/11/" },
+                    { 12, "64BBY", "blue", "male", "auburn, grey", 180, false, null, "Wilhuff Tarkin", 21, "fair", "https://swapi.dev/api/people/12/" },
+                    { 13, "200BBY", "blue", "male", "brown", 228, false, 112, "Chewbacca", 14, "unknown", "https://swapi.dev/api/people/13/" },
+                    { 14, "29BBY", "brown", "male", "brown", 180, false, 80, "Han Solo", 22, "fair", "https://swapi.dev/api/people/14/" },
+                    { 15, "44BBY", "black", "male", "n/a", 173, false, 74, "Greedo", 23, "green", "https://swapi.dev/api/people/15/" },
+                    { 16, "600BBY", "orange", "hermaphrodite", "n/a", 175, false, null, "Jabba Desilijic Tiure", 24, "green-tan, brown", "https://swapi.dev/api/people/16/" },
+                    { 18, "21BBY", "hazel", "male", "brown", 170, false, 77, "Wedge Antilles", 22, "fair", "https://swapi.dev/api/people/18/" },
+                    { 19, "unknown", "blue", "male", "brown", 180, false, 110, "Jek Tono Porkins", 26, "fair", "https://swapi.dev/api/people/19/" },
+                    { 20, "896BBY", "brown", "male", "white", 66, false, 17, "Yoda", 28, "green", "https://swapi.dev/api/people/20/" },
+                    { 21, "82BBY", "yellow", "male", "grey", 170, false, 75, "Palpatine", 8, "pale", "https://swapi.dev/api/people/21/" },
+                    { 22, "31.5BBY", "brown", "male", "black", 183, false, null, "Boba Fett", 10, "fair", "https://swapi.dev/api/people/22/" },
+                    { 23, "15BBY", "red", "none", "none", 200, false, 140, "IG-88", 28, "metal", "https://swapi.dev/api/people/23/" },
+                    { 24, "53BBY", "red", "male", "none", 190, false, 113, "Bossk", 29, "green", "https://swapi.dev/api/people/24/" },
+                    { 25, "31BBY", "brown", "male", "black", 177, false, 79, "Lando Calrissian", 30, "dark", "https://swapi.dev/api/people/25/" },
+                    { 26, "37BBY", "blue", "male", "none", 175, false, 79, "Lobot", 6, "light", "https://swapi.dev/api/people/26/" },
+                    { 27, "41BBY", "orange", "male", "none", 180, false, 83, "Ackbar", 31, "brown mottle", "https://swapi.dev/api/people/27/" },
+                    { 28, "48BBY", "blue", "female", "auburn", 150, false, null, "Mon Mothma", 32, "fair", "https://swapi.dev/api/people/28/" },
+                    { 29, "unknown", "brown", "male", "brown", null, false, null, "Arvel Crynyd", 28, "fair", "https://swapi.dev/api/people/29/" },
+                    { 30, "8BBY", "brown", "male", "brown", 88, false, 20, "Wicket Systri Warrick", 7, "brown", "https://swapi.dev/api/people/30/" },
+                    { 31, "unknown", "black", "male", "none", 160, false, 68, "Nien Nunb", 33, "grey", "https://swapi.dev/api/people/31/" },
+                    { 32, "92BBY", "blue", "male", "brown", 193, false, 89, "Qui-Gon Jinn", 28, "fair", "https://swapi.dev/api/people/32/" },
+                    { 33, "unknown", "red", "male", "none", 191, false, 90, "Nute Gunray", 18, "mottled green", "https://swapi.dev/api/people/33/" },
+                    { 34, "91BBY", "blue", "male", "blond", 170, false, null, "Finis Valorum", 9, "fair", "https://swapi.dev/api/people/34/" },
+                    { 35, "46BBY", "brown", "female", "brown", 185, false, 45, "Padmé Amidala", 8, "light", "https://swapi.dev/api/people/35/" },
+                    { 36, "52BBY", "orange", "male", "none", 196, false, 66, "Jar Jar Binks", 8, "orange", "https://swapi.dev/api/people/36/" },
+                    { 37, "unknown", "orange", "male", "none", 224, false, 82, "Roos Tarpals", 8, "grey", "https://swapi.dev/api/people/37/" },
+                    { 38, "unknown", "orange", "male", "none", 206, false, null, "Rugor Nass", 8, "green", "https://swapi.dev/api/people/38/" },
+                    { 39, "unknown", "blue", "male", "brown", 183, false, null, "Ric Olié", 8, "fair", "https://swapi.dev/api/people/39/" },
+                    { 40, "unknown", "yellow", "male", "black", 137, false, null, "Watto", 34, "blue, grey", "https://swapi.dev/api/people/40/" },
+                    { 41, "unknown", "orange", "male", "none", 112, false, 40, "Sebulba", 35, "grey, red", "https://swapi.dev/api/people/41/" },
+                    { 42, "62BBY", "brown", "male", "black", 183, false, null, "Quarsh Panaka", 8, "dark", "https://swapi.dev/api/people/42/" },
+                    { 43, "72BBY", "brown", "female", "black", 163, false, null, "Shmi Skywalker", 1, "fair", "https://swapi.dev/api/people/43/" },
+                    { 44, "54BBY", "yellow", "male", "none", 175, false, 80, "Darth Maul", 36, "red", "https://swapi.dev/api/people/44/" },
+                    { 45, "unknown", "pink", "male", "none", 180, false, null, "Bib Fortuna", 37, "pale", "https://swapi.dev/api/people/45/" },
+                    { 46, "48BBY", "hazel", "female", "none", 178, false, 55, "Ayla Secura", 37, "blue", "https://swapi.dev/api/people/46/" },
+                    { 47, "unknown", "unknown", "male", "none", 79, false, 15, "Ratts Tyerel", 38, "grey, blue", "https://swapi.dev/api/people/47/" },
+                    { 48, "unknown", "yellow", "male", "none", 94, false, 45, "Dud Bolt", 39, "blue, grey", "https://swapi.dev/api/people/48/" },
+                    { 49, "unknown", "black", "male", "none", 122, false, null, "Gasgano", 40, "white, blue", "https://swapi.dev/api/people/49/" },
+                    { 50, "unknown", "orange", "male", "none", 163, false, 65, "Ben Quadinaros", 41, "grey, green, yellow", "https://swapi.dev/api/people/50/" },
+                    { 51, "72BBY", "brown", "male", "none", 188, false, 84, "Mace Windu", 42, "dark", "https://swapi.dev/api/people/51/" },
+                    { 52, "92BBY", "yellow", "male", "white", 198, false, 82, "Ki-Adi-Mundi", 43, "pale", "https://swapi.dev/api/people/52/" },
+                    { 53, "unknown", "black", "male", "none", 196, false, 87, "Kit Fisto", 44, "green", "https://swapi.dev/api/people/53/" },
+                    { 54, "unknown", "brown", "male", "black", 171, false, null, "Eeth Koth", 45, "brown", "https://swapi.dev/api/people/54/" },
+                    { 55, "unknown", "blue", "female", "none", 184, false, 50, "Adi Gallia", 9, "dark", "https://swapi.dev/api/people/55/" },
+                    { 56, "unknown", "orange", "male", "none", 188, false, null, "Saesee Tiin", 47, "pale", "https://swapi.dev/api/people/56/" },
+                    { 57, "unknown", "yellow", "male", "none", 264, false, null, "Yarael Poof", 48, "white", "https://swapi.dev/api/people/57/" },
+                    { 58, "22BBY", "black", "male", "none", 188, false, 80, "Plo Koon", 49, "orange", "https://swapi.dev/api/people/58/" },
+                    { 59, "unknown", "blue", "male", "none", 196, false, null, "Mas Amedda", 50, "blue", "https://swapi.dev/api/people/59/" },
+                    { 60, "unknown", "brown", "male", "black", 185, false, 85, "Gregar Typho", 8, "dark", "https://swapi.dev/api/people/60/" },
+                    { 61, "unknown", "brown", "female", "brown", 157, false, null, "Cordé", 8, "light", "https://swapi.dev/api/people/61/" },
+                    { 62, "82BBY", "blue", "male", "brown", 183, false, null, "Cliegg Lars", 1, "fair", "https://swapi.dev/api/people/62/" },
+                    { 63, "unknown", "yellow", "male", "none", 183, false, 80, "Poggle the Lesser", 11, "green", "https://swapi.dev/api/people/63/" },
+                    { 64, "58BBY", "blue", "female", "black", 170, false, null, "Luminara Unduli", 51, "yellow", "https://swapi.dev/api/people/64/" },
+                    { 65, "40BBY", "blue", "female", "black", 166, false, 50, "Barriss Offee", 51, "yellow", "https://swapi.dev/api/people/65/" },
+                    { 66, "unknown", "brown", "female", "brown", 165, false, null, "Dormé", 8, "light", "https://swapi.dev/api/people/66/" },
+                    { 67, "102BBY", "brown", "male", "white", 193, false, 80, "Dooku", 52, "fair", "https://swapi.dev/api/people/67/" },
+                    { 68, "67BBY", "brown", "male", "black", 191, false, null, "Bail Prestor Organa", 2, "tan", "https://swapi.dev/api/people/68/" },
+                    { 69, "66BBY", "brown", "male", "black", 183, false, 79, "Jango Fett", 53, "tan", "https://swapi.dev/api/people/69/" },
+                    { 70, "unknown", "yellow", "female", "blonde", 168, false, 55, "Zam Wesell", 54, "fair, green, yellow", "https://swapi.dev/api/people/70/" },
+                    { 71, "unknown", "yellow", "male", "none", 198, false, 102, "Dexter Jettster", 55, "brown", "https://swapi.dev/api/people/71/" },
+                    { 72, "unknown", "black", "male", "none", 229, false, 88, "Lama Su", 10, "grey", "https://swapi.dev/api/people/72/" },
+                    { 73, "unknown", "black", "female", "none", 213, false, null, "Taun We", 10, "grey", "https://swapi.dev/api/people/73/" },
+                    { 74, "unknown", "blue", "female", "white", 167, false, null, "Jocasta Nu", 9, "fair", "https://swapi.dev/api/people/74/" },
+                    { 75, "unknown", "red, blue", "female", "none", 96, false, null, "R4-P17", 28, "silver, red", "https://swapi.dev/api/people/75/" },
+                    { 76, "unknown", "unknown", "male", "none", 193, false, 48, "Wat Tambor", 56, "green, grey", "https://swapi.dev/api/people/76/" },
+                    { 77, "unknown", "gold", "male", "none", 191, false, null, "San Hill", 57, "grey", "https://swapi.dev/api/people/77/" },
+                    { 78, "unknown", "black", "female", "none", 178, false, 57, "Shaak Ti", 58, "red, blue, white", "https://swapi.dev/api/people/78/" },
+                    { 79, "unknown", "green, yellow", "male", "none", 216, false, 159, "Grievous", 59, "brown, white", "https://swapi.dev/api/people/79/" },
+                    { 80, "unknown", "blue", "male", "brown", 234, false, 136, "Tarfful", 14, "brown", "https://swapi.dev/api/people/80/" },
+                    { 81, "unknown", "brown", "male", "brown", 188, false, 79, "Raymus Antilles", 2, "light", "https://swapi.dev/api/people/81/" },
+                    { 82, "unknown", "white", "female", "none", 178, false, 48, "Sly Moore", 60, "pale", "https://swapi.dev/api/people/82/" },
+                    { 83, "unknown", "black", "male", "none", 206, false, 80, "Tion Medon", 12, "grey", "https://swapi.dev/api/people/83/" }
                 });
 
             migrationBuilder.InsertData(
@@ -911,16 +911,6 @@ namespace UniverseApp.Infrastructure.Migrations
             migrationBuilder.DeleteData(
                 table: "Planets",
                 keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
                 keyValue: 3);
 
             migrationBuilder.DeleteData(
@@ -932,11 +922,6 @@ namespace UniverseApp.Infrastructure.Migrations
                 table: "Planets",
                 keyColumn: "Id",
                 keyValue: 5);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
-                keyValue: 6);
 
             migrationBuilder.DeleteData(
                 table: "Planets",
@@ -966,67 +951,12 @@ namespace UniverseApp.Infrastructure.Migrations
             migrationBuilder.DeleteData(
                 table: "Planets",
                 keyColumn: "Id",
-                keyValue: 20);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
-                keyValue: 21);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
-                keyValue: 22);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
                 keyValue: 25);
 
             migrationBuilder.DeleteData(
                 table: "Planets",
                 keyColumn: "Id",
-                keyValue: 26);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
                 keyValue: 27);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
-                keyValue: 30);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
-                keyValue: 32);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
-                keyValue: 36);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
-                keyValue: 42);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
-                keyValue: 52);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
-                keyValue: 53);
-
-            migrationBuilder.DeleteData(
-                table: "Planets",
-                keyColumn: "Id",
-                keyValue: 60);
 
             migrationBuilder.DeleteData(
                 table: "Species",
@@ -1591,6 +1521,21 @@ namespace UniverseApp.Infrastructure.Migrations
             migrationBuilder.DeleteData(
                 table: "Planets",
                 keyColumn: "Id",
+                keyValue: 1);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
+                keyValue: 2);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
+                keyValue: 6);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
                 keyValue: 7);
 
             migrationBuilder.DeleteData(
@@ -1631,12 +1576,32 @@ namespace UniverseApp.Infrastructure.Migrations
             migrationBuilder.DeleteData(
                 table: "Planets",
                 keyColumn: "Id",
+                keyValue: 20);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
+                keyValue: 21);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
+                keyValue: 22);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
                 keyValue: 23);
 
             migrationBuilder.DeleteData(
                 table: "Planets",
                 keyColumn: "Id",
                 keyValue: 24);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
+                keyValue: 26);
 
             migrationBuilder.DeleteData(
                 table: "Planets",
@@ -1651,7 +1616,17 @@ namespace UniverseApp.Infrastructure.Migrations
             migrationBuilder.DeleteData(
                 table: "Planets",
                 keyColumn: "Id",
+                keyValue: 30);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
                 keyValue: 31);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
+                keyValue: 32);
 
             migrationBuilder.DeleteData(
                 table: "Planets",
@@ -1667,6 +1642,11 @@ namespace UniverseApp.Infrastructure.Migrations
                 table: "Planets",
                 keyColumn: "Id",
                 keyValue: 35);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
+                keyValue: 36);
 
             migrationBuilder.DeleteData(
                 table: "Planets",
@@ -1692,6 +1672,11 @@ namespace UniverseApp.Infrastructure.Migrations
                 table: "Planets",
                 keyColumn: "Id",
                 keyValue: 41);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
+                keyValue: 42);
 
             migrationBuilder.DeleteData(
                 table: "Planets",
@@ -1741,6 +1726,16 @@ namespace UniverseApp.Infrastructure.Migrations
             migrationBuilder.DeleteData(
                 table: "Planets",
                 keyColumn: "Id",
+                keyValue: 52);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
+                keyValue: 53);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
                 keyValue: 54);
 
             migrationBuilder.DeleteData(
@@ -1767,6 +1762,11 @@ namespace UniverseApp.Infrastructure.Migrations
                 table: "Planets",
                 keyColumn: "Id",
                 keyValue: 59);
+
+            migrationBuilder.DeleteData(
+                table: "Planets",
+                keyColumn: "Id",
+                keyValue: 60);
 
             migrationBuilder.DropColumn(
                 name: "Language",

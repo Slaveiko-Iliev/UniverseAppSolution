@@ -24,6 +24,7 @@ namespace UniverseApp.Infrastructure.Configurations
                     EyeColor = c.EyeColor,
                     BirthYear = c.BirthYear,
                     Gender = c.Gender,
+                    PlanetId = c.PlanetId != null ? GetEntityIdFromUrl(c.PlanetId) : null,
                     Url = c.Url,
                     IsDeleted = false
                 })

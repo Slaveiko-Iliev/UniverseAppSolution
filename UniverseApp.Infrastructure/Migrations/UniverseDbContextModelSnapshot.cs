@@ -423,6 +423,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 77,
                             Name = "Luke Skywalker",
+                            PlanetId = 1,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/1/"
                         },
@@ -437,6 +438,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 75,
                             Name = "C-3PO",
+                            PlanetId = 1,
                             SkinColor = "gold",
                             Url = "https://swapi.dev/api/people/2/"
                         },
@@ -451,6 +453,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 32,
                             Name = "R2-D2",
+                            PlanetId = 8,
                             SkinColor = "white, blue",
                             Url = "https://swapi.dev/api/people/3/"
                         },
@@ -465,6 +468,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 136,
                             Name = "Darth Vader",
+                            PlanetId = 1,
                             SkinColor = "white",
                             Url = "https://swapi.dev/api/people/4/"
                         },
@@ -479,6 +483,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 49,
                             Name = "Leia Organa",
+                            PlanetId = 2,
                             SkinColor = "light",
                             Url = "https://swapi.dev/api/people/5/"
                         },
@@ -493,6 +498,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 120,
                             Name = "Owen Lars",
+                            PlanetId = 1,
                             SkinColor = "light",
                             Url = "https://swapi.dev/api/people/6/"
                         },
@@ -507,6 +513,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 75,
                             Name = "Beru Whitesun lars",
+                            PlanetId = 1,
                             SkinColor = "light",
                             Url = "https://swapi.dev/api/people/7/"
                         },
@@ -521,6 +528,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 32,
                             Name = "R5-D4",
+                            PlanetId = 1,
                             SkinColor = "white, red",
                             Url = "https://swapi.dev/api/people/8/"
                         },
@@ -535,6 +543,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 84,
                             Name = "Biggs Darklighter",
+                            PlanetId = 1,
                             SkinColor = "light",
                             Url = "https://swapi.dev/api/people/9/"
                         },
@@ -549,6 +558,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 77,
                             Name = "Obi-Wan Kenobi",
+                            PlanetId = 20,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/10/"
                         },
@@ -563,6 +573,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 84,
                             Name = "Anakin Skywalker",
+                            PlanetId = 1,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/11/"
                         },
@@ -576,6 +587,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 180,
                             IsDeleted = false,
                             Name = "Wilhuff Tarkin",
+                            PlanetId = 21,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/12/"
                         },
@@ -590,6 +602,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 112,
                             Name = "Chewbacca",
+                            PlanetId = 14,
                             SkinColor = "unknown",
                             Url = "https://swapi.dev/api/people/13/"
                         },
@@ -604,6 +617,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 80,
                             Name = "Han Solo",
+                            PlanetId = 22,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/14/"
                         },
@@ -618,6 +632,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 74,
                             Name = "Greedo",
+                            PlanetId = 23,
                             SkinColor = "green",
                             Url = "https://swapi.dev/api/people/15/"
                         },
@@ -631,6 +646,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 175,
                             IsDeleted = false,
                             Name = "Jabba Desilijic Tiure",
+                            PlanetId = 24,
                             SkinColor = "green-tan, brown",
                             Url = "https://swapi.dev/api/people/16/"
                         },
@@ -645,6 +661,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 77,
                             Name = "Wedge Antilles",
+                            PlanetId = 22,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/18/"
                         },
@@ -659,6 +676,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 110,
                             Name = "Jek Tono Porkins",
+                            PlanetId = 26,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/19/"
                         },
@@ -673,6 +691,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 17,
                             Name = "Yoda",
+                            PlanetId = 28,
                             SkinColor = "green",
                             Url = "https://swapi.dev/api/people/20/"
                         },
@@ -687,6 +706,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 75,
                             Name = "Palpatine",
+                            PlanetId = 8,
                             SkinColor = "pale",
                             Url = "https://swapi.dev/api/people/21/"
                         },
@@ -700,6 +720,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 183,
                             IsDeleted = false,
                             Name = "Boba Fett",
+                            PlanetId = 10,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/22/"
                         },
@@ -714,6 +735,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 140,
                             Name = "IG-88",
+                            PlanetId = 28,
                             SkinColor = "metal",
                             Url = "https://swapi.dev/api/people/23/"
                         },
@@ -728,6 +750,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 113,
                             Name = "Bossk",
+                            PlanetId = 29,
                             SkinColor = "green",
                             Url = "https://swapi.dev/api/people/24/"
                         },
@@ -742,6 +765,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 79,
                             Name = "Lando Calrissian",
+                            PlanetId = 30,
                             SkinColor = "dark",
                             Url = "https://swapi.dev/api/people/25/"
                         },
@@ -756,6 +780,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 79,
                             Name = "Lobot",
+                            PlanetId = 6,
                             SkinColor = "light",
                             Url = "https://swapi.dev/api/people/26/"
                         },
@@ -770,6 +795,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 83,
                             Name = "Ackbar",
+                            PlanetId = 31,
                             SkinColor = "brown mottle",
                             Url = "https://swapi.dev/api/people/27/"
                         },
@@ -783,6 +809,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 150,
                             IsDeleted = false,
                             Name = "Mon Mothma",
+                            PlanetId = 32,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/28/"
                         },
@@ -795,6 +822,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             HairColor = "brown",
                             IsDeleted = false,
                             Name = "Arvel Crynyd",
+                            PlanetId = 28,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/29/"
                         },
@@ -809,6 +837,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 20,
                             Name = "Wicket Systri Warrick",
+                            PlanetId = 7,
                             SkinColor = "brown",
                             Url = "https://swapi.dev/api/people/30/"
                         },
@@ -823,6 +852,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 68,
                             Name = "Nien Nunb",
+                            PlanetId = 33,
                             SkinColor = "grey",
                             Url = "https://swapi.dev/api/people/31/"
                         },
@@ -837,6 +867,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 89,
                             Name = "Qui-Gon Jinn",
+                            PlanetId = 28,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/32/"
                         },
@@ -851,6 +882,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 90,
                             Name = "Nute Gunray",
+                            PlanetId = 18,
                             SkinColor = "mottled green",
                             Url = "https://swapi.dev/api/people/33/"
                         },
@@ -864,6 +896,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 170,
                             IsDeleted = false,
                             Name = "Finis Valorum",
+                            PlanetId = 9,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/34/"
                         },
@@ -878,6 +911,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 45,
                             Name = "Padmé Amidala",
+                            PlanetId = 8,
                             SkinColor = "light",
                             Url = "https://swapi.dev/api/people/35/"
                         },
@@ -892,6 +926,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 66,
                             Name = "Jar Jar Binks",
+                            PlanetId = 8,
                             SkinColor = "orange",
                             Url = "https://swapi.dev/api/people/36/"
                         },
@@ -906,6 +941,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 82,
                             Name = "Roos Tarpals",
+                            PlanetId = 8,
                             SkinColor = "grey",
                             Url = "https://swapi.dev/api/people/37/"
                         },
@@ -919,6 +955,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 206,
                             IsDeleted = false,
                             Name = "Rugor Nass",
+                            PlanetId = 8,
                             SkinColor = "green",
                             Url = "https://swapi.dev/api/people/38/"
                         },
@@ -932,6 +969,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 183,
                             IsDeleted = false,
                             Name = "Ric Olié",
+                            PlanetId = 8,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/39/"
                         },
@@ -945,6 +983,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 137,
                             IsDeleted = false,
                             Name = "Watto",
+                            PlanetId = 34,
                             SkinColor = "blue, grey",
                             Url = "https://swapi.dev/api/people/40/"
                         },
@@ -959,6 +998,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 40,
                             Name = "Sebulba",
+                            PlanetId = 35,
                             SkinColor = "grey, red",
                             Url = "https://swapi.dev/api/people/41/"
                         },
@@ -972,6 +1012,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 183,
                             IsDeleted = false,
                             Name = "Quarsh Panaka",
+                            PlanetId = 8,
                             SkinColor = "dark",
                             Url = "https://swapi.dev/api/people/42/"
                         },
@@ -985,6 +1026,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 163,
                             IsDeleted = false,
                             Name = "Shmi Skywalker",
+                            PlanetId = 1,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/43/"
                         },
@@ -999,6 +1041,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 80,
                             Name = "Darth Maul",
+                            PlanetId = 36,
                             SkinColor = "red",
                             Url = "https://swapi.dev/api/people/44/"
                         },
@@ -1012,6 +1055,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 180,
                             IsDeleted = false,
                             Name = "Bib Fortuna",
+                            PlanetId = 37,
                             SkinColor = "pale",
                             Url = "https://swapi.dev/api/people/45/"
                         },
@@ -1026,6 +1070,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 55,
                             Name = "Ayla Secura",
+                            PlanetId = 37,
                             SkinColor = "blue",
                             Url = "https://swapi.dev/api/people/46/"
                         },
@@ -1040,6 +1085,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 15,
                             Name = "Ratts Tyerel",
+                            PlanetId = 38,
                             SkinColor = "grey, blue",
                             Url = "https://swapi.dev/api/people/47/"
                         },
@@ -1054,6 +1100,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 45,
                             Name = "Dud Bolt",
+                            PlanetId = 39,
                             SkinColor = "blue, grey",
                             Url = "https://swapi.dev/api/people/48/"
                         },
@@ -1067,6 +1114,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 122,
                             IsDeleted = false,
                             Name = "Gasgano",
+                            PlanetId = 40,
                             SkinColor = "white, blue",
                             Url = "https://swapi.dev/api/people/49/"
                         },
@@ -1081,6 +1129,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 65,
                             Name = "Ben Quadinaros",
+                            PlanetId = 41,
                             SkinColor = "grey, green, yellow",
                             Url = "https://swapi.dev/api/people/50/"
                         },
@@ -1095,6 +1144,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 84,
                             Name = "Mace Windu",
+                            PlanetId = 42,
                             SkinColor = "dark",
                             Url = "https://swapi.dev/api/people/51/"
                         },
@@ -1109,6 +1159,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 82,
                             Name = "Ki-Adi-Mundi",
+                            PlanetId = 43,
                             SkinColor = "pale",
                             Url = "https://swapi.dev/api/people/52/"
                         },
@@ -1123,6 +1174,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 87,
                             Name = "Kit Fisto",
+                            PlanetId = 44,
                             SkinColor = "green",
                             Url = "https://swapi.dev/api/people/53/"
                         },
@@ -1136,6 +1188,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 171,
                             IsDeleted = false,
                             Name = "Eeth Koth",
+                            PlanetId = 45,
                             SkinColor = "brown",
                             Url = "https://swapi.dev/api/people/54/"
                         },
@@ -1150,6 +1203,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 50,
                             Name = "Adi Gallia",
+                            PlanetId = 9,
                             SkinColor = "dark",
                             Url = "https://swapi.dev/api/people/55/"
                         },
@@ -1163,6 +1217,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 188,
                             IsDeleted = false,
                             Name = "Saesee Tiin",
+                            PlanetId = 47,
                             SkinColor = "pale",
                             Url = "https://swapi.dev/api/people/56/"
                         },
@@ -1176,6 +1231,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 264,
                             IsDeleted = false,
                             Name = "Yarael Poof",
+                            PlanetId = 48,
                             SkinColor = "white",
                             Url = "https://swapi.dev/api/people/57/"
                         },
@@ -1190,6 +1246,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 80,
                             Name = "Plo Koon",
+                            PlanetId = 49,
                             SkinColor = "orange",
                             Url = "https://swapi.dev/api/people/58/"
                         },
@@ -1203,6 +1260,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 196,
                             IsDeleted = false,
                             Name = "Mas Amedda",
+                            PlanetId = 50,
                             SkinColor = "blue",
                             Url = "https://swapi.dev/api/people/59/"
                         },
@@ -1217,6 +1275,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 85,
                             Name = "Gregar Typho",
+                            PlanetId = 8,
                             SkinColor = "dark",
                             Url = "https://swapi.dev/api/people/60/"
                         },
@@ -1230,6 +1289,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 157,
                             IsDeleted = false,
                             Name = "Cordé",
+                            PlanetId = 8,
                             SkinColor = "light",
                             Url = "https://swapi.dev/api/people/61/"
                         },
@@ -1243,6 +1303,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 183,
                             IsDeleted = false,
                             Name = "Cliegg Lars",
+                            PlanetId = 1,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/62/"
                         },
@@ -1257,6 +1318,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 80,
                             Name = "Poggle the Lesser",
+                            PlanetId = 11,
                             SkinColor = "green",
                             Url = "https://swapi.dev/api/people/63/"
                         },
@@ -1270,6 +1332,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 170,
                             IsDeleted = false,
                             Name = "Luminara Unduli",
+                            PlanetId = 51,
                             SkinColor = "yellow",
                             Url = "https://swapi.dev/api/people/64/"
                         },
@@ -1284,6 +1347,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 50,
                             Name = "Barriss Offee",
+                            PlanetId = 51,
                             SkinColor = "yellow",
                             Url = "https://swapi.dev/api/people/65/"
                         },
@@ -1297,6 +1361,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 165,
                             IsDeleted = false,
                             Name = "Dormé",
+                            PlanetId = 8,
                             SkinColor = "light",
                             Url = "https://swapi.dev/api/people/66/"
                         },
@@ -1311,6 +1376,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 80,
                             Name = "Dooku",
+                            PlanetId = 52,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/67/"
                         },
@@ -1324,6 +1390,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 191,
                             IsDeleted = false,
                             Name = "Bail Prestor Organa",
+                            PlanetId = 2,
                             SkinColor = "tan",
                             Url = "https://swapi.dev/api/people/68/"
                         },
@@ -1338,6 +1405,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 79,
                             Name = "Jango Fett",
+                            PlanetId = 53,
                             SkinColor = "tan",
                             Url = "https://swapi.dev/api/people/69/"
                         },
@@ -1352,6 +1420,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 55,
                             Name = "Zam Wesell",
+                            PlanetId = 54,
                             SkinColor = "fair, green, yellow",
                             Url = "https://swapi.dev/api/people/70/"
                         },
@@ -1366,6 +1435,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 102,
                             Name = "Dexter Jettster",
+                            PlanetId = 55,
                             SkinColor = "brown",
                             Url = "https://swapi.dev/api/people/71/"
                         },
@@ -1380,6 +1450,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 88,
                             Name = "Lama Su",
+                            PlanetId = 10,
                             SkinColor = "grey",
                             Url = "https://swapi.dev/api/people/72/"
                         },
@@ -1393,6 +1464,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 213,
                             IsDeleted = false,
                             Name = "Taun We",
+                            PlanetId = 10,
                             SkinColor = "grey",
                             Url = "https://swapi.dev/api/people/73/"
                         },
@@ -1406,6 +1478,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 167,
                             IsDeleted = false,
                             Name = "Jocasta Nu",
+                            PlanetId = 9,
                             SkinColor = "fair",
                             Url = "https://swapi.dev/api/people/74/"
                         },
@@ -1419,6 +1492,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 96,
                             IsDeleted = false,
                             Name = "R4-P17",
+                            PlanetId = 28,
                             SkinColor = "silver, red",
                             Url = "https://swapi.dev/api/people/75/"
                         },
@@ -1433,6 +1507,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 48,
                             Name = "Wat Tambor",
+                            PlanetId = 56,
                             SkinColor = "green, grey",
                             Url = "https://swapi.dev/api/people/76/"
                         },
@@ -1446,6 +1521,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             Height = 191,
                             IsDeleted = false,
                             Name = "San Hill",
+                            PlanetId = 57,
                             SkinColor = "grey",
                             Url = "https://swapi.dev/api/people/77/"
                         },
@@ -1460,6 +1536,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 57,
                             Name = "Shaak Ti",
+                            PlanetId = 58,
                             SkinColor = "red, blue, white",
                             Url = "https://swapi.dev/api/people/78/"
                         },
@@ -1474,6 +1551,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 159,
                             Name = "Grievous",
+                            PlanetId = 59,
                             SkinColor = "brown, white",
                             Url = "https://swapi.dev/api/people/79/"
                         },
@@ -1488,6 +1566,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 136,
                             Name = "Tarfful",
+                            PlanetId = 14,
                             SkinColor = "brown",
                             Url = "https://swapi.dev/api/people/80/"
                         },
@@ -1502,6 +1581,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 79,
                             Name = "Raymus Antilles",
+                            PlanetId = 2,
                             SkinColor = "light",
                             Url = "https://swapi.dev/api/people/81/"
                         },
@@ -1516,6 +1596,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 48,
                             Name = "Sly Moore",
+                            PlanetId = 60,
                             SkinColor = "pale",
                             Url = "https://swapi.dev/api/people/82/"
                         },
@@ -1530,6 +1611,7 @@ namespace UniverseApp.Infrastructure.Migrations
                             IsDeleted = false,
                             Mass = 80,
                             Name = "Tion Medon",
+                            PlanetId = 12,
                             SkinColor = "grey",
                             Url = "https://swapi.dev/api/people/83/"
                         });
