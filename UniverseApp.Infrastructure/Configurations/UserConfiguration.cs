@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UniverseApp.Infrastructure.Data.Models;
+using static UniverseApp.Infrastructure.Constants.JediConstants;
 
 namespace UniverseApp.Infrastructure.Configurations
 {
@@ -23,7 +24,20 @@ namespace UniverseApp.Infrastructure.Configurations
 
             user.PasswordHash = hash.HashPassword(user, "aA@123");
 
-            builder.HasData(user);
+            var yoda = new UniverseUser
+            {
+                Id = "cfcc5c95-4666-4fe1-b26a-50c4016dac21",
+                Email = JediEmail,
+                NormalizedEmail = JediEmail.ToUpper(),
+                UserName = JediEmail,
+                NormalizedUserName = JediEmail.ToUpper(),
+                FirstName = "Yoda",
+                LastName = "Master"
+            };
+
+            yoda.PasswordHash = hash.HashPassword(yoda, "aA@123");
+
+            builder.HasData(user, yoda);
         }
     }
 }

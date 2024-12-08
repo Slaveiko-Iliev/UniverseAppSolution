@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using UniverseApp.Infrastructure.Data.Models;
+using static UniverseApp.Infrastructure.Constants.JediConstants;
 
 namespace UniverseApp.Areas.Identity.Pages.Account
 {
@@ -109,6 +110,14 @@ namespace UniverseApp.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+
+                    if (await _signInManager.UserManager.IsInRoleAsync(user, JediRoleName))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = JediAreaName });
+                    }
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
