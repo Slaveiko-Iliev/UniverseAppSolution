@@ -12,6 +12,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using UniverseApp.Infrastructure.Data.Models;
+using static UniverseApp.Core.Constants.CustomClaims;
 using static UniverseApp.Infrastructure.Constants.ModelsConstants.General;
 using static UniverseApp.Infrastructure.Constants.UniverseUserConstants;
 
@@ -104,6 +105,8 @@ namespace UniverseApp.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim(UserFullNameClaim, $"{user.FirstName} {user.LastName}"));
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
