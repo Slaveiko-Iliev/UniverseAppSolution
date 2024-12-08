@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UniverseApp.Core.Services;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
 using UniverseApp.Infrastructure.Data;
+using UniverseApp.Infrastructure.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ builder.Services.AddDbContext<UniverseDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<UniverseUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<UniverseDbContext>();
 builder.Services.AddControllersWithViews();
 

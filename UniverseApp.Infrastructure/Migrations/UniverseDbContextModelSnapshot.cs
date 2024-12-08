@@ -17,7 +17,7 @@ namespace UniverseApp.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -146,6 +146,11 @@ namespace UniverseApp.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -197,6 +202,10 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator().HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -4639,6 +4648,43 @@ namespace UniverseApp.Infrastructure.Migrations
                             Name = "AT-RT",
                             Passengers = 0,
                             Url = "https://swapi.dev/api/vehicles/76/"
+                        });
+                });
+
+            modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.UniverseUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.HasDiscriminator().HasValue("UniverseUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "18990560-1cca-49b8-b4db-5adb987559c3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b4b721ba-3706-462f-8213-643a72b03eaf",
+                            Email = "user@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@MAIL.COM",
+                            NormalizedUserName = "USER@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDzd0XgM3qDkIJlhjuVQTMkhsqhBEDIToxpTrBbRIQ1Ddm3+c3FV/Kj+TyutAUqZPw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "45d68651-1b79-402f-b6ec-aa6d321109e3",
+                            TwoFactorEnabled = false,
+                            UserName = "user@mail.com",
+                            FirstName = "First",
+                            LastName = "User"
                         });
                 });
 

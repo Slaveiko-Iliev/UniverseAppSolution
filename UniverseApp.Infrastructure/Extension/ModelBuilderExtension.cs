@@ -7,6 +7,7 @@ namespace UniverseApp.Infrastructure.Extension
     {
         public static void Seed(this ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new MovieConfiguration());
             builder.ApplyConfiguration(new PlanetConfiguration());
             builder.ApplyConfiguration(new CharacterConfiguration());

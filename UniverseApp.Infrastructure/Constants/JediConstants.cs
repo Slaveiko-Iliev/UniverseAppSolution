@@ -1,6 +1,6 @@
 ﻿namespace UniverseApp.Infrastructure.Constants
 {
-    public class JediConstants
+    public static class JediConstants
     {
         public const string JediAreaName = "Jedi";
         public const string JediRoleName = "Yoda";

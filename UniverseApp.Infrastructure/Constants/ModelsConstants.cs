@@ -1,6 +1,6 @@
 ﻿namespace UniverseApp.Infrastructure.Constants
 {
-    public class ModelsConstants
+    public static class ModelsConstants
     {
         public static class PlanetConst
         {
