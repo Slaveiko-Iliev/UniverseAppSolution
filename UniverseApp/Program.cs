@@ -26,6 +26,8 @@ builder.Services.AddScoped<IServiceHelper, ServicesHelper>();
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IPlanetService, PlanetService>();
+builder.Services.AddScoped<ISpecieService, SpecieService>();
+builder.Services.AddScoped<ICharacterService, CharacterService>();
 
 var app = builder.Build();
 
