@@ -6,11 +6,11 @@ using static UniverseApp.Infrastructure.Constants.ModelsConstants.CharacterConst
 namespace UniverseApp.Infrastructure.Data.Models
 {
     [Include("Movies")]
-	[Include("Species")]
-	[Include("Vehicles")]
-	[Include("Starships")]
+    [Include("Species")]
+    [Include("Vehicles")]
+    [Include("Starships")]
     [Comment("Character Entity")]
-	public class Character
+    public class Character
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -30,19 +30,19 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         [MaxLength(HairColorMaxLenght)]
         [Comment("Character Hair Color")]
-        public string? HairColor { get; set; } // is nullable?
+        public string? HairColor { get; set; }
 
         [MaxLength(SkinColorMaxLenght)]
         [Comment("Character Skin Color")]
-        public string? SkinColor { get; set; } // is nullable?
+        public string? SkinColor { get; set; }
 
         [MaxLength(EyeColorMaxLenght)]
         [Comment("Character Eye Color")]
-        public string? EyeColor { get; set; } // is nullable?
+        public string? EyeColor { get; set; }
 
         [MaxLength(BirthYearMaxLenght)]
         [Comment("Character Birth Year")]
-        public string? BirthYear { get; set; } // is nullable?
+        public string? BirthYear { get; set; }
 
         [MaxLength(GenderMaxLenght)]
         [Comment("Character Gender")]

@@ -6,8 +6,8 @@ using static UniverseApp.Infrastructure.Constants.ModelsConstants.SpecieConst;
 namespace UniverseApp.Infrastructure.Data.Models
 {
     [Include("Characters")]
-	[Include("Movies")]
-	[Comment("Specie Entity")]
+    [Include("Movies")]
+    [Comment("Specie Entity")]
     public class Specie
     {
         [Key]
@@ -66,7 +66,7 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         [MaxLength(UrlMaxLenght)]
         [Comment("Specie Url")]
-        public string? Url { get; set; } = null!;
+        public string? Url { get; set; }
 
         [Required]
         [Comment("Whether the Entity has been deleted")]
