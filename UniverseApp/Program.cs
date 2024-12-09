@@ -29,6 +29,7 @@ builder.Services.AddScoped<IPlanetService, PlanetService>();
 builder.Services.AddScoped<ISpecieService, SpecieService>();
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddScoped<IStarshipService, StarshipService>();
 
 var app = builder.Build();
 
@@ -54,7 +55,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "areas",
-        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+        pattern: "{area:exists}/{controller=Home}/{action=index}/{id?}");
 
     endpoints.MapDefaultControllerRoute();
     endpoints.MapRazorPages();

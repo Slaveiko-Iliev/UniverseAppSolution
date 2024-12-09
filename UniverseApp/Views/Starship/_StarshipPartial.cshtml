@@ -1,0 +1,34 @@
+﻿@model StarshipAllViewModel
+
+<div class="col d-flex justify-content-center p-3">
+    <div class="card" style="">
+        <img src="~/Images/vehicle.png" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Model: @Model.Model</li>
+            <li class="list-group-item">Manufacturer: @Model.Manufacturer</li>
+            <li class="list-group-item">Cost in credits: @Model.CostInCredits</li>
+            <li class="list-group-item">Length: @Model.Length</li>
+            <li class="list-group-item">Max atmosphering speed: @Model.MaxAtmospheringSpeed</li>
+            <li class="list-group-item">Crew: @Model.Crew</li>
+            <li class="list-group-item">Passengers: @Model.Passengers</li>
+            <li class="list-group-item">Cargo capacity: @Model.CargoCapacity</li>
+            <li class="list-group-item">Consumables: @Model.Consumables</li>
+            <li class="list-group-item">Starship class: @Model.Class</li>
+            <li class="list-group-item">Hyperdrive rating: @Model.HyperdriveRating</li>
+            <li class="list-group-item">MGLT: @Model.MGLT</li>
+        </ul>
+        <div class="card-body ">
+            <p class="card-text">
+                <a asp-controller="Starship" asp-action="Details" asp-route-id="@Model.Id"
+                   class="btn btn-primary">Details</a>
+                <a asp-controller="Starship" asp-action="Edit" asp-route-id="@Model.Id"
+                   class="btn btn-primary">Edit</a>
+                <a asp-controller="Starship" asp-action="Delete" asp-route-id="@Model.Id"
+                   class="btn btn-primary">Delete</a>
+            </p>
+        </div>
+    </div>
+</div>
