@@ -12,8 +12,8 @@ using UniverseApp.Infrastructure.Data;
 namespace UniverseApp.Infrastructure.Migrations
 {
     [DbContext(typeof(UniverseDbContext))]
-    [Migration("20241208222810_YodaAdded")]
-    partial class YodaAdded
+    [Migration("20241210075921_SeedData")]
+    partial class SeedData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,80 +143,6 @@ namespace UniverseApp.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator().HasValue("IdentityUser");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -3954,6 +3880,119 @@ namespace UniverseApp.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.UniverseUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "18990560-1cca-49b8-b4db-5adb987559c3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4940d66f-593f-4021-8526-629f94158e32",
+                            Email = "user@mail.com",
+                            EmailConfirmed = false,
+                            FirstName = "First",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@MAIL.COM",
+                            NormalizedUserName = "USER@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKSmu0jnrWNDXxuBnn2T9walsEgWPJGB5hU1Mizj0Fuo1pNAo6Vkh6ztjOIugI8TAg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6ee7a2f0-be65-45df-b25e-422865ebd905",
+                            TwoFactorEnabled = false,
+                            UserName = "user@mail.com"
+                        },
+                        new
+                        {
+                            Id = "cfcc5c95-4666-4fe1-b26a-50c4016dac21",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "666b2bae-44dc-4ad1-b56d-6316d2c92534",
+                            Email = "yoda@mail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Yoda",
+                            LastName = "Master",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "YODA@MAIL.COM",
+                            NormalizedUserName = "YODA@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAENikkkfqHvH6+bTJ3WJIDmj0XwWFCzRtsA2LvE5sHGCP5QoBb3lJlGyJrlNUTzURvQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a8837600-0786-4d5c-adc3-26e03d0600fe",
+                            TwoFactorEnabled = false,
+                            UserName = "yoda@mail.com"
+                        });
+                });
+
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Vehicle", b =>
                 {
                     b.Property<int>("Id")
@@ -4669,61 +4708,6 @@ namespace UniverseApp.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.UniverseUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.HasDiscriminator().HasValue("UniverseUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "18990560-1cca-49b8-b4db-5adb987559c3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "6ebf8102-dc4c-4c5e-9fc6-a230abcbd5c8",
-                            Email = "user@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "USER@MAIL.COM",
-                            NormalizedUserName = "USER@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPUkCigEBBAitjCxSdWy6lMud9FVZqiFiWxzEwlWYK5DpRpBN6x0f2Xc++SSAqExhg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "62d8da1f-ec9b-435a-b382-0dca403f80e2",
-                            TwoFactorEnabled = false,
-                            UserName = "user@mail.com",
-                            FirstName = "First",
-                            LastName = "User"
-                        },
-                        new
-                        {
-                            Id = "cfcc5c95-4666-4fe1-b26a-50c4016dac21",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "28c0e8d4-75e5-4754-b881-9ace5d7ff3f6",
-                            Email = "yoda@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "YODA@MAIL.COM",
-                            NormalizedUserName = "YODA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECBLQHwjIDFReJZtaAswgodAvQly4T7q1Q3wyus9WytceaLO6y+A1m+Ox2Ji8f0RxQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "869d46a8-8c57-49c8-afcb-01e04a1028bd",
-                            TwoFactorEnabled = false,
-                            UserName = "yoda@mail.com",
-                            FirstName = "Yoda",
-                            LastName = "Master"
-                        });
-                });
-
             modelBuilder.Entity("CharacterMovie", b =>
                 {
                     b.HasOne("UniverseApp.Infrastructure.Data.Models.Character", null)
@@ -4795,7 +4779,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("UniverseApp.Infrastructure.Data.Models.UniverseUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -4804,7 +4788,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("UniverseApp.Infrastructure.Data.Models.UniverseUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -4819,7 +4803,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("UniverseApp.Infrastructure.Data.Models.UniverseUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -4828,7 +4812,7 @@ namespace UniverseApp.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("UniverseApp.Infrastructure.Data.Models.UniverseUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
