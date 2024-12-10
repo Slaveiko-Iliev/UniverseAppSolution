@@ -30,6 +30,7 @@ builder.Services.AddScoped<ISpecieService, SpecieService>();
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
 builder.Services.AddScoped<IStarshipService, StarshipService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
