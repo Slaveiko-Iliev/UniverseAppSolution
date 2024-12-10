@@ -1,0 +1,119 @@
+﻿@model UserAllQueryModel
+
+@{
+    ViewBag.Title = "All Users";
+}
+
+<form method="get">
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="SearchIsActive"></label>
+            <input asp-for="SearchIsActive" class="form-control" placeholder="...">
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="SearchIsPadawan"></label>
+            <input asp-for="SearchIsPadawan" class="form-control" placeholder="...">
+        </div>
+        <div class="col-md-3">
+            <div class="form-group mt-4">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = Math.Ceiling((double)Model.TotalUsersCount /
+        UserAllQueryModel.UsersPerPage);
+}
+<div class="row mb-5">
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+        asp-controller="Home"
+        asp-action="AllUsers"
+        asp-route-currentPage="@previousPage"
+        asp-route-searchCharacter="@Model.SearchIsActive"
+        asp-route-searchPlanet="@Model.SearchIsPadawan"><<</a>
+    </div>
+
+    @{
+        var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+        !Model.Users.Any();
+    }
+
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary
+           @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+        asp-controller="Home"
+        asp-action="AllUsers"
+        asp-route-currentPage="@(Model.CurrentPage + 1)"
+        asp-route-searchCharacter="@Model.SearchIsActive"
+        asp-route-searchPlanet="@Model.SearchIsPadawan">>></a>
+    </div>
+</div>
+
+@if (!Model.Users.Any())
+{
+    <h2 class="text-center">No users found by the given criteria!</h2>
+}
+
+<div class="container-fluid text-center">
+    <div class="row">
+        @foreach (var user in Model.Users)
+        {
+            @* <partial name="_VehiclePartial" model="@vehicle" /> *@
+            @user.FirstName
+        }
+    </div>
+</div>
+
+@* @model IEnumerable<UniverseUser>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>All Users</h2>
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Is padawan</th>
+						<th>Is active</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var user in Model)
+					{
+						<tr>
+							<td>
+								@User.FindFirst(UniverseApp.Core.Constants.CustomClaims.UserFullNameClaim)?.Value
+							</td>
+							<td>@user.Email</td>
+							<td>
+
+							</td>
+							<td>
+								@if (user.IsActive)
+								{
+									<span class="text-primary">✔</span>
+								}
+							</td>
+							<td>
+								<a asp-controller="Home" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-primary">Edit</a>
+								<a asp-controller="Home" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Delete</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+ *@

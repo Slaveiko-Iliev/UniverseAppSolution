@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Jedi\Data\**" />
+    <Content Remove="Areas\Jedi\Data\**" />
+    <EmbeddedResource Remove="Areas\Jedi\Data\**" />
+    <None Remove="Areas\Jedi\Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.13.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.11" />
@@ -25,12 +32,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UniverseApp.Core\UniverseApp.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Jedi\Data\" />
-    <Folder Include="Areas\Jedi\Models\" />
-    <Folder Include="Areas\Jedi\Views\" />
   </ItemGroup>
 
 </Project>

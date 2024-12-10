@@ -9,13 +9,11 @@
     <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.FindFirstValue(UniverseApp.Core.Constants.CustomClaims.UserFullNameClaim)!</a>
     </li>
-    @if(User.IsYoda()){
-            <li class="nav-item">
-                <form class="form-inline" asp-area="Jedi" asp-controller="Home" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "Jedi" })">
-                    <button type="submit" class="nav-link btn btn-link text-dark">Admin Universe</button>
-                </form>
-            </li>
-    }
+    <li class="nav-item">
+        <form class="form-inline" asp-area="" asp-controller="Home" asp-route-returnUrl="@Url.Action("Index","Home", new { area = "" })">
+            <button type="submit" class="nav-link btn btn-link text-dark">Universe</button>
+        </form>
+    </li>
     <li class="nav-item">
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>

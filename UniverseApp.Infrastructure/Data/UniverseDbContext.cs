@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UniverseApp.Infrastructure.Data.Models;
-using UniverseApp.Infrastructure.Extension;
 
 namespace UniverseApp.Infrastructure.Data
 {
-    public class UniverseDbContext : IdentityDbContext
+    public class UniverseDbContext : IdentityDbContext<UniverseUser>
     {
         public UniverseDbContext(DbContextOptions<UniverseDbContext> options)
             : base(options)
@@ -21,7 +20,7 @@ namespace UniverseApp.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Seed();
+            //builder.Seed();
 
             base.OnModelCreating(builder);
         }
