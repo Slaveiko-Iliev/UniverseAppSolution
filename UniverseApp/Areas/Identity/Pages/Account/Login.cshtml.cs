@@ -113,7 +113,7 @@ namespace UniverseApp.Areas.Identity.Pages.Account
 
                     var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
 
-                    if (await _signInManager.UserManager.IsInRoleAsync(user, JediRoleName))
+                    if (await _signInManager.UserManager.IsInRoleAsync(user, YodaRoleName))
                     {
                         return RedirectToAction("Index", "Home", new { area = JediAreaName });
                     }

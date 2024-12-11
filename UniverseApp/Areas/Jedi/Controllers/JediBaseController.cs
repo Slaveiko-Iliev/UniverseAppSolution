@@ -5,7 +5,7 @@ using static UniverseApp.Infrastructure.Constants.JediConstants;
 namespace UniverseApp.Areas.Jedi.Controllers
 {
     [Area(JediAreaName)]
-    [Authorize(Roles = JediRoleName)]
+    [Authorize(Roles = YodaRoleName)]
     public class JediBaseController : Controller
     {
 

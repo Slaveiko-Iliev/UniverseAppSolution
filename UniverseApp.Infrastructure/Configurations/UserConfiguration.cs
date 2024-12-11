@@ -19,7 +19,8 @@ namespace UniverseApp.Infrastructure.Configurations
                 UserName = "user@mail.com",
                 NormalizedUserName = "user@mail.com".ToUpper(),
                 FirstName = "First",
-                LastName = "User"
+                LastName = "User",
+                EmailConfirmed = true
             };
 
             user.PasswordHash = hash.HashPassword(user, "aA@123");
@@ -27,10 +28,10 @@ namespace UniverseApp.Infrastructure.Configurations
             var yoda = new UniverseUser
             {
                 Id = "cfcc5c95-4666-4fe1-b26a-50c4016dac21",
-                Email = JediEmail,
-                NormalizedEmail = JediEmail.ToUpper(),
-                UserName = JediEmail,
-                NormalizedUserName = JediEmail.ToUpper(),
+                Email = YodaEmail,
+                NormalizedEmail = YodaEmail.ToUpper(),
+                UserName = YodaEmail,
+                NormalizedUserName = YodaEmail.ToUpper(),
                 FirstName = "Yoda",
                 LastName = "Master"
             };
