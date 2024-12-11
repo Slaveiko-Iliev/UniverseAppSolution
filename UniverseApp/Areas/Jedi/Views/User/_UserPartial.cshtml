@@ -1,0 +1,32 @@
+﻿@inject IUserService UserService
+@model UserAllViewModel
+
+<tr>
+	<td>
+		@Model.FirstName @Model.LastName
+	</td>
+	<td>
+		@if (Model.IsActive)
+		{
+			<span class="text-primary">✔</span>
+		}
+	</td>
+	<td>
+		@if (Model.IsPadawan)
+		{
+			<span class="text-primary">✔</span>
+		}
+	</td>
+	<td>
+		<a asp-area="Jedi" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+		
+		@if(await UserService.IsUserActive(Model.Id)){
+			<a asp-area="Jedi" asp-controller="User" asp-action="ChangeActivity" asp-route-id="@Model.Id" class="btn btn-danger">Block</a>
+		}
+		else
+		{
+			<a asp-area="Jedi" asp-controller="User" asp-action="ChangeActivity" asp-route-id="@Model.Id" class="btn btn-danger">Unblock</a>
+		}
+		
+	</td>
+</tr>
