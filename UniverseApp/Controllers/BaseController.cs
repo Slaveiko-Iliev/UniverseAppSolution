@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using UniverseApp.Attributes;
 
 namespace UniverseApp.Controllers
 {
-    [Authorize]
-    public class BaseController : Controller
-    {
-        
-    }
+	[Authorize]
+	[ActiveUserAuthorize]
+	public class BaseController : Controller
+	{
+
+	}
 }

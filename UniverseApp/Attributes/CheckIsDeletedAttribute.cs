@@ -6,24 +6,24 @@ using UniverseApp.Infrastructure.Models;
 
 public class CheckIsDeletedAttribute<T> : Attribute, IAsyncActionFilter where T : class, IEntity
 {
-    public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
-    {
-        var id = context.ActionArguments["id"];
-        var serviceHelper = context.HttpContext.RequestServices.GetService<IRepository>();
+	public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+	{
+		var id = context.ActionArguments["id"];
+		var serviceHelper = context.HttpContext.RequestServices.GetService<IRepository>();
 
-        if (serviceHelper == null)
-        {
-            context.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
-        }
+		if (serviceHelper == null)
+		{
+			context.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
+		}
 
-        var entity = await serviceHelper.AllReadOnly<T>().FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == (int)id);
+		var entity = await serviceHelper!.AllReadOnly<T>().FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == (int)id);
 
-        if (entity != null && entity.IsDeleted)
-        {
-            context.Result = new BadRequestResult();
-            return;
-        }
+		if (entity != null && entity.IsDeleted)
+		{
+			context.Result = new BadRequestResult();
+			return;
+		}
 
-        await next();
-    }
+		await next();
+	}
 }
