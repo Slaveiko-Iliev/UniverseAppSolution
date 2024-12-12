@@ -35,7 +35,7 @@ namespace UniverseApp.Core.Services
 			.OrderByDescending(u => u.IsActive)
 			.ToListAsync();
 
-		public async Task<bool> IsUserActive(string userId) =>
+		public async Task<bool> IsUserActiveAsync(string userId) =>
 			await _userManager.Users
 			.Where(u => u.Id == userId)
 			.AnyAsync(u => u.IsActive);

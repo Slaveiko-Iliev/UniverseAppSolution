@@ -4,10 +4,11 @@ using static UniverseApp.Infrastructure.Constants.JediConstants;
 
 namespace UniverseApp.Areas.Jedi.Controllers
 {
-    [Area(JediAreaName)]
-    [Authorize(Roles = YodaRoleName)]
-    public class JediBaseController : Controller
-    {
+	[Area(JediAreaName)]
+	[Authorize(Roles = YodaRoleName)]
+	[ActiveUserAuthorizeAttribute]
+	public class JediBaseController : Controller
+	{
 
-    }
+	}
 }

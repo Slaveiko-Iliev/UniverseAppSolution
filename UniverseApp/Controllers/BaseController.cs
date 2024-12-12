@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace UniverseApp.Controllers
 {
-    [Authorize]
-    public class BaseController : Controller
-    {
-        
-    }
+	[Authorize]
+	[ActiveUserAuthorizeAttribute]
+	public class BaseController : Controller
+	{
+
+	}
 }

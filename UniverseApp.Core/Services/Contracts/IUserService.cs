@@ -7,7 +7,7 @@ namespace UniverseApp.Core.Services.Contracts
 	{
 		Task ChangeUserActivityAsync(string userId);
 		Task<IEnumerable<UniverseUser>> GetUsersAsync();
-		public Task<bool> IsUserActive(string userId);
+		public Task<bool> IsUserActiveAsync(string userId);
 
 	}
 }
