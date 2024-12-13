@@ -8,12 +8,12 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.FindFirstValue(UniverseApp.Core.Constants.CustomClaims.UserFullNameClaim)!</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.FindFirstValue(UniverseApp.Infrastructure.Constants.CustomClaims.UserFullNameClaim)!</a>
     </li>
         @if (User.IsYoda(RoleManager))
         {
             <li class="nav-item">
-                <form class="form-inline" asp-area="Jedi" asp-controller="Home" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "Jedi" })">
+                <form class="form-inline" asp-area="Jedi" asp-controller="Home" asp-action="Index">
                     <button type="submit" class="nav-link btn btn-link text-dark">Admin Universe</button>
                 </form>
             </li>
