@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using UniverseApp.Infrastructure.Data;
+using UniverseApp.Infrastructure.Data.DTOs;
 
 namespace UniverseApp.Infrastructure.Common
 {
@@ -54,11 +55,17 @@ namespace UniverseApp.Infrastructure.Common
 			return await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
 		}
 
-		public async Task<List<string>> GetEntitiesNames<TEntity>(ICollection<TEntity> characters) where TEntity : class
+		public async Task<List<KeyValuePair<string, EntityNameDto>>> GetEntitiesNames<TEntity>(ICollection<TEntity> characters) where TEntity : class
 		{
 			return await DbSet<TEntity>()
 				.Where(x => characters.Contains(x))
-				.Select(x => (x.GetType().GetProperty("Name")!.GetValue(x) as string)!)
+				.Select(x => new KeyValuePair<string, EntityNameDto>
+					(typeof(TEntity).Name,
+					new EntityNameDto
+					{
+						Id = EF.Property<int>(x, "Id"),
+						Name = EF.Property<string>(x, "Name")
+					}))
 				.ToListAsync();
 		}
 	}

@@ -1,17 +1,19 @@
-﻿namespace UniverseApp.Core.Models.Movie
+﻿using UniverseApp.Infrastructure.Data.DTOs;
+
+namespace UniverseApp.Core.Models.Movie
 {
 	public class MovieDetailsViewModel : MovieFormModel
 	{
 		public int Id { get; set; }
 
-		public ICollection<string> CharactersNames { get; set; } = new List<string>();
+		public ICollection<KeyValuePair<string, EntityNameDto>> CharactersNames { get; set; } = new List<KeyValuePair<string, EntityNameDto>>();
 
-		public ICollection<string> PlanetsNames { get; set; } = new List<string>();
+		public ICollection<KeyValuePair<string, EntityNameDto>> PlanetsNames { get; set; } = new List<KeyValuePair<string, EntityNameDto>>();
 
-		public ICollection<string> StarshipsNames { get; set; } = new List<string>();
+		public ICollection<KeyValuePair<string, EntityNameDto>> StarshipsNames { get; set; } = new List<KeyValuePair<string, EntityNameDto>>();
 
-		public ICollection<string> VehiclesNames { get; set; } = new List<string>();
+		public ICollection<KeyValuePair<string, EntityNameDto>> VehiclesNames { get; set; } = new List<KeyValuePair<string, EntityNameDto>>();
 
-		public ICollection<string> SpeciesNames { get; set; } = new List<string>();
+		public ICollection<KeyValuePair<string, EntityNameDto>> SpeciesNames { get; set; } = new List<KeyValuePair<string, EntityNameDto>>();
 	}
 }

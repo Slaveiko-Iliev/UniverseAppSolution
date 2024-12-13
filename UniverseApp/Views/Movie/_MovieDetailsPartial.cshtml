@@ -1,4 +1,4 @@
-﻿@model List<string>
+﻿@model List<KeyValuePair<string, EntityNameDto>>
 @{
     var row = Math.Ceiling((double)Model.Count() / 4);
 }
@@ -12,7 +12,7 @@
                     for (int j = i * 4; j < (i + 1) * 4 && j < Model.Count; j++)
                     {
                         <div class="col">
-                            @Model[j]
+                            <a class="nav-link text-dark" asp-area="" asp-controller="@Model[j].Key" asp-action="Details" asp-route-id="@Model[j].Value.Id">@Model[j].Value.Name</a>
                         </div>
                     }
                 }

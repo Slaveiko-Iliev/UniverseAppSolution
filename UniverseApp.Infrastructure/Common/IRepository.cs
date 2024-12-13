@@ -1,4 +1,6 @@
-﻿namespace UniverseApp.Infrastructure.Common
+﻿using UniverseApp.Infrastructure.Data.DTOs;
+
+namespace UniverseApp.Infrastructure.Common
 {
 	public interface IRepository
 	{
@@ -12,6 +14,6 @@
 
 		Task<TEntity> GetEntityByIdAsync<TEntity>(int id) where TEntity : class;
 
-		Task<List<string>> GetEntitiesNames<TEntity>(ICollection<TEntity> characters) where TEntity : class;
+		Task<List<KeyValuePair<string, EntityNameDto>>> GetEntitiesNames<TEntity>(ICollection<TEntity> characters) where TEntity : class;
 	}
 }
