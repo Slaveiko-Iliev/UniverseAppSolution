@@ -17,4 +17,8 @@
     <ProjectReference Include="..\UniverseApp.Infrastructure\UniverseApp.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Constants\" />
+  </ItemGroup>
+
 </Project>
