@@ -6,7 +6,7 @@ namespace UniverseApp.Areas.Jedi.Controllers
 {
 	[Area(JediAreaName)]
 	[Authorize(Roles = YodaRoleName)]
-	[ActiveUserAuthorizeAttribute]
+	[ActiveUserAuthorize]
 	public class JediBaseController : Controller
 	{
 

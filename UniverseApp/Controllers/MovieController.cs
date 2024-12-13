@@ -2,123 +2,134 @@
 using UniverseApp.Core.Models.Movie;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Data.Models;
+using static UniverseApp.Infrastructure.Constants.JediConstants;
 
 namespace UniverseApp.Controllers
 {
-    public class MovieController : BaseController
-    {
-        private readonly IMovieService _movieService;
+	public class MovieController : BaseController
+	{
+		private readonly IMovieService _movieService;
 
-        public MovieController(IMovieService movieService)
-        {
-            _movieService = movieService;
-        }
+		public MovieController(IMovieService movieService)
+		{
+			_movieService = movieService;
+		}
 
-        [HttpGet]
-        public IActionResult Add()
-        {
-            var model = new MovieFormModel();
-            return View(model);
-        }
+		[HttpGet]
+		public IActionResult Add()
+		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
 
-        [HttpPost]
-        public async Task<IActionResult> Add(MovieFormModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+			var model = new MovieFormModel();
+			return View(model);
+		}
 
-            int newMovieId = await _movieService.AddMovieAsync(model);
-            return RedirectToAction(nameof(Details), new { id = newMovieId });
-        }
+		[HttpPost]
+		public async Task<IActionResult> Add(MovieFormModel model)
+		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
 
-        public async Task<IActionResult> All([FromQuery] MovieAllQueryModel model)
-        {
-            var queryResult = await _movieService.GetAllMoviesAsync(model.SearchCharacter, model.SearchPlanet, model.CurrentPage, MovieAllQueryModel.MoviesPerPage);
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
 
-            model.Movies = queryResult.Movies;
-            model.TotalMoviesCount = queryResult.TotalMoviesCount;
+			int newMovieId = await _movieService.AddMovieAsync(model);
+			return RedirectToAction(nameof(Details), new { id = newMovieId });
+		}
 
-            return View(model);
-        }
+		public async Task<IActionResult> All([FromQuery] MovieAllQueryModel model)
+		{
+			var queryResult = await _movieService.GetAllMoviesAsync(model.SearchCharacter, model.SearchPlanet, model.CurrentPage, MovieAllQueryModel.MoviesPerPage);
 
-        [CheckIsDeleted<Movie>]
-        public async Task<IActionResult> Details(int id)
-        {
-            if (await _movieService.ExistByIdAsync(id) == false)
-            {
-                return BadRequest();
-            }
+			model.Movies = queryResult.Movies;
+			model.TotalMoviesCount = queryResult.TotalMoviesCount;
 
-            var movie = await _movieService.GetMovieDetailsByIdAsync(id);
+			return View(model);
+		}
 
-            return View(movie);
-        }
+		[CheckIsDeleted<Movie>]
+		public async Task<IActionResult> Details(int id)
+		{
+			if (await _movieService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
 
-        [HttpGet]
-        [CheckIsDeleted<Movie>]
-        public async Task<IActionResult> Edit(int id)
-        {
-            if (await _movieService.ExistByIdAsync(id) == false)
-            {
-                return BadRequest();
-            }
+			var movie = await _movieService.GetMovieDetailsByIdAsync(id);
 
-            var movie = await _movieService.GetMovieFormByIdAsync(id);
+			return View(movie);
+		}
 
-            return View(movie);
-        }
+		[HttpGet]
+		[CheckIsDeleted<Movie>]
+		public async Task<IActionResult> Edit(int id)
+		{
+			if (await _movieService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
 
-        [HttpPost]
-        [CheckIsDeleted<Movie>]
-        public async Task<IActionResult> Edit(int id, MovieFormModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+			var movie = await _movieService.GetMovieFormByIdAsync(id);
 
-            if (await _movieService.ExistByIdAsync(id) == false)
-            {
-                return BadRequest();
-            }
+			return View(movie);
+		}
 
-            await _movieService.EditMovieAsync(id, model);
+		[HttpPost]
+		[CheckIsDeleted<Movie>]
+		public async Task<IActionResult> Edit(int id, MovieFormModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
 
-            return RedirectToAction(nameof(Details), new { id });
-        }
+			if (await _movieService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
 
-        [HttpGet]
-        [CheckIsDeleted<Movie>]
-        public async Task<IActionResult> Delete(int id)
-        {
-            if (await _movieService.ExistByIdAsync(id) == false)
-            {
-                return BadRequest();
-            }
+			await _movieService.EditMovieAsync(id, model);
 
-            MovieDeleteViewModel movie = await _movieService.GetMovieDeleteModelByIdAsync(id);
+			return RedirectToAction(nameof(Details), new { id });
+		}
 
-            return View(movie);
-        }
+		[HttpGet]
+		[CheckIsDeleted<Movie>]
+		public async Task<IActionResult> Delete(int id)
+		{
+			if (await _movieService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
 
-        [HttpPost]
-        [CheckIsDeleted<Movie>]
-        public async Task<IActionResult> Delete(int id, MovieDeleteViewModel model)
-        {
-            if (await _movieService.ExistByIdAsync(model.Id) == false)
-            {
-                return BadRequest();
-            }
-            if (id != model.Id)
-            {
-                return BadRequest();
-            }
+			MovieDeleteViewModel movie = await _movieService.GetMovieDeleteModelByIdAsync(id);
 
-            await _movieService.DeleteMovieAsync(id);
+			return View(movie);
+		}
 
-            return RedirectToAction(nameof(All));
-        }
-    }
+		[HttpPost]
+		[CheckIsDeleted<Movie>]
+		public async Task<IActionResult> Delete(int id, MovieDeleteViewModel model)
+		{
+			if (await _movieService.ExistByIdAsync(model.Id) == false)
+			{
+				return BadRequest();
+			}
+			if (id != model.Id)
+			{
+				return BadRequest();
+			}
+
+			await _movieService.DeleteMovieAsync(id);
+
+			return RedirectToAction(nameof(All));
+		}
+	}
 }
