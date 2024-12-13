@@ -14,6 +14,9 @@
             <li class="list-group-item">Eye color: @Model.EyeColor</li>
             <li class="list-group-item">Birth year: @Model.BirthYear</li>
             <li class="list-group-item">Gender: @Model.Gender</li>
+			@if(Model.Planet != null){
+                <li class="list-group-item">Homeworld: @Model.Planet.Name</li>
+            }
         </ul>
         <div class="card-body ">
             <p class="card-text">
