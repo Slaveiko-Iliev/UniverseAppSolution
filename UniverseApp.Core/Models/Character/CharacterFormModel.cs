@@ -7,7 +7,7 @@ namespace UniverseApp.Core.Models.Character
     {
         [Required(ErrorMessage = RequiredFieldErrorMesssage)]
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public required string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [StringLength(HeightMaxLenght, MinimumLength = HeightMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
         public string? Height { get; set; }

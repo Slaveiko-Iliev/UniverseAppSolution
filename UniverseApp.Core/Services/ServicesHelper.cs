@@ -13,7 +13,10 @@ namespace UniverseApp.Core.Services
             _repository = repository;
         }
 
-        public string[] SplitInput(string input) => input != null ? input.Split(", ", StringSplitOptions.RemoveEmptyEntries) : new string[0];
+        public string[] SplitInput(string input) =>
+            input != null
+            ? input.Split(", ", StringSplitOptions.RemoveEmptyEntries)
+            : new string[0];
 
         public int[] GetParsedIds(string input)
         {
@@ -32,5 +35,10 @@ namespace UniverseApp.Core.Services
         {
             return await _repository.AllReadOnly<T>().Where(x => ids.Contains((int)x.GetType().GetProperty("Id").GetValue(x))).ToArrayAsync();
         }
+        public int? TryParseInputToInt(string input) =>
+            int.TryParse(input, out int result) ? result : null;
+
+        public double? TryParseInputToDouble(string input) =>
+            double.TryParse(input, out double result) ? result : null;
     }
 }

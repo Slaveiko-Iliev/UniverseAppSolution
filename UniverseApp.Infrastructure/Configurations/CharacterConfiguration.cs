@@ -13,7 +13,7 @@ namespace UniverseApp.Infrastructure.Configurations
 			var charactersToImport = GetEntityDtoInfoAsync<CharacterInfoDto>().Result;
 
 			var characters = charactersToImport
-				.Select(async c => new Character()
+				.Select(c => new Character()
 				{
 					Id = GetEntityIdFromUrl(c.Url),
 					Name = c.Name,
@@ -25,9 +25,6 @@ namespace UniverseApp.Infrastructure.Configurations
 					BirthYear = c.BirthYear,
 					Gender = c.Gender,
 					PlanetId = c.PlanetId != null ? GetEntityIdFromUrl(c.PlanetId) : null,
-					//Planet = int.TryParse(c.PlanetId, out int res)
-					//		? await _repository.GetEntityByIdAsync<Planet>(res)
-					//		: null,
 					Url = c.Url,
 					IsDeleted = false
 				})
