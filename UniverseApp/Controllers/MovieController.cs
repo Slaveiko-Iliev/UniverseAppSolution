@@ -71,6 +71,11 @@ namespace UniverseApp.Controllers
 		[CheckIsDeleted<Movie>]
 		public async Task<IActionResult> Edit(int id)
 		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
 			if (await _movieService.ExistByIdAsync(id) == false)
 			{
 				return BadRequest();
@@ -85,6 +90,11 @@ namespace UniverseApp.Controllers
 		[CheckIsDeleted<Movie>]
 		public async Task<IActionResult> Edit(int id, MovieFormModel model)
 		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
 			if (!ModelState.IsValid)
 			{
 				return View(model);
@@ -104,6 +114,12 @@ namespace UniverseApp.Controllers
 		[CheckIsDeleted<Movie>]
 		public async Task<IActionResult> Delete(int id)
 		{
+
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
 			if (await _movieService.ExistByIdAsync(id) == false)
 			{
 				return BadRequest();
@@ -118,6 +134,11 @@ namespace UniverseApp.Controllers
 		[CheckIsDeleted<Movie>]
 		public async Task<IActionResult> Delete(int id, MovieDeleteViewModel model)
 		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
 			if (await _movieService.ExistByIdAsync(model.Id) == false)
 			{
 				return BadRequest();

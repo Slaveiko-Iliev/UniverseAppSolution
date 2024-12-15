@@ -19,8 +19,8 @@ namespace UniverseApp.Core.Services
 		{
 			var movie = new Movie
 			{
-				Id = _repository.All<Movie>().Count() + 1,
-				Title = model.Title,
+				Id = _repository.AllReadOnly<Movie>().Count() + 1,
+				Name = model.Name,
 				EpisodeId = model.EpisodeId,
 				Description = model.Description,
 				Director = model.Director,
@@ -36,8 +36,8 @@ namespace UniverseApp.Core.Services
 			return movie.Id;
 		}
 
-		public Task<bool> ExistByIdAsync(int id) =>
-			_repository
+		public async Task<bool> ExistByIdAsync(int id) =>
+			await _repository
 				.AllReadOnly<Movie>()
 				.Where(m => !m.IsDeleted)
 				.AnyAsync(m => m.Id == id);
@@ -71,7 +71,7 @@ namespace UniverseApp.Core.Services
 				.Select(m => new MovieAllViewModel
 				{
 					Id = m.Id,
-					Title = m.Title,
+					Name = m.Name,
 					EpisodeId = m.EpisodeId,
 					Description = m.Description,
 					Director = m.Director,
@@ -105,7 +105,7 @@ namespace UniverseApp.Core.Services
 			var movieDetails = new MovieDetailsViewModel
 			{
 				Id = movie.Id,
-				Title = movie.Title,
+				Name = movie.Name,
 				EpisodeId = movie.EpisodeId,
 				Description = movie.Description,
 				Director = movie.Director,
@@ -130,7 +130,7 @@ namespace UniverseApp.Core.Services
 
 			var movieFormModel = new MovieFormModel
 			{
-				Title = movie.Title,
+				Name = movie.Name,
 				EpisodeId = movie.EpisodeId,
 				Description = movie.Description,
 				Director = movie.Director,
@@ -148,7 +148,7 @@ namespace UniverseApp.Core.Services
 			var movie = await _repository
 				.GetEntityByIdAsync<Movie>(id);
 
-			movie.Title = model.Title;
+			movie.Name = model.Name;
 			movie.EpisodeId = model.EpisodeId;
 			movie.Description = model.Description;
 			movie.Director = model.Director;
@@ -177,7 +177,7 @@ namespace UniverseApp.Core.Services
 
 			var movieDeleteModel = new MovieDeleteViewModel
 			{
-				Title = movie.Title,
+				Name = movie.Name,
 				Director = movie.Director,
 				ReleaseDate = movie.ReleaseDate.ToString("yyyy-MM-dd"),
 				ImageUrl = movie.ImageUrl
