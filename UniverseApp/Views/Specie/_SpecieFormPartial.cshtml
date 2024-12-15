@@ -1,5 +1,58 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model SpecieFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Name...">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Classification"></label>
+                <input asp-for="Classification" class="form-control" placeholder="Classification...">
+                <span asp-validation-for="Classification" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Designation"></label>
+                <input asp-for="Designation" rows="4" class="form-control" placeholder="Designation..."></input>
+                <span asp-validation-for="Designation" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AverageHeight"></label>
+                <input asp-for="AverageHeight" class="form-control" placeholder="Average height...">
+                <span asp-validation-for="AverageHeight" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkinColor"></label>
+                <input asp-for="SkinColor" class="form-control" placeholder="Skin color...">
+                <span asp-validation-for="SkinColor" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HairColor"></label>
+                <input asp-for="HairColor" class="form-control" placeholder="Hair color...">
+                <span asp-validation-for="HairColor" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EyeColor"></label>
+                <input asp-for="EyeColor" class="form-control" placeholder="Eye color...">
+                <span asp-validation-for="EyeColor" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AverageLifespan"></label>
+                <input asp-for="AverageLifespan" class="form-control" placeholder="Average lifespan...">
+                <span asp-validation-for="AverageLifespan" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Language"></label>
+                <input asp-for="Language" class="form-control" placeholder="Language...">
+                <span asp-validation-for="Language" class="small text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <a asp-controller="Specie" asp-action="All" class="btn btn-primary mt-3">Cancel</a>
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

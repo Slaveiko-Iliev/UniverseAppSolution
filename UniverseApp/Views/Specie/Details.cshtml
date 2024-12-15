@@ -1,0 +1,57 @@
+﻿@model SpecieDetailsViewModel
+
+@{
+    ViewBag.Title = "Specie Details";
+}
+
+<div class="card mb-3" style="max-width: 90%;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="~/Images/specie.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h4 class="card-title">@Model.Name</h4>
+                <p class="card-text"><span class="fw-bolder">Classification:</span> @Model.Classification</p>
+                <p class="card-text"><span class="fw-bolder">Designation:</span> @Model.Designation</p>
+                <p class="card-text"><span class="fw-bolder">Average height:</span> @Model.AverageHeight</p>
+                <p class="card-text"><span class="fw-bolder">Skin color:</span> @Model.SkinColor</p>
+                <p class="card-text"><span class="fw-bolder">Hair color:</span> @Model.HairColor</p>
+                <p class="card-text"><span class="fw-bolder">Eye color:</span> @Model.EyeColor</p>
+                <p class="card-text"><span class="fw-bolder">Average lifespan</span>: @Model.AverageLifespan</p>
+                <p class="card-text"><span class="fw-bolder">Language:</span> @Model.Language</p>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Characters
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <partial name="_SpecieDetailsPartial" model="@Model.CharactersNames" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Movies
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                            <partial name="_SpecieDetailsPartial" model="@Model.MoviesNames" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a asp-controller="Specie" asp-action="All" asp-route-id="@Model.Id"
+               class="btn btn-primary">Back</a>
+            <a asp-controller="Specie" asp-action="Edit" asp-route-id="@Model.Id"
+               class="btn btn-primary">Edit</a>
+            <a asp-controller="Specie" asp-action="Delete" asp-route-id="@Model.Id"
+               class="btn btn-primary">Delete</a>
+        </div>
+    </div>
+</div>

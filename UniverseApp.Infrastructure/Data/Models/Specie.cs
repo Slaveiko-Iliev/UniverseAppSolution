@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UniverseApp.Infrastructure.Models;
 using static UniverseApp.Infrastructure.Constants.ModelsConstants.SpecieConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
@@ -8,7 +9,7 @@ namespace UniverseApp.Infrastructure.Data.Models
     [Include("Characters")]
     [Include("Movies")]
     [Comment("Specie Entity")]
-    public class Specie
+    public class Specie : IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -32,7 +33,7 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         [MaxLength(AverageHeightMaxLenght)]
         [Comment("Specie Average Height")]
-        public string? AverageHeight { get; set; }
+        public int? AverageHeight { get; set; }
 
         [MaxLength(SkinColorsMaxLenght)]
         [Comment("Specie SkinColor")]
@@ -48,7 +49,7 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         [MaxLength(AverageLifespanMaxLenght)]
         [Comment("Specie Average Lifespan")]
-        public string? AverageLifespan { get; set; }
+        public int? AverageLifespan { get; set; }
 
         [MaxLength(HomeworldMaxLenght)]
         [Comment("Specie Homeworld")]

@@ -2,8 +2,11 @@
 
 namespace UniverseApp.Core.Services.Contracts
 {
-    public interface ISpecieService
-    {
-        Task<SpecieQueryServiceModel> GetAllSpeciesAsync(string? searchCharacter, string? searchMovie, int currentPage, int speciesPerPage);
-    }
+	public interface ISpecieService
+	{
+		Task<int> AddSpecieAsync(SpecieFormModel model);
+		Task<bool> ExistByIdAsync(int id);
+		Task<SpecieQueryServiceModel> GetAllSpeciesAsync(string? searchCharacter, string? searchMovie, int currentPage, int speciesPerPage);
+		Task<SpecieDetailsViewModel> GetSpecieDetailsByIdAsync(int id);
+	}
 }

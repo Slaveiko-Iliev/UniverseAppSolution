@@ -80,7 +80,7 @@
             public const int DesignationMinLenght = 5;
             public const int DesignationMaxLenght = 30;
             public const int AverageHeightMinLenght = 1;
-            public const int AverageHeightMaxLenght = 10;
+            public const int AverageHeightMaxLenght = 3;
             public const int SkinColorsMinLenght = 3;
             public const int SkinColorsMaxLenght = 50;
             public const int HairColorsMinLenght = 3;
@@ -88,11 +88,15 @@
             public const int EyeColorsMinLenght = 3;
             public const int EyeColorsMaxLenght = 50;
             public const int AverageLifespanMinLenght = 1;
-            public const int AverageLifespanMaxLenght = 15;
+            public const int AverageLifespanMaxLenght = 4;
             public const int LanguageMinLenght = 3;
             public const int LanguageMaxLenght = 30;
             public const int HomeworldMinLenght = 4;
             public const int HomeworldMaxLenght = 50;
+            public const int CharacterIdsMinLenght = 1;
+            public const int CharacterIdsMaxLenght = 100;
+            public const int MovieIdsMinLenght = 1;
+            public const int MovieIdsMaxLenght = 100;
             public const int UrlMinLenght = 4;
             public const int UrlMaxLenght = 100;
         }

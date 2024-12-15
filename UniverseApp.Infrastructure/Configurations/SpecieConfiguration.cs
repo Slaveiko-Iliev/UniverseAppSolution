@@ -7,31 +7,31 @@ using static UniverseApp.Infrastructure.Common.SeedDtoDataHelper;
 
 namespace UniverseApp.Infrastructure.Configurations
 {
-    public class SpecieConfiguration : IEntityTypeConfiguration<Specie>
-    {
-        public void Configure(EntityTypeBuilder<Specie> builder)
-        {
-            var speciesToImport = GetEntityDtoInfoAsync<SpecieInfoDto>().Result;
+	public class SpecieConfiguration : IEntityTypeConfiguration<Specie>
+	{
+		public void Configure(EntityTypeBuilder<Specie> builder)
+		{
+			var speciesToImport = GetEntityDtoInfoAsync<SpecieInfoDto>().Result;
 
-            var species = speciesToImport
-                .Select(s => new Specie()
-                {
-                    Id = GetEntityIdFromUrl(s.Url),
-                    Name = s.Name,
-                    Classification = s.Classification,
-                    Designation = s.Designation,
-                    AverageHeight = s.AverageHeight,
-                    SkinColors = s.SkinColors,
-                    HairColors = s.HairColors,
-                    EyeColors = s.EyeColors,
-                    AverageLifespan = s.AverageLifespan,
-                    PlanetId = s.PlanetId != null ? GetEntityIdFromUrl(s.PlanetId) : null,
-                    Language = s.Language,
-                    Url = s.Url,
-                })
-                .ToList();
+			var species = speciesToImport
+				.Select(s => new Specie()
+				{
+					Id = GetEntityIdFromUrl(s.Url),
+					Name = s.Name,
+					Classification = s.Classification,
+					Designation = s.Designation,
+					AverageHeight = s.AverageHeight != null ? TryParseInputToInt(s.AverageHeight) : null,
+					SkinColors = s.SkinColors,
+					HairColors = s.HairColors,
+					EyeColors = s.EyeColors,
+					AverageLifespan = s.AverageLifespan != null ? TryParseInputToInt(s.AverageLifespan) : null,
+					PlanetId = s.PlanetId != null ? GetEntityIdFromUrl(s.PlanetId) : null,
+					Language = s.Language,
+					Url = s.Url,
+				})
+				.ToList();
 
-            builder.HasData(species);
-        }
-    }
+			builder.HasData(species);
+		}
+	}
 }
