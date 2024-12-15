@@ -12,7 +12,7 @@ using UniverseApp.Infrastructure.Data;
 namespace UniverseApp.Infrastructure.Migrations
 {
     [DbContext(typeof(UniverseDbContext))]
-    [Migration("20241210075921_SeedData")]
+    [Migration("20241214105419_SeedData")]
     partial class SeedData
     {
         /// <inheritdoc />
@@ -117,6 +117,12 @@ namespace UniverseApp.Infrastructure.Migrations
                             Id = "6468123d-a641-4305-9a52-533361297ed3",
                             Name = "Yoda",
                             NormalizedName = "YODA"
+                        },
+                        new
+                        {
+                            Id = "234e651b-2617-450d-838e-b8a6d072b35c",
+                            Name = "Padawan",
+                            NormalizedName = "PADAWAN"
                         });
                 });
 
@@ -168,6 +174,22 @@ namespace UniverseApp.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Yoda Master",
+                            UserId = "cfcc5c95-4666-4fe1-b26a-50c4016dac21"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "First User",
+                            UserId = "18990560-1cca-49b8-b4db-5adb987559c3"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -1604,6 +1626,12 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasComment("Whether the Entity has been deleted");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasComment("Movie Title");
+
                     b.Property<string>("Producer")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -1613,12 +1641,6 @@ namespace UniverseApp.Infrastructure.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2")
                         .HasComment("Movie Release Date");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)")
-                        .HasComment("Movie Title");
 
                     b.Property<string>("Url")
                         .HasMaxLength(100)
@@ -1640,9 +1662,9 @@ namespace UniverseApp.Infrastructure.Migrations
                             EpisodeId = "4",
                             ImageUrl = "",
                             IsDeleted = false,
+                            Name = "A New Hope",
                             Producer = "Gary Kurtz, Rick McCallum",
                             ReleaseDate = new DateTime(1977, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "A New Hope",
                             Url = "https://swapi.dev/api/films/1/"
                         },
                         new
@@ -1653,9 +1675,9 @@ namespace UniverseApp.Infrastructure.Migrations
                             EpisodeId = "5",
                             ImageUrl = "",
                             IsDeleted = false,
+                            Name = "The Empire Strikes Back",
                             Producer = "Gary Kurtz, Rick McCallum",
                             ReleaseDate = new DateTime(1980, 5, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Empire Strikes Back",
                             Url = "https://swapi.dev/api/films/2/"
                         },
                         new
@@ -1666,9 +1688,9 @@ namespace UniverseApp.Infrastructure.Migrations
                             EpisodeId = "6",
                             ImageUrl = "",
                             IsDeleted = false,
+                            Name = "Return of the Jedi",
                             Producer = "Howard G. Kazanjian, George Lucas, Rick McCallum",
                             ReleaseDate = new DateTime(1983, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Return of the Jedi",
                             Url = "https://swapi.dev/api/films/3/"
                         },
                         new
@@ -1679,9 +1701,9 @@ namespace UniverseApp.Infrastructure.Migrations
                             EpisodeId = "1",
                             ImageUrl = "",
                             IsDeleted = false,
+                            Name = "The Phantom Menace",
                             Producer = "Rick McCallum",
                             ReleaseDate = new DateTime(1999, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Phantom Menace",
                             Url = "https://swapi.dev/api/films/4/"
                         },
                         new
@@ -1692,9 +1714,9 @@ namespace UniverseApp.Infrastructure.Migrations
                             EpisodeId = "2",
                             ImageUrl = "",
                             IsDeleted = false,
+                            Name = "Attack of the Clones",
                             Producer = "Rick McCallum",
                             ReleaseDate = new DateTime(2002, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Attack of the Clones",
                             Url = "https://swapi.dev/api/films/5/"
                         },
                         new
@@ -1705,9 +1727,9 @@ namespace UniverseApp.Infrastructure.Migrations
                             EpisodeId = "3",
                             ImageUrl = "",
                             IsDeleted = false,
+                            Name = "Revenge of the Sith",
                             Producer = "Rick McCallum",
                             ReleaseDate = new DateTime(2005, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Revenge of the Sith",
                             Url = "https://swapi.dev/api/films/6/"
                         });
                 });
@@ -2584,14 +2606,14 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Specie Identifier");
 
-                    b.Property<string>("AverageHeight")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
+                    b.Property<int?>("AverageHeight")
+                        .HasMaxLength(3)
+                        .HasColumnType("int")
                         .HasComment("Specie Average Height");
 
-                    b.Property<string>("AverageLifespan")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)")
+                    b.Property<int?>("AverageLifespan")
+                        .HasMaxLength(4)
+                        .HasColumnType("int")
                         .HasComment("Specie Average Lifespan");
 
                     b.Property<string>("Classification")
@@ -2659,8 +2681,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            AverageHeight = "180",
-                            AverageLifespan = "120",
+                            AverageHeight = 180,
+                            AverageLifespan = 120,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "brown, blue, green, hazel, grey, amber",
@@ -2675,8 +2697,6 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            AverageHeight = "n/a",
-                            AverageLifespan = "indefinite",
                             Classification = "artificial",
                             Designation = "sentient",
                             EyeColors = "n/a",
@@ -2690,8 +2710,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            AverageHeight = "210",
-                            AverageLifespan = "400",
+                            AverageHeight = 210,
+                            AverageLifespan = 400,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "blue, green, yellow, brown, golden, red",
@@ -2706,8 +2726,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            AverageHeight = "170",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 170,
                             Classification = "sentient",
                             Designation = "reptilian",
                             EyeColors = "black",
@@ -2722,8 +2741,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 5,
-                            AverageHeight = "300",
-                            AverageLifespan = "1000",
+                            AverageHeight = 300,
+                            AverageLifespan = 1000,
                             Classification = "gastropod",
                             Designation = "sentient",
                             EyeColors = "yellow, red",
@@ -2738,8 +2757,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 6,
-                            AverageHeight = "66",
-                            AverageLifespan = "900",
+                            AverageHeight = 66,
+                            AverageLifespan = 900,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "brown, green, yellow",
@@ -2754,8 +2773,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 7,
-                            AverageHeight = "200",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 200,
                             Classification = "reptile",
                             Designation = "sentient",
                             EyeColors = "yellow, orange",
@@ -2770,8 +2788,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 8,
-                            AverageHeight = "160",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 160,
                             Classification = "amphibian",
                             Designation = "sentient",
                             EyeColors = "yellow",
@@ -2786,8 +2803,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 9,
-                            AverageHeight = "100",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 100,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "orange, brown",
@@ -2802,8 +2818,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 10,
-                            AverageHeight = "180",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 180,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "black",
@@ -2818,8 +2833,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 11,
-                            AverageHeight = "180",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 180,
                             Classification = "unknown",
                             Designation = "sentient",
                             EyeColors = "red, pink",
@@ -2834,8 +2848,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 12,
-                            AverageHeight = "190",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 190,
                             Classification = "amphibian",
                             Designation = "sentient",
                             EyeColors = "orange",
@@ -2850,8 +2863,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 13,
-                            AverageHeight = "120",
-                            AverageLifespan = "91",
+                            AverageHeight = 120,
+                            AverageLifespan = 91,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "yellow",
@@ -2866,8 +2879,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 14,
-                            AverageHeight = "100",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 100,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "yellow, blue",
@@ -2882,8 +2894,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 15,
-                            AverageHeight = "200",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 200,
                             Classification = "mammals",
                             Designation = "sentient",
                             EyeColors = "blue, brown, orange, pink",
@@ -2898,8 +2909,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 16,
-                            AverageHeight = "80",
-                            AverageLifespan = "79",
+                            AverageHeight = 80,
+                            AverageLifespan = 79,
                             Classification = "reptile",
                             Designation = "sentient",
                             EyeColors = "unknown",
@@ -2914,8 +2925,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 17,
-                            AverageHeight = "100",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 100,
                             Classification = "unknown",
                             Designation = "sentient",
                             EyeColors = "yellow",
@@ -2930,8 +2940,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 18,
-                            AverageHeight = "125",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 125,
                             Classification = "unknown",
                             Designation = "sentient",
                             EyeColors = "black",
@@ -2946,8 +2955,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 19,
-                            AverageHeight = "200",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 200,
                             Classification = "unknown",
                             Designation = "sentient",
                             EyeColors = "orange",
@@ -2962,8 +2970,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 20,
-                            AverageHeight = "200",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 200,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "hazel",
@@ -2978,8 +2985,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 21,
-                            AverageHeight = "180",
-                            AverageLifespan = "70",
+                            AverageHeight = 180,
+                            AverageLifespan = 70,
                             Classification = "amphibian",
                             Designation = "sentient",
                             EyeColors = "black",
@@ -2994,8 +3001,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 22,
-                            AverageHeight = "180",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 180,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "brown, orange",
@@ -3010,8 +3016,6 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 23,
-                            AverageHeight = "unknown",
-                            AverageLifespan = "unknown",
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "blue, indigo",
@@ -3026,8 +3030,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 24,
-                            AverageHeight = "180",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 180,
                             Classification = "unknown",
                             Designation = "sentient",
                             EyeColors = "orange",
@@ -3042,8 +3045,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 25,
-                            AverageHeight = "240",
-                            AverageLifespan = "86",
+                            AverageHeight = 240,
+                            AverageLifespan = 86,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "yellow",
@@ -3058,8 +3061,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 26,
-                            AverageHeight = "180",
-                            AverageLifespan = "70",
+                            AverageHeight = 180,
+                            AverageLifespan = 70,
                             Classification = "unknown",
                             Designation = "sentient",
                             EyeColors = "black, silver",
@@ -3074,8 +3077,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 27,
-                            AverageHeight = "190",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 190,
                             Classification = "amphibian",
                             Designation = "sentient",
                             EyeColors = "blue",
@@ -3090,8 +3092,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 28,
-                            AverageHeight = "178",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 178,
                             Classification = "insectoid",
                             Designation = "sentient",
                             EyeColors = "green, hazel",
@@ -3106,8 +3107,7 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 29,
-                            AverageHeight = "180",
-                            AverageLifespan = "unknown",
+                            AverageHeight = 180,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "blue, green, red, yellow, brown, orange",
@@ -3122,8 +3122,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 30,
-                            AverageHeight = "180",
-                            AverageLifespan = "70",
+                            AverageHeight = 180,
+                            AverageLifespan = 70,
                             Classification = "reptilian",
                             Designation = "sentient",
                             EyeColors = "yellow",
@@ -3138,8 +3138,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 31,
-                            AverageHeight = "178",
-                            AverageLifespan = "75",
+                            AverageHeight = 178,
+                            AverageLifespan = 75,
                             Classification = "amphibian",
                             Designation = "sentient",
                             EyeColors = "yellow",
@@ -3154,8 +3154,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 32,
-                            AverageHeight = "220",
-                            AverageLifespan = "80",
+                            AverageHeight = 220,
+                            AverageLifespan = 80,
                             Classification = "amphibian",
                             Designation = "sentient",
                             EyeColors = "black",
@@ -3170,8 +3170,6 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 33,
-                            AverageHeight = "unknown",
-                            AverageLifespan = "unknown",
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "unknown",
@@ -3186,8 +3184,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 34,
-                            AverageHeight = "190",
-                            AverageLifespan = "100",
+                            AverageHeight = 190,
+                            AverageLifespan = 100,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "black",
@@ -3202,8 +3200,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 35,
-                            AverageHeight = "180",
-                            AverageLifespan = "94",
+                            AverageHeight = 180,
+                            AverageLifespan = 94,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "red, orange, yellow, green, blue, black",
@@ -3218,8 +3216,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 36,
-                            AverageHeight = "170",
-                            AverageLifespan = "80",
+                            AverageHeight = 170,
+                            AverageLifespan = 80,
                             Classification = "reptile",
                             Designation = "sentient",
                             EyeColors = "yellow",
@@ -3234,8 +3232,8 @@ namespace UniverseApp.Infrastructure.Migrations
                         new
                         {
                             Id = 37,
-                            AverageHeight = "190",
-                            AverageLifespan = "700",
+                            AverageHeight = 190,
+                            AverageLifespan = 700,
                             Classification = "mammal",
                             Designation = "sentient",
                             EyeColors = "black",
@@ -3904,6 +3902,10 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasComment("Is the user active");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -3959,17 +3961,18 @@ namespace UniverseApp.Infrastructure.Migrations
                         {
                             Id = "18990560-1cca-49b8-b4db-5adb987559c3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4940d66f-593f-4021-8526-629f94158e32",
+                            ConcurrencyStamp = "e0b2f0ad-7828-4497-9995-8fbabf1117ae",
                             Email = "user@mail.com",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             FirstName = "First",
+                            IsActive = true,
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@MAIL.COM",
                             NormalizedUserName = "USER@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKSmu0jnrWNDXxuBnn2T9walsEgWPJGB5hU1Mizj0Fuo1pNAo6Vkh6ztjOIugI8TAg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDIQ54JbNupgH7wiCfQtilz0N0SysuocdIVwMbFjO18dbtJckzm6DUEyWuRwL+TRmg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6ee7a2f0-be65-45df-b25e-422865ebd905",
+                            SecurityStamp = "edf5205e-96f6-4a8c-988b-44f7b23c4600",
                             TwoFactorEnabled = false,
                             UserName = "user@mail.com"
                         },
@@ -3977,17 +3980,18 @@ namespace UniverseApp.Infrastructure.Migrations
                         {
                             Id = "cfcc5c95-4666-4fe1-b26a-50c4016dac21",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "666b2bae-44dc-4ad1-b56d-6316d2c92534",
+                            ConcurrencyStamp = "b2667625-221b-4d6e-85e1-cab2540b1c02",
                             Email = "yoda@mail.com",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             FirstName = "Yoda",
+                            IsActive = true,
                             LastName = "Master",
                             LockoutEnabled = false,
                             NormalizedEmail = "YODA@MAIL.COM",
                             NormalizedUserName = "YODA@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENikkkfqHvH6+bTJ3WJIDmj0XwWFCzRtsA2LvE5sHGCP5QoBb3lJlGyJrlNUTzURvQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHjie/1AeYJLzjYl8A/okupp9mNwUcEJmB0uo5nUqgkklnSBXFanNbQewtqAFGVkWw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a8837600-0786-4d5c-adc3-26e03d0600fe",
+                            SecurityStamp = "b5d6e149-6850-41e3-9bc0-a6c84ebe414e",
                             TwoFactorEnabled = false,
                             UserName = "yoda@mail.com"
                         });
@@ -4891,7 +4895,7 @@ namespace UniverseApp.Infrastructure.Migrations
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Specie", b =>
                 {
                     b.HasOne("UniverseApp.Infrastructure.Data.Models.Planet", "Planet")
-                        .WithMany()
+                        .WithMany("Species")
                         .HasForeignKey("PlanetId");
 
                     b.Navigation("Planet");
@@ -4900,6 +4904,8 @@ namespace UniverseApp.Infrastructure.Migrations
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Planet", b =>
                 {
                     b.Navigation("Characters");
+
+                    b.Navigation("Species");
                 });
 #pragma warning restore 612, 618
         }
