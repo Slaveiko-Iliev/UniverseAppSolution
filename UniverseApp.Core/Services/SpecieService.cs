@@ -6,169 +6,196 @@ using UniverseApp.Infrastructure.Data.Models;
 
 namespace UniverseApp.Core.Services
 {
-	public class SpecieService : ISpecieService
-	{
-		private readonly IRepository _repository;
-		private readonly IServiceHelper _serviceHelper;
+    public class SpecieService : ISpecieService
+    {
+        private readonly IRepository _repository;
+        private readonly IServiceHelper _serviceHelper;
 
-		public SpecieService(IRepository repository, IServiceHelper serviceHelper)
-		{
-			_repository = repository;
-			_serviceHelper = serviceHelper;
-		}
+        public SpecieService(IRepository repository, IServiceHelper serviceHelper)
+        {
+            _repository = repository;
+            _serviceHelper = serviceHelper;
+        }
 
-		public async Task<int> AddSpecieAsync(SpecieFormModel model)
-		{
-			int? averageHeight = model.AverageHeight != null
-				? _serviceHelper.TryParseInputToInt(model.AverageHeight)
-				: null;
-			int? averageLifespan = model.AverageLifespan != null
-				? _serviceHelper.TryParseInputToInt(model.AverageLifespan)
-				: null;
+        public async Task<int> AddSpecieAsync(SpecieFormModel model)
+        {
+            int? averageHeight = model.AverageHeight != null
+                ? _serviceHelper.TryParseInputToInt(model.AverageHeight)
+                : null;
+            int? averageLifespan = model.AverageLifespan != null
+                ? _serviceHelper.TryParseInputToInt(model.AverageLifespan)
+                : null;
 
-			var newSpecie = new Specie()
-			{
-				Id = _repository.AllReadOnly<Specie>().Count() + 1,
-				Name = model.Name,
-				Classification = model.Classification,
-				Designation = model.Designation,
-				AverageHeight = averageHeight,
-				SkinColors = model.SkinColor,
-				HairColors = model.HairColor,
-				EyeColors = model.EyeColor,
-				AverageLifespan = averageLifespan,
-				Language = model.Language,
-			};
+            var newSpecie = new Specie()
+            {
+                Id = _repository.AllReadOnly<Specie>().Count() + 1,
+                Name = model.Name,
+                Classification = model.Classification,
+                Designation = model.Designation,
+                AverageHeight = averageHeight,
+                SkinColors = model.SkinColor,
+                HairColors = model.HairColor,
+                EyeColors = model.EyeColor,
+                AverageLifespan = averageLifespan,
+                Language = model.Language,
+            };
 
-			await _repository.AddAsync(newSpecie);
-			await _repository.SaveChangesAsync();
+            await _repository.AddAsync(newSpecie);
+            await _repository.SaveChangesAsync();
 
-			return newSpecie.Id;
-		}
+            return newSpecie.Id;
+        }
 
-		public async Task EditSpecieAsync(int id, SpecieFormModel model)
-		{
-			var specie = await _repository
-				.GetEntityByIdAsync<Specie>(id);
+        public async Task DeleteSpecieAsync(int id)
+        {
+            var specie = await _repository
+                .All<Specie>()
+                .FirstAsync(m => m.Id == id);
 
-			specie.Name = model.Name;
-			specie.Classification = model.Classification;
-			specie.Designation = model.Designation;
-			specie.AverageHeight = model.AverageHeight != null
-				? _serviceHelper.TryParseInputToInt(model.AverageHeight)
-				: null;
-			specie.SkinColors = model.SkinColor;
-			specie.HairColors = model.HairColor;
-			specie.EyeColors = model.EyeColor;
-			specie.AverageLifespan = model.AverageLifespan != null
-				? _serviceHelper.TryParseInputToInt(model.AverageLifespan)
-				: null;
-			specie.Language = model.Language;
+            specie.IsDeleted = true;
+            await _repository.SaveChangesAsync();
+        }
 
-			await _repository.SaveChangesAsync();
-		}
+        public async Task EditSpecieAsync(int id, SpecieFormModel model)
+        {
+            var specie = await _repository
+                .GetEntityByIdAsync<Specie>(id);
 
-		public async Task<bool> ExistByIdAsync(int id) =>
-			await _repository
-				.AllReadOnly<Specie>()
-				.Where(m => !m.IsDeleted)
-				.AnyAsync(m => m.Id == id);
+            specie.Name = model.Name;
+            specie.Classification = model.Classification;
+            specie.Designation = model.Designation;
+            specie.AverageHeight = model.AverageHeight != null
+                ? _serviceHelper.TryParseInputToInt(model.AverageHeight)
+                : null;
+            specie.SkinColors = model.SkinColor;
+            specie.HairColors = model.HairColor;
+            specie.EyeColors = model.EyeColor;
+            specie.AverageLifespan = model.AverageLifespan != null
+                ? _serviceHelper.TryParseInputToInt(model.AverageLifespan)
+                : null;
+            specie.Language = model.Language;
 
-		public async Task<SpecieQueryServiceModel> GetAllSpeciesAsync(string? searchCharacter, string? searchMovie, int currentPage, int speciesPerPage)
-		{
-			var species = _repository
-				.AllReadOnly<Specie>();
+            await _repository.SaveChangesAsync();
+        }
 
-			if (!string.IsNullOrEmpty(searchCharacter))
-			{
-				species = species
-					.Where(m => m.Characters.Any(c => c.Name == searchCharacter));
-			}
+        public async Task<bool> ExistByIdAsync(int id) =>
+            await _repository
+                .AllReadOnly<Specie>()
+                .Where(m => !m.IsDeleted)
+                .AnyAsync(m => m.Id == id);
 
-			if (!string.IsNullOrEmpty(searchMovie))
-			{
-				species = species
-					.Where(m => m.Movies.Any(p => p.Name == searchMovie));
-			}
+        public async Task<SpecieQueryServiceModel> GetAllSpeciesAsync(string? searchCharacter, string? searchMovie, int currentPage, int speciesPerPage)
+        {
+            var species = _repository
+                .AllReadOnly<Specie>()
+                .Where(v => !v.IsDeleted);
 
-			var totalSpeciesCount = await species.CountAsync();
+            if (!string.IsNullOrEmpty(searchCharacter))
+            {
+                species = species
+                    .Where(m => m.Characters.Any(c => c.Name == searchCharacter));
+            }
 
-			species = species
-				.OrderBy(m => m.Id)
-				.Skip((currentPage - 1) * speciesPerPage)
-				.Take(speciesPerPage);
+            if (!string.IsNullOrEmpty(searchMovie))
+            {
+                species = species
+                    .Where(m => m.Movies.Any(p => p.Name == searchMovie));
+            }
 
-			var specieViewModels = await species
-				.Select(s => new SpecieAllViewModel
-				{
-					Id = s.Id,
-					Name = s.Name,
-					Classification = s.Classification,
-					Designation = s.Designation,
-					AverageHeight = s.AverageHeight.ToString(),
-					SkinColor = s.SkinColors,
-					HairColor = s.HairColors,
-					EyeColor = s.EyeColors,
-					AverageLifespan = s.AverageLifespan.ToString(),
-					Language = s.Language
-				})
-				.ToListAsync();
+            var totalSpeciesCount = await species.CountAsync();
 
-			var specieAllQueryModels = new SpecieQueryServiceModel()
-			{
-				TotalSpeciesCount = totalSpeciesCount,
-				Species = specieViewModels
-			};
+            species = species
+                .OrderBy(m => m.Id)
+                .Skip((currentPage - 1) * speciesPerPage)
+                .Take(speciesPerPage);
 
-			return specieAllQueryModels;
-		}
+            var specieViewModels = await species
+                .Select(s => new SpecieAllViewModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Classification = s.Classification,
+                    Designation = s.Designation,
+                    AverageHeight = s.AverageHeight.ToString(),
+                    SkinColor = s.SkinColors,
+                    HairColor = s.HairColors,
+                    EyeColor = s.EyeColors,
+                    AverageLifespan = s.AverageLifespan.ToString(),
+                    Language = s.Language
+                })
+                .ToListAsync();
 
-		public async Task<SpecieDetailsViewModel> GetSpecieDetailsByIdAsync(int id)
-		{
-			var specie = await _repository
-				.GetEntityByIdAsync<Specie>(id);
+            var specieAllQueryModels = new SpecieQueryServiceModel()
+            {
+                TotalSpeciesCount = totalSpeciesCount,
+                Species = specieViewModels
+            };
 
-			var charactersNames = await _repository.GetEntitiesNames<Character>(specie.Characters);
-			var moviesNames = await _repository.GetEntitiesNames<Movie>(specie.Movies);
+            return specieAllQueryModels;
+        }
 
-			var specieDetails = new SpecieDetailsViewModel
-			{
-				Id = specie.Id,
-				Name = specie.Name,
-				Classification = specie.Classification,
-				Designation = specie.Designation,
-				AverageHeight = specie.AverageHeight.ToString(),
-				SkinColor = specie.SkinColors,
-				HairColor = specie.HairColors,
-				EyeColor = specie.EyeColors,
-				AverageLifespan = specie.AverageLifespan.ToString(),
-				Language = specie.Language,
-				CharactersNames = charactersNames,
-				MoviesNames = moviesNames
-			};
+        public async Task<SpecieDeleteViewModel> GetSpecieDeleteModelByIdAsync(int id)
+        {
+            var specie = await _repository
+                .GetEntityByIdAsync<Specie>(id);
 
-			return specieDetails;
-		}
+            var specieDeleteModel = new SpecieDeleteViewModel
+            {
+                Name = specie.Name,
+                Classification = specie.Classification,
+                Designation = specie.Designation,
+                Homeworld = specie.Planet?.Name
+            };
 
-		public async Task<SpecieFormModel> GetSpecieFormByIdAsync(int id)
-		{
-			var specie = await _repository
-				.GetEntityByIdAsync<Specie>(id);
+            return specieDeleteModel;
+        }
 
-			var specieFormModel = new SpecieFormModel
-			{
-				Name = specie.Name,
-				Classification = specie.Classification,
-				Designation = specie.Designation,
-				AverageHeight = specie.AverageHeight.ToString(),
-				SkinColor = specie.SkinColors,
-				HairColor = specie.HairColors,
-				EyeColor = specie.EyeColors,
-				AverageLifespan = specie.AverageLifespan.ToString(),
-				Language = specie.Language
-			};
+        public async Task<SpecieDetailsViewModel> GetSpecieDetailsByIdAsync(int id)
+        {
+            var specie = await _repository
+                .GetEntityByIdAsync<Specie>(id);
 
-			return specieFormModel;
-		}
-	}
+            var charactersNames = await _repository.GetEntitiesNames<Character>(specie.Characters);
+            var moviesNames = await _repository.GetEntitiesNames<Movie>(specie.Movies);
+
+            var specieDetails = new SpecieDetailsViewModel
+            {
+                Id = specie.Id,
+                Name = specie.Name,
+                Classification = specie.Classification,
+                Designation = specie.Designation,
+                AverageHeight = specie.AverageHeight.ToString(),
+                SkinColor = specie.SkinColors,
+                HairColor = specie.HairColors,
+                EyeColor = specie.EyeColors,
+                AverageLifespan = specie.AverageLifespan.ToString(),
+                Language = specie.Language,
+                CharactersNames = charactersNames,
+                MoviesNames = moviesNames
+            };
+
+            return specieDetails;
+        }
+
+        public async Task<SpecieFormModel> GetSpecieFormByIdAsync(int id)
+        {
+            var specie = await _repository
+                .GetEntityByIdAsync<Specie>(id);
+
+            var specieFormModel = new SpecieFormModel
+            {
+                Name = specie.Name,
+                Classification = specie.Classification,
+                Designation = specie.Designation,
+                AverageHeight = specie.AverageHeight.ToString(),
+                SkinColor = specie.SkinColors,
+                HairColor = specie.HairColors,
+                EyeColor = specie.EyeColors,
+                AverageLifespan = specie.AverageLifespan.ToString(),
+                Language = specie.Language
+            };
+
+            return specieFormModel;
+        }
+    }
 }

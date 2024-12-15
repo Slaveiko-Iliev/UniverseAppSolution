@@ -1,0 +1,35 @@
+﻿@model SpecieDeleteViewModel
+
+@{
+    ViewData["Title"] = "Delete Specie";
+}
+
+<form method="post" asp-action="Delete">
+    <div class="row">
+        <div class="col-md-4">
+            <img class="card-img-top" src="" alt="">
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Classification" class="control-label"></label>
+                <input asp-for="Classification" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Designation" class="control-label"></label>
+                <input asp-for="Designation" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Homeworld" class="control-label"></label>
+                <input asp-for="Homeworld" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group mt-2">
+                <a asp-controller="Specie" asp-action="All" class="btn btn-primary">Cancel</a>
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+</form>

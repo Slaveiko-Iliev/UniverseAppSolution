@@ -6,219 +6,247 @@ using UniverseApp.Infrastructure.Data.Models;
 
 namespace UniverseApp.Core.Services
 {
-	public class StarshipService : IStarshipService
-	{
-		private readonly IRepository _repository;
-		private readonly IServiceHelper _serviceHelper;
+    public class StarshipService : IStarshipService
+    {
+        private readonly IRepository _repository;
+        private readonly IServiceHelper _serviceHelper;
 
-		public StarshipService(IRepository repository, IServiceHelper serviceHelper)
-		{
-			_repository = repository;
-			_serviceHelper = serviceHelper;
-		}
+        public StarshipService(IRepository repository, IServiceHelper serviceHelper)
+        {
+            _repository = repository;
+            _serviceHelper = serviceHelper;
+        }
 
-		public async Task<int> AddStarshipAsync(StarshipFormModel model)
-		{
-			int? costInCredits = model.CostInCredits != null
-				? _serviceHelper.TryParseInputToInt(model.CostInCredits)
-				: null;
-			double? length = model.Length != null
-				? _serviceHelper.TryParseInputToDouble(model.Length)
-				: null;
-			int? maxAtmospheringSpeed = model.MaxAtmospheringSpeed != null
-				? _serviceHelper.TryParseInputToInt(model.MaxAtmospheringSpeed)
-				: null;
-			int? crew = model.Crew != null
-				? _serviceHelper.TryParseInputToInt(model.Crew)
-				: null;
-			int? passengers = model.Passengers != null
-				? _serviceHelper.TryParseInputToInt(model.Passengers)
-				: null;
-			int? cargoCapacity = model.CargoCapacity != null
-				? _serviceHelper.TryParseInputToInt(model.CargoCapacity)
-				: null;
-			double? hyperdriveRating = model.HyperdriveRating != null
-				? _serviceHelper.TryParseInputToDouble(model.HyperdriveRating)
-				: null;
-			int? mglt = model.MGLT != null
-				? _serviceHelper.TryParseInputToInt(model.MGLT)
-				: null;
+        public async Task<int> AddStarshipAsync(StarshipFormModel model)
+        {
+            int? costInCredits = model.CostInCredits != null
+                ? _serviceHelper.TryParseInputToInt(model.CostInCredits)
+                : null;
+            double? length = model.Length != null
+                ? _serviceHelper.TryParseInputToDouble(model.Length)
+                : null;
+            int? maxAtmospheringSpeed = model.MaxAtmospheringSpeed != null
+                ? _serviceHelper.TryParseInputToInt(model.MaxAtmospheringSpeed)
+                : null;
+            int? crew = model.Crew != null
+                ? _serviceHelper.TryParseInputToInt(model.Crew)
+                : null;
+            int? passengers = model.Passengers != null
+                ? _serviceHelper.TryParseInputToInt(model.Passengers)
+                : null;
+            int? cargoCapacity = model.CargoCapacity != null
+                ? _serviceHelper.TryParseInputToInt(model.CargoCapacity)
+                : null;
+            double? hyperdriveRating = model.HyperdriveRating != null
+                ? _serviceHelper.TryParseInputToDouble(model.HyperdriveRating)
+                : null;
+            int? mglt = model.MGLT != null
+                ? _serviceHelper.TryParseInputToInt(model.MGLT)
+                : null;
 
-			var newStarship = new Starship()
-			{
-				Id = _repository.AllReadOnly<Starship>().Count() + 40,
-				Name = model.Name,
-				Model = model.StarshipModel,
-				Manufacturer = model.Manufacturer,
-				CostInCredits = costInCredits,
-				Length = length,
-				MaxAtmospheringSpeed = maxAtmospheringSpeed,
-				Crew = crew,
-				Passengers = passengers,
-				CargoCapacity = cargoCapacity,
-				Consumables = model.Consumables,
-				Class = model.Class,
-				HyperdriveRating = hyperdriveRating,
-				MGLT = mglt
-			};
+            var newStarship = new Starship()
+            {
+                Id = _repository.AllReadOnly<Starship>().Count() + 40,
+                Name = model.Name,
+                Model = model.StarshipModel,
+                Manufacturer = model.Manufacturer,
+                CostInCredits = costInCredits,
+                Length = length,
+                MaxAtmospheringSpeed = maxAtmospheringSpeed,
+                Crew = crew,
+                Passengers = passengers,
+                CargoCapacity = cargoCapacity,
+                Consumables = model.Consumables,
+                Class = model.Class,
+                HyperdriveRating = hyperdriveRating,
+                MGLT = mglt
+            };
 
-			await _repository.AddAsync(newStarship);
-			await _repository.SaveChangesAsync();
+            await _repository.AddAsync(newStarship);
+            await _repository.SaveChangesAsync();
 
-			return newStarship.Id;
-		}
+            return newStarship.Id;
+        }
 
-		public async Task EditStarshipAsync(int id, StarshipFormModel model)
-		{
-			var starship = await _repository
-				.GetEntityByIdAsync<Starship>(id);
+        public async Task DeleteStarshipAsync(int id)
+        {
+            var starship = await _repository
+                .All<Starship>()
+                .FirstAsync(m => m.Id == id);
 
-			starship.Name = model.Name;
-			starship.Model = model.StarshipModel;
-			starship.Manufacturer = model.Manufacturer;
-			starship.CostInCredits = model.CostInCredits != null
-				? _serviceHelper.TryParseInputToInt(model.CostInCredits)
-				: null;
-			starship.Length = model.Length != null
-				? _serviceHelper.TryParseInputToDouble(model.Length)
-				: null;
-			starship.MaxAtmospheringSpeed = model.MaxAtmospheringSpeed != null
-				? _serviceHelper.TryParseInputToInt(model.MaxAtmospheringSpeed)
-				: null;
-			starship.Crew = model.Crew != null
-				? _serviceHelper.TryParseInputToInt(model.Crew)
-				: null;
-			starship.Passengers = model.Passengers != null
-				? _serviceHelper.TryParseInputToInt(model.Passengers)
-				: null;
-			starship.CargoCapacity = model.CargoCapacity != null
-				? _serviceHelper.TryParseInputToInt(model.CargoCapacity)
-				: null;
-			starship.Consumables = model.Consumables;
-			starship.Class = model.Class;
-			starship.HyperdriveRating = model.HyperdriveRating != null
-				? _serviceHelper.TryParseInputToDouble(model.HyperdriveRating)
-				: null;
-			starship.MGLT = model.MGLT != null
-				? _serviceHelper.TryParseInputToInt(model.MGLT)
-				: null;
+            starship.IsDeleted = true;
+            await _repository.SaveChangesAsync();
+        }
 
-			await _repository.SaveChangesAsync();
-		}
+        public async Task EditStarshipAsync(int id, StarshipFormModel model)
+        {
+            var starship = await _repository
+                .GetEntityByIdAsync<Starship>(id);
 
-		public async Task<bool> ExistByIdAsync(int id) =>
-			await _repository
-				.AllReadOnly<Starship>()
-				.Where(m => !m.IsDeleted)
-				.AnyAsync(m => m.Id == id);
+            starship.Name = model.Name;
+            starship.Model = model.StarshipModel;
+            starship.Manufacturer = model.Manufacturer;
+            starship.CostInCredits = model.CostInCredits != null
+                ? _serviceHelper.TryParseInputToInt(model.CostInCredits)
+                : null;
+            starship.Length = model.Length != null
+                ? _serviceHelper.TryParseInputToDouble(model.Length)
+                : null;
+            starship.MaxAtmospheringSpeed = model.MaxAtmospheringSpeed != null
+                ? _serviceHelper.TryParseInputToInt(model.MaxAtmospheringSpeed)
+                : null;
+            starship.Crew = model.Crew != null
+                ? _serviceHelper.TryParseInputToInt(model.Crew)
+                : null;
+            starship.Passengers = model.Passengers != null
+                ? _serviceHelper.TryParseInputToInt(model.Passengers)
+                : null;
+            starship.CargoCapacity = model.CargoCapacity != null
+                ? _serviceHelper.TryParseInputToInt(model.CargoCapacity)
+                : null;
+            starship.Consumables = model.Consumables;
+            starship.Class = model.Class;
+            starship.HyperdriveRating = model.HyperdriveRating != null
+                ? _serviceHelper.TryParseInputToDouble(model.HyperdriveRating)
+                : null;
+            starship.MGLT = model.MGLT != null
+                ? _serviceHelper.TryParseInputToInt(model.MGLT)
+                : null;
 
-		public async Task<StarshipQueryServiceModel> GetAllStarshipsAsync(string? searchCharacter, string? searchMovie, int currentPage, int starshipsPerPage)
-		{
-			var starships = _repository
-				.AllReadOnly<Starship>();
+            await _repository.SaveChangesAsync();
+        }
 
-			if (!string.IsNullOrEmpty(searchCharacter))
-			{
-				starships = starships
-					.Where(v => v.Characters.Any(ch => ch.Name == searchCharacter));
-			}
+        public async Task<bool> ExistByIdAsync(int id) =>
+            await _repository
+                .AllReadOnly<Starship>()
+                .Where(m => !m.IsDeleted)
+                .AnyAsync(m => m.Id == id);
 
-			if (!string.IsNullOrEmpty(searchMovie))
-			{
-				starships = starships
-					.Where(v => v.Movies.Any(m => m.Name == searchMovie));
-			}
+        public async Task<StarshipQueryServiceModel> GetAllStarshipsAsync(string? searchCharacter, string? searchMovie, int currentPage, int starshipsPerPage)
+        {
+            var starships = _repository
+                .AllReadOnly<Starship>()
+                .Where(v => !v.IsDeleted);
 
-			var totalStarshipsCount = await starships.CountAsync();
+            if (!string.IsNullOrEmpty(searchCharacter))
+            {
+                starships = starships
+                    .Where(v => v.Characters.Any(ch => ch.Name == searchCharacter));
+            }
 
-			starships = starships
-				.OrderBy(m => m.Id)
-				.Skip((currentPage - 1) * starshipsPerPage)
-				.Take(starshipsPerPage);
+            if (!string.IsNullOrEmpty(searchMovie))
+            {
+                starships = starships
+                    .Where(v => v.Movies.Any(m => m.Name == searchMovie));
+            }
 
-			var starshipViewModels = await starships
-				.Select(m => new StarshipAllViewModel
-				{
-					Id = m.Id,
-					Name = m.Name,
-					StarshipModel = m.Model,
-					Manufacturer = m.Manufacturer,
-					CostInCredits = m.CostInCredits.ToString(),
-					Length = m.Length.ToString(),
-					MaxAtmospheringSpeed = m.MaxAtmospheringSpeed.ToString(),
-					Crew = m.Crew.ToString(),
-					Passengers = m.Passengers.ToString(),
-					CargoCapacity = m.CargoCapacity.ToString(),
-					Consumables = m.Consumables,
-					Class = m.Class,
-					HyperdriveRating = m.HyperdriveRating.ToString(),
-					MGLT = m.MGLT.ToString()
-				})
-				.ToListAsync();
+            var totalStarshipsCount = await starships.CountAsync();
 
-			var starshipAllQueryModels = new StarshipQueryServiceModel()
-			{
-				TotalStarshipsCount = totalStarshipsCount,
-				Starships = starshipViewModels
-			};
+            starships = starships
+                .OrderBy(m => m.Id)
+                .Skip((currentPage - 1) * starshipsPerPage)
+                .Take(starshipsPerPage);
 
-			return starshipAllQueryModels;
-		}
+            var starshipViewModels = await starships
+                .Select(m => new StarshipAllViewModel
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    StarshipModel = m.Model,
+                    Manufacturer = m.Manufacturer,
+                    CostInCredits = m.CostInCredits.ToString(),
+                    Length = m.Length.ToString(),
+                    MaxAtmospheringSpeed = m.MaxAtmospheringSpeed.ToString(),
+                    Crew = m.Crew.ToString(),
+                    Passengers = m.Passengers.ToString(),
+                    CargoCapacity = m.CargoCapacity.ToString(),
+                    Consumables = m.Consumables,
+                    Class = m.Class,
+                    HyperdriveRating = m.HyperdriveRating.ToString(),
+                    MGLT = m.MGLT.ToString()
+                })
+                .ToListAsync();
 
-		public async Task<StarshipDetailsViewModel> GetStarshipDetailsByIdAsync(int id)
-		{
-			var starship = await _repository
-				.GetEntityByIdAsync<Starship>(id);
+            var starshipAllQueryModels = new StarshipQueryServiceModel()
+            {
+                TotalStarshipsCount = totalStarshipsCount,
+                Starships = starshipViewModels
+            };
 
-			var charactersNames = await _repository.GetEntitiesNames<Character>(starship.Characters);
-			var moviesNames = await _repository.GetEntitiesNames<Movie>(starship.Movies);
+            return starshipAllQueryModels;
+        }
 
-			var starshipDetails = new StarshipDetailsViewModel
-			{
-				Id = starship.Id,
-				Name = starship.Name,
-				StarshipModel = starship.Model,
-				Manufacturer = starship.Manufacturer,
-				CostInCredits = starship.CostInCredits.ToString(),
-				Length = starship.Length.ToString(),
-				MaxAtmospheringSpeed = starship.MaxAtmospheringSpeed.ToString(),
-				Crew = starship.Crew.ToString(),
-				Passengers = starship.Passengers.ToString(),
-				CargoCapacity = starship.CargoCapacity.ToString(),
-				Consumables = starship.Consumables,
-				Class = starship.Class,
-				HyperdriveRating = starship.HyperdriveRating.ToString(),
-				MGLT = starship.MGLT.ToString(),
-				CharactersNames = charactersNames,
-				MoviesNames = moviesNames
-			};
+        public async Task<StarshipDeleteViewModel> GetStarshipDeleteModelByIdAsync(int id)
+        {
+            var starship = await _repository
+                .GetEntityByIdAsync<Starship>(id);
 
-			return starshipDetails;
-		}
+            var starshipDeleteModel = new StarshipDeleteViewModel
+            {
+                Id = starship.Id,
+                Name = starship.Name,
+                StarshipModel = starship.Model,
+                Manufacturer = starship.Manufacturer,
+                StarshipClass = starship.Class
+            };
 
-		public async Task<StarshipFormModel> GetStarshipFormByIdAsync(int id)
-		{
-			var starship = await _repository
-				.GetEntityByIdAsync<Starship>(id);
+            return starshipDeleteModel;
+        }
 
-			var starshipFormModel = new StarshipFormModel
-			{
-				Name = starship.Name,
-				StarshipModel = starship.Model,
-				Manufacturer = starship.Manufacturer,
-				CostInCredits = starship.CostInCredits.ToString(),
-				Length = starship.Length.ToString(),
-				MaxAtmospheringSpeed = starship.MaxAtmospheringSpeed.ToString(),
-				Crew = starship.Crew.ToString(),
-				Passengers = starship.Passengers.ToString(),
-				CargoCapacity = starship.CargoCapacity.ToString(),
-				Consumables = starship.Consumables,
-				Class = starship.Class,
-				HyperdriveRating = starship.HyperdriveRating.ToString(),
-				MGLT = starship.MGLT.ToString()
-			};
+        public async Task<StarshipDetailsViewModel> GetStarshipDetailsByIdAsync(int id)
+        {
+            var starship = await _repository
+                .GetEntityByIdAsync<Starship>(id);
 
-			return starshipFormModel;
-		}
-	}
+            var charactersNames = await _repository.GetEntitiesNames<Character>(starship.Characters);
+            var moviesNames = await _repository.GetEntitiesNames<Movie>(starship.Movies);
+
+            var starshipDetails = new StarshipDetailsViewModel
+            {
+                Id = starship.Id,
+                Name = starship.Name,
+                StarshipModel = starship.Model,
+                Manufacturer = starship.Manufacturer,
+                CostInCredits = starship.CostInCredits.ToString(),
+                Length = starship.Length.ToString(),
+                MaxAtmospheringSpeed = starship.MaxAtmospheringSpeed.ToString(),
+                Crew = starship.Crew.ToString(),
+                Passengers = starship.Passengers.ToString(),
+                CargoCapacity = starship.CargoCapacity.ToString(),
+                Consumables = starship.Consumables,
+                Class = starship.Class,
+                HyperdriveRating = starship.HyperdriveRating.ToString(),
+                MGLT = starship.MGLT.ToString(),
+                CharactersNames = charactersNames,
+                MoviesNames = moviesNames
+            };
+
+            return starshipDetails;
+        }
+
+        public async Task<StarshipFormModel> GetStarshipFormByIdAsync(int id)
+        {
+            var starship = await _repository
+                .GetEntityByIdAsync<Starship>(id);
+
+            var starshipFormModel = new StarshipFormModel
+            {
+                Name = starship.Name,
+                StarshipModel = starship.Model,
+                Manufacturer = starship.Manufacturer,
+                CostInCredits = starship.CostInCredits.ToString(),
+                Length = starship.Length.ToString(),
+                MaxAtmospheringSpeed = starship.MaxAtmospheringSpeed.ToString(),
+                Crew = starship.Crew.ToString(),
+                Passengers = starship.Passengers.ToString(),
+                CargoCapacity = starship.CargoCapacity.ToString(),
+                Consumables = starship.Consumables,
+                Class = starship.Class,
+                HyperdriveRating = starship.HyperdriveRating.ToString(),
+                MGLT = starship.MGLT.ToString()
+            };
+
+            return starshipFormModel;
+        }
+    }
 }

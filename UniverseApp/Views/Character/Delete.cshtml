@@ -1,13 +1,13 @@
-﻿@model MovieDeleteViewModel
+﻿@model CharacterDeleteViewModel
 
 @{
-	ViewData["Title"] = "Delete Movie";
+    ViewData["Title"] = "Delete Character";
 }
 
 <form method="post" asp-action="Delete">
     <div class="row">
         <div class="col-md-4">
-            <img class="card-img-top" src="@Model.ImageUrl" alt="">
+            <img class="card-img-top" src="" alt="">
         </div>
         <div class="col-md-8">
             <div class="form-group">
@@ -15,15 +15,15 @@
                 <input asp-for="Name" class="form-control" disabled="disabled" />
             </div>
             <div class="form-group">
-                <label asp-for="Director" class="control-label"></label>
-                <input asp-for="Director" class="form-control" disabled="disabled" />
+                <label asp-for="Height" class="control-label"></label>
+                <input asp-for="Height" class="form-control" disabled="disabled" />
             </div>
             <div class="form-group">
-                <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" disabled="disabled" />
+                <label asp-for="BirthYear" class="control-label"></label>
+                <input asp-for="BirthYear" class="form-control" disabled="disabled" />
             </div>
             <div class="form-group mt-2">
-                <a asp-controller="Movie" asp-action="All" class="btn btn-primary">Cancel</a>
+                <a asp-controller="Character" asp-action="All" class="btn btn-primary">Cancel</a>
                 <input type="submit" value="Delete" class="btn btn-danger" />
             </div>
         </div>

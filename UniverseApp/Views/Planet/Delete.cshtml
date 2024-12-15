@@ -1,0 +1,36 @@
+﻿@model PlanetDeleteViewModel
+
+@{
+    ViewData["Title"] = "Delete Planet";
+}
+
+<form method="post" asp-action="Delete">
+    <div class="row">
+        <div class="col-md-4">
+            <img class="card-img-top" src="" alt="">
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="RotationPeriod" class="control-label"></label>
+                <input asp-for="RotationPeriod" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="OrbitalPeriod" class="control-label"></label>
+                <input asp-for="OrbitalPeriod" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Population" class="control-label"></label>
+                <input asp-for="Population" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group mt-2">
+                <a asp-controller="Planet" asp-action="All"
+                   class="btn btn-primary">Cancel</a>
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+</form>

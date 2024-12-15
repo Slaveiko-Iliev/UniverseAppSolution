@@ -6,182 +6,208 @@ using UniverseApp.Infrastructure.Data.Models;
 
 namespace UniverseApp.Core.Services
 {
-	public class CharacterService : ICharacterService
-	{
-		private readonly IRepository _repository;
-		private readonly IServiceHelper _serviceHelper;
+    public class CharacterService : ICharacterService
+    {
+        private readonly IRepository _repository;
+        private readonly IServiceHelper _serviceHelper;
 
-		public CharacterService(IRepository repository, IServiceHelper serviceHelper)
-		{
-			_repository = repository;
-			_serviceHelper = serviceHelper;
-		}
+        public CharacterService(IRepository repository, IServiceHelper serviceHelper)
+        {
+            _repository = repository;
+            _serviceHelper = serviceHelper;
+        }
 
-		public async Task<int> AddCharacterAsync(CharacterFormModel model)
-		{
-			int? height = model.Height != null
-				? _serviceHelper.TryParseInputToInt(model.Height)
-				: null;
-			int? mass = model.Mass != null
-				? _serviceHelper.TryParseInputToInt(model.Mass)
-				: null;
+        public async Task<int> AddCharacterAsync(CharacterFormModel model)
+        {
+            int? height = model.Height != null
+                ? _serviceHelper.TryParseInputToInt(model.Height)
+                : null;
+            int? mass = model.Mass != null
+                ? _serviceHelper.TryParseInputToInt(model.Mass)
+                : null;
 
-			var newCharacter = new Character()
-			{
-				Id = _repository.AllReadOnly<Character>().Count() + 2,
-				Name = model.Name,
-				Height = height,
-				Mass = mass,
-				HairColor = model.HairColor,
-				SkinColor = model.SkinColor,
-				EyeColor = model.EyeColor,
-				BirthYear = model.BirthYear,
-				Gender = model.Gender,
-			};
+            var newCharacter = new Character()
+            {
+                Id = _repository.AllReadOnly<Character>().Count() + 2,
+                Name = model.Name,
+                Height = height,
+                Mass = mass,
+                HairColor = model.HairColor,
+                SkinColor = model.SkinColor,
+                EyeColor = model.EyeColor,
+                BirthYear = model.BirthYear,
+                Gender = model.Gender,
+            };
 
-			await _repository.AddAsync(newCharacter);
-			await _repository.SaveChangesAsync();
+            await _repository.AddAsync(newCharacter);
+            await _repository.SaveChangesAsync();
 
-			return newCharacter.Id;
-		}
+            return newCharacter.Id;
+        }
 
-		public async Task EditCharacterAsync(int id, CharacterFormModel model)
-		{
-			var character = await _repository
-				.GetEntityByIdAsync<Character>(id);
+        public async Task DeleteCharacterAsync(int id)
+        {
+            var character = await _repository
+                .All<Character>()
+                .FirstAsync(m => m.Id == id);
 
-			character.Name = model.Name;
-			character.Height = model.Height != null
-				? _serviceHelper.TryParseInputToInt(model.Height)
-				: null;
-			character.Mass = model.Mass != null
-				? _serviceHelper.TryParseInputToInt(model.Mass)
-				: null;
-			character.HairColor = model.HairColor;
-			character.SkinColor = model.SkinColor;
-			character.EyeColor = model.EyeColor;
-			character.BirthYear = model.BirthYear;
-			character.Gender = model.Gender;
+            character.IsDeleted = true;
+            await _repository.SaveChangesAsync();
+        }
 
-			await _repository.SaveChangesAsync();
-		}
+        public async Task EditCharacterAsync(int id, CharacterFormModel model)
+        {
+            var character = await _repository
+                .GetEntityByIdAsync<Character>(id);
 
-		public async Task<bool> ExistByIdAsync(int id) =>
-			await _repository
-				.AllReadOnly<Character>()
-				.Where(m => !m.IsDeleted)
-				.AnyAsync(m => m.Id == id);
+            character.Name = model.Name;
+            character.Height = model.Height != null
+                ? _serviceHelper.TryParseInputToInt(model.Height)
+                : null;
+            character.Mass = model.Mass != null
+                ? _serviceHelper.TryParseInputToInt(model.Mass)
+                : null;
+            character.HairColor = model.HairColor;
+            character.SkinColor = model.SkinColor;
+            character.EyeColor = model.EyeColor;
+            character.BirthYear = model.BirthYear;
+            character.Gender = model.Gender;
 
-		public async Task<CharacterQueryServiceModel> GetAllCharactersAsync(string? searchMovie, string? searchSpecie, string? searchVehicle, string? searchStarship, int currentPage, int charactersPerPage)
-		{
-			var characters = _repository
-				.AllReadOnly<Character>();
+            await _repository.SaveChangesAsync();
+        }
 
-			if (!string.IsNullOrEmpty(searchMovie))
-			{
-				characters = characters
-					.Where(ch => ch.Movies.Any(m => m.Name == searchMovie));
-			}
+        public async Task<bool> ExistByIdAsync(int id) =>
+            await _repository
+                .AllReadOnly<Character>()
+                .Where(m => !m.IsDeleted)
+                .AnyAsync(m => m.Id == id);
 
-			if (!string.IsNullOrEmpty(searchSpecie))
-			{
-				characters = characters
-					.Where(ch => ch.Species.Any(sp => sp.Name == searchSpecie));
-			}
+        public async Task<CharacterQueryServiceModel> GetAllCharactersAsync(string? searchMovie, string? searchSpecie, string? searchVehicle, string? searchStarship, int currentPage, int charactersPerPage)
+        {
+            var characters = _repository
+                .AllReadOnly<Character>()
+                .Where(ch => !ch.IsDeleted);
 
-			if (!string.IsNullOrEmpty(searchVehicle))
-			{
-				characters = characters
-					.Where(ch => ch.Vehicles.Any(v => v.Name == searchVehicle));
-			}
+            if (!string.IsNullOrEmpty(searchMovie))
+            {
+                characters = characters
+                    .Where(ch => ch.Movies.Any(m => m.Name == searchMovie));
+            }
 
-			if (!string.IsNullOrEmpty(searchStarship))
-			{
-				characters = characters
-					.Where(ch => ch.Starships.Any(st => st.Name == searchStarship));
-			}
+            if (!string.IsNullOrEmpty(searchSpecie))
+            {
+                characters = characters
+                    .Where(ch => ch.Species.Any(sp => sp.Name == searchSpecie));
+            }
 
-			int totalCharactersCount = await characters.CountAsync();
+            if (!string.IsNullOrEmpty(searchVehicle))
+            {
+                characters = characters
+                    .Where(ch => ch.Vehicles.Any(v => v.Name == searchVehicle));
+            }
 
-			characters = characters
-				.OrderBy(m => m.Id)
-				.Skip((currentPage - 1) * charactersPerPage)
-				.Take(charactersPerPage);
+            if (!string.IsNullOrEmpty(searchStarship))
+            {
+                characters = characters
+                    .Where(ch => ch.Starships.Any(st => st.Name == searchStarship));
+            }
 
-			var charactersViewModels = await characters
-				.Select(ch => new CharacterAllViewModel
-				{
-					Id = ch.Id,
-					Name = ch.Name,
-					Height = ch.Height.ToString(),
-					Mass = ch.Mass.ToString(),
-					HairColor = ch.HairColor,
-					SkinColor = ch.SkinColor,
-					EyeColor = ch.EyeColor,
-					BirthYear = ch.BirthYear,
-					Gender = ch.Gender,
-					PlanetId = ch.PlanetId,
-					Planet = ch.Planet
-				})
-				.ToListAsync();
+            int totalCharactersCount = await characters.CountAsync();
 
-			var characterAllQueryModels = new CharacterQueryServiceModel()
-			{
-				TotalCharactersCount = totalCharactersCount,
-				Characters = charactersViewModels
-			};
+            characters = characters
+                .OrderBy(m => m.Id)
+                .Skip((currentPage - 1) * charactersPerPage)
+                .Take(charactersPerPage);
 
-			return characterAllQueryModels;
-		}
+            var charactersViewModels = await characters
+                .Select(ch => new CharacterAllViewModel
+                {
+                    Id = ch.Id,
+                    Name = ch.Name,
+                    Height = ch.Height.ToString(),
+                    Mass = ch.Mass.ToString(),
+                    HairColor = ch.HairColor,
+                    SkinColor = ch.SkinColor,
+                    EyeColor = ch.EyeColor,
+                    BirthYear = ch.BirthYear,
+                    Gender = ch.Gender,
+                    PlanetId = ch.PlanetId,
+                    Planet = ch.Planet
+                })
+                .ToListAsync();
 
-		public async Task<CharacterDetailsViewModel> GetCharacterDetailsByIdAsync(int id)
-		{
-			var character = await _repository
-				.GetEntityByIdAsync<Character>(id);
+            var characterAllQueryModels = new CharacterQueryServiceModel()
+            {
+                TotalCharactersCount = totalCharactersCount,
+                Characters = charactersViewModels
+            };
 
-			var moviesNames = await _repository.GetEntitiesNames<Movie>(character.Movies);
-			var speciesNames = await _repository.GetEntitiesNames<Specie>(character.Species);
-			var vehiclesNames = await _repository.GetEntitiesNames<Vehicle>(character.Vehicles);
-			var starshipsNames = await _repository.GetEntitiesNames<Starship>(character.Starships);
+            return characterAllQueryModels;
+        }
 
-			var characterDetails = new CharacterDetailsViewModel
-			{
-				Id = character.Id,
-				Name = character.Name,
-				Height = character.Height.ToString(),
-				Mass = character.Mass.ToString(),
-				HairColor = character.HairColor,
-				SkinColor = character.SkinColor,
-				EyeColor = character.EyeColor,
-				BirthYear = character.BirthYear,
-				Gender = character.Gender,
-				MoviesNames = moviesNames,
-				SpeciesNames = speciesNames,
-				VehiclesNames = vehiclesNames,
-				StarshipsNames = starshipsNames
-			};
+        public async Task<CharacterDeleteViewModel> GetCharacterDeleteModelByIdAsync(int id)
+        {
+            var character = await _repository
+                .GetEntityByIdAsync<Character>(id);
 
-			return characterDetails;
-		}
+            var characterDeleteModel = new CharacterDeleteViewModel
+            {
+                Name = character.Name,
+                Height = character.Height.ToString(),
+                BirthYear = character.BirthYear
+            };
 
-		public async Task<CharacterFormModel> GetCharacterFormByIdAsync(int id)
-		{
-			var character = await _repository
-				.GetEntityByIdAsync<Character>(id);
+            return characterDeleteModel;
+        }
 
-			var characterFormModel = new CharacterFormModel
-			{
-				Name = character.Name,
-				Height = character.Height.ToString(),
-				Mass = character.Mass.ToString(),
-				HairColor = character.HairColor,
-				SkinColor = character.SkinColor,
-				EyeColor = character.EyeColor,
-				BirthYear = character.BirthYear,
-				Gender = character.Gender,
-			};
+        public async Task<CharacterDetailsViewModel> GetCharacterDetailsByIdAsync(int id)
+        {
+            var character = await _repository
+                .GetEntityByIdAsync<Character>(id);
 
-			return characterFormModel;
-		}
-	}
+            var moviesNames = await _repository.GetEntitiesNames<Movie>(character.Movies);
+            var speciesNames = await _repository.GetEntitiesNames<Specie>(character.Species);
+            var vehiclesNames = await _repository.GetEntitiesNames<Vehicle>(character.Vehicles);
+            var starshipsNames = await _repository.GetEntitiesNames<Starship>(character.Starships);
+
+            var characterDetails = new CharacterDetailsViewModel
+            {
+                Id = character.Id,
+                Name = character.Name,
+                Height = character.Height.ToString(),
+                Mass = character.Mass.ToString(),
+                HairColor = character.HairColor,
+                SkinColor = character.SkinColor,
+                EyeColor = character.EyeColor,
+                BirthYear = character.BirthYear,
+                Gender = character.Gender,
+                MoviesNames = moviesNames,
+                SpeciesNames = speciesNames,
+                VehiclesNames = vehiclesNames,
+                StarshipsNames = starshipsNames
+            };
+
+            return characterDetails;
+        }
+
+        public async Task<CharacterFormModel> GetCharacterFormByIdAsync(int id)
+        {
+            var character = await _repository
+                .GetEntityByIdAsync<Character>(id);
+
+            var characterFormModel = new CharacterFormModel
+            {
+                Name = character.Name,
+                Height = character.Height.ToString(),
+                Mass = character.Mass.ToString(),
+                HairColor = character.HairColor,
+                SkinColor = character.SkinColor,
+                EyeColor = character.EyeColor,
+                BirthYear = character.BirthYear,
+                Gender = character.Gender,
+            };
+
+            return characterFormModel;
+        }
+    }
 }
