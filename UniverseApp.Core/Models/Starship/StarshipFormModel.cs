@@ -8,10 +8,10 @@ namespace UniverseApp.Core.Models.Starship
     {
         [Required(ErrorMessage = RequiredFieldErrorMesssage)]
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public required string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [StringLength(ModelMaxLenght, MinimumLength = ModelMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public string? Model { get; set; }
+        public string? StarshipModel { get; set; }
 
         [StringLength(ManufacturerMaxLenght, MinimumLength = ManufacturerMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
         public string? Manufacturer { get; set; }

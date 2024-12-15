@@ -1,0 +1,77 @@
+﻿@model StarshipFormModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Name...">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StarshipModel"></label>
+                <input asp-for="StarshipModel" class="form-control" placeholder="Model...">
+                <span asp-validation-for="StarshipModel" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Manufacturer"></label>
+                <input asp-for="Manufacturer" rows="4" class="form-control" placeholder="Manufacturer...">
+                <span asp-validation-for="Manufacturer" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CostInCredits"></label>
+                <input asp-for="CostInCredits" class="form-control" placeholder="Cost in credits...">
+                <span asp-validation-for="CostInCredits" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Length"></label>
+                <input asp-for="Length" class="form-control" placeholder="Length...">
+                <span asp-validation-for="Length" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxAtmospheringSpeed"></label>
+                <input asp-for="MaxAtmospheringSpeed" class="form-control" placeholder="Max atmosphering speed...">
+                <span asp-validation-for="MaxAtmospheringSpeed" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Crew"></label>
+                <input asp-for="Crew" class="form-control" placeholder="Crew...">
+                <span asp-validation-for="Crew" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Passengers"></label>
+                <input asp-for="Passengers" class="form-control" placeholder="Passengers...">
+                <span asp-validation-for="Passengers" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CargoCapacity"></label>
+                <input asp-for="CargoCapacity" class="form-control" placeholder="Cargo capacity...">
+                <span asp-validation-for="CargoCapacity" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Consumables"></label>
+                <input asp-for="Consumables" class="form-control" placeholder="Consumables...">
+                <span asp-validation-for="Consumables" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Class"></label>
+                <input asp-for="Class" class="form-control" placeholder="Class...">
+                <span asp-validation-for="Class" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HyperdriveRating"></label>
+                <input asp-for="HyperdriveRating" class="form-control" placeholder="Hyperdrive rating...">
+                <span asp-validation-for="HyperdriveRating" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MGLT"></label>
+                <input asp-for="MGLT" class="form-control" placeholder="MGLT...">
+                <span asp-validation-for="MGLT" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <a asp-controller="Starship" asp-action="All" class="btn btn-primary mt-3">Cancel</a>
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
