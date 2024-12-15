@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UniverseApp.Core.Models.Planet;
 using UniverseApp.Core.Services.Contracts;
+using UniverseApp.Infrastructure.Data.Models;
 using static UniverseApp.Infrastructure.Constants.JediConstants;
 
 namespace UniverseApp.Controllers
@@ -42,9 +43,9 @@ namespace UniverseApp.Controllers
 				return View(model);
 			}
 
-			await _planetService.AddPlanetAsync(model);
+			int newPlanetId = await _planetService.AddPlanetAsync(model);
 
-			return RedirectToAction("All");
+			return RedirectToAction(nameof(Details), new { id = newPlanetId });
 		}
 
 		public async Task<IActionResult> All([FromQuery] PlanetAllQueryModel model)
@@ -53,6 +54,19 @@ namespace UniverseApp.Controllers
 
 			model.Planets = queryResult.Planets;
 			model.TotalPlanetsCount = queryResult.TotalPlanetsCount;
+
+			return View(model);
+		}
+
+		[CheckIsDeleted<Planet>]
+		public async Task<IActionResult> Details(int id)
+		{
+			if (await _planetService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			var model = await _planetService.GetSpecieDetailsByIdAsync(id);
 
 			return View(model);
 		}

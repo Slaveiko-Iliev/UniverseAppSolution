@@ -1,14 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UniverseApp.Infrastructure.Models;
 using static UniverseApp.Infrastructure.Constants.ModelsConstants.PlanetConst;
 
 namespace UniverseApp.Infrastructure.Data.Models
 {
     [Include("Characters")]
-	[Include("Movies")]
+    [Include("Species")]
+    [Include("Movies")]
     [Comment("Planet Entity")]
-	public class Planet
+    public class Planet : IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -53,6 +55,8 @@ namespace UniverseApp.Infrastructure.Data.Models
         [MaxLength(PopulationMaxLenght)]
         [Comment("Population of Planet")]
         public int? Population { get; set; }
+
+        public ICollection<Specie> Species { get; set; } = new List<Specie>();
 
         public ICollection<Character> Characters { get; set; } = new List<Character>();
 
