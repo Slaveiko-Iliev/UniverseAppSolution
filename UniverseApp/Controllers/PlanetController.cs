@@ -70,5 +70,48 @@ namespace UniverseApp.Controllers
 
 			return View(model);
 		}
+
+		[HttpGet]
+		[CheckIsDeleted<Planet>]
+		public async Task<IActionResult> Edit(int id)
+		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
+			if (await _planetService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			var planet = await _planetService.GetPlanetFormByIdAsync(id);
+
+			return View(planet);
+		}
+
+		[HttpPost]
+		[CheckIsDeleted<Planet>]
+		public async Task<IActionResult> Edit(int id, PlanetFormModel model)
+		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			if (await _planetService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			await _planetService.EditPlanetAsync(id, model);
+
+			return RedirectToAction(nameof(Details), new { id });
+		}
 	}
 }

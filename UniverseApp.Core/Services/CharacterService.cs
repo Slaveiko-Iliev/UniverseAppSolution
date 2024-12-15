@@ -45,6 +45,27 @@ namespace UniverseApp.Core.Services
 			return newCharacter.Id;
 		}
 
+		public async Task EditCharacterAsync(int id, CharacterFormModel model)
+		{
+			var character = await _repository
+				.GetEntityByIdAsync<Character>(id);
+
+			character.Name = model.Name;
+			character.Height = model.Height != null
+				? _serviceHelper.TryParseInputToInt(model.Height)
+				: null;
+			character.Mass = model.Mass != null
+				? _serviceHelper.TryParseInputToInt(model.Mass)
+				: null;
+			character.HairColor = model.HairColor;
+			character.SkinColor = model.SkinColor;
+			character.EyeColor = model.EyeColor;
+			character.BirthYear = model.BirthYear;
+			character.Gender = model.Gender;
+
+			await _repository.SaveChangesAsync();
+		}
+
 		public async Task<bool> ExistByIdAsync(int id) =>
 			await _repository
 				.AllReadOnly<Character>()
@@ -113,7 +134,7 @@ namespace UniverseApp.Core.Services
 			return characterAllQueryModels;
 		}
 
-		public async Task<CharacterDetailsViewModel> GetSpecieDetailsByIdAsync(int id)
+		public async Task<CharacterDetailsViewModel> GetCharacterDetailsByIdAsync(int id)
 		{
 			var character = await _repository
 				.GetEntityByIdAsync<Character>(id);
@@ -141,6 +162,26 @@ namespace UniverseApp.Core.Services
 			};
 
 			return characterDetails;
+		}
+
+		public async Task<CharacterFormModel> GetCharacterFormByIdAsync(int id)
+		{
+			var character = await _repository
+				.GetEntityByIdAsync<Character>(id);
+
+			var characterFormModel = new CharacterFormModel
+			{
+				Name = character.Name,
+				Height = character.Height.ToString(),
+				Mass = character.Mass.ToString(),
+				HairColor = character.HairColor,
+				SkinColor = character.SkinColor,
+				EyeColor = character.EyeColor,
+				BirthYear = character.BirthYear,
+				Gender = character.Gender,
+			};
+
+			return characterFormModel;
 		}
 	}
 }

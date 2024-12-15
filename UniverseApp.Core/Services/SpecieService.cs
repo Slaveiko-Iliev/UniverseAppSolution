@@ -46,6 +46,28 @@ namespace UniverseApp.Core.Services
 			return newSpecie.Id;
 		}
 
+		public async Task EditSpecieAsync(int id, SpecieFormModel model)
+		{
+			var specie = await _repository
+				.GetEntityByIdAsync<Specie>(id);
+
+			specie.Name = model.Name;
+			specie.Classification = model.Classification;
+			specie.Designation = model.Designation;
+			specie.AverageHeight = model.AverageHeight != null
+				? _serviceHelper.TryParseInputToInt(model.AverageHeight)
+				: null;
+			specie.SkinColors = model.SkinColor;
+			specie.HairColors = model.HairColor;
+			specie.EyeColors = model.EyeColor;
+			specie.AverageLifespan = model.AverageLifespan != null
+				? _serviceHelper.TryParseInputToInt(model.AverageLifespan)
+				: null;
+			specie.Language = model.Language;
+
+			await _repository.SaveChangesAsync();
+		}
+
 		public async Task<bool> ExistByIdAsync(int id) =>
 			await _repository
 				.AllReadOnly<Specie>()
@@ -126,6 +148,27 @@ namespace UniverseApp.Core.Services
 			};
 
 			return specieDetails;
+		}
+
+		public async Task<SpecieFormModel> GetSpecieFormByIdAsync(int id)
+		{
+			var specie = await _repository
+				.GetEntityByIdAsync<Specie>(id);
+
+			var specieFormModel = new SpecieFormModel
+			{
+				Name = specie.Name,
+				Classification = specie.Classification,
+				Designation = specie.Designation,
+				AverageHeight = specie.AverageHeight.ToString(),
+				SkinColor = specie.SkinColors,
+				HairColor = specie.HairColors,
+				EyeColor = specie.EyeColors,
+				AverageLifespan = specie.AverageLifespan.ToString(),
+				Language = specie.Language
+			};
+
+			return specieFormModel;
 		}
 	}
 }

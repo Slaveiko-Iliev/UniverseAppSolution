@@ -5,11 +5,12 @@ namespace UniverseApp.Core.Services.Contracts
 	public interface IStarshipService
 	{
 		Task<int> AddStarshipAsync(StarshipFormModel model);
-
+		Task EditStarshipAsync(int id, StarshipFormModel model);
 		Task<bool> ExistByIdAsync(int id);
 
 		Task<StarshipQueryServiceModel> GetAllStarshipsAsync(string? searchCharacter, string? searchMovie, int currentPage, int starshipsPerPage);
 
-		Task<StarshipDetailsViewModel> GetSpecieDetailsByIdAsync(int id);
+		Task<StarshipDetailsViewModel> GetStarshipDetailsByIdAsync(int id);
+		Task<StarshipFormModel> GetStarshipFormByIdAsync(int id);
 	}
 }

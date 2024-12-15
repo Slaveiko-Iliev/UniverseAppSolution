@@ -60,6 +60,38 @@ namespace UniverseApp.Core.Services
 			return newVehicle.Id;
 		}
 
+		public async Task EditVehicleAsync(int id, VehicleFormModel model)
+		{
+			var vehicle = await _repository
+				.GetEntityByIdAsync<Vehicle>(id);
+
+			vehicle.Name = model.Name;
+			vehicle.Model = model.VehicleModel;
+			vehicle.Manufacturer = model.Manufacturer;
+			vehicle.CostInCredits = model.CostInCredits != null
+				? _serviceHelper.TryParseInputToInt(model.CostInCredits)
+				: null;
+			vehicle.Length = model.Length != null
+				? _serviceHelper.TryParseInputToDouble(model.Length)
+				: null;
+			vehicle.MaxAtmospheringSpeed = model.MaxAtmospheringSpeed != null
+				? _serviceHelper.TryParseInputToInt(model.MaxAtmospheringSpeed)
+				: null;
+			vehicle.Crew = model.Crew != null
+				? _serviceHelper.TryParseInputToInt(model.Crew)
+				: null;
+			vehicle.Passengers = model.Passengers != null
+				? _serviceHelper.TryParseInputToInt(model.Passengers)
+				: null;
+			vehicle.CargoCapacity = model.CargoCapacity != null
+				? _serviceHelper.TryParseInputToInt(model.CargoCapacity)
+				: null;
+			vehicle.Consumables = model.Consumables;
+			vehicle.Class = model.Class;
+
+			await _repository.SaveChangesAsync();
+		}
+
 		public async Task<bool> ExistByIdAsync(int id) =>
 			await _repository
 				.AllReadOnly<Vehicle>()
@@ -117,7 +149,7 @@ namespace UniverseApp.Core.Services
 			return vehicleAllQueryModels;
 		}
 
-		public async Task<VehicleDetailsViewModel> GetSpecieDetailsByIdAsync(int id)
+		public async Task<VehicleDetailsViewModel> GetVehicleDetailsByIdAsync(int id)
 		{
 			var vehicle = await _repository
 				.GetEntityByIdAsync<Vehicle>(id);
@@ -144,6 +176,29 @@ namespace UniverseApp.Core.Services
 			};
 
 			return vehicleDetails;
+		}
+
+		public async Task<VehicleFormModel> GetVehicleFormByIdAsync(int id)
+		{
+			var starship = await _repository
+				.GetEntityByIdAsync<Vehicle>(id);
+
+			var vehicleFormModel = new VehicleFormModel
+			{
+				Name = starship.Name,
+				VehicleModel = starship.Model,
+				Manufacturer = starship.Manufacturer,
+				CostInCredits = starship.CostInCredits.ToString(),
+				Length = starship.Length.ToString(),
+				MaxAtmospheringSpeed = starship.MaxAtmospheringSpeed.ToString(),
+				Crew = starship.Crew.ToString(),
+				Passengers = starship.Passengers.ToString(),
+				CargoCapacity = starship.CargoCapacity.ToString(),
+				Consumables = starship.Consumables,
+				Class = starship.Class
+			};
+
+			return vehicleFormModel;
 		}
 	}
 }

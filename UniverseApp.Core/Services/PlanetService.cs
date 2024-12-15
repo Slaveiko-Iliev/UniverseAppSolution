@@ -57,6 +57,31 @@ namespace UniverseApp.Core.Services
 			return newPlanet.Id;
 		}
 
+		public async Task EditPlanetAsync(int id, PlanetFormModel model)
+		{
+			var movie = await _repository
+				.GetEntityByIdAsync<Planet>(id);
+
+			movie.Name = model.Name;
+			movie.RotationPeriod = model.RotationPeriod != null
+				? _serviceHelper.TryParseInputToInt(model.RotationPeriod)
+				: null;
+			movie.OrbitalPeriod = model.OrbitalPeriod != null
+				? _serviceHelper.TryParseInputToInt(model.OrbitalPeriod)
+				: null;
+			movie.Climate = _serviceHelper.SplitInput(model.Climate!);
+			movie.Gravity = model.Gravity;
+			movie.Terrain = _serviceHelper.SplitInput(model.Terrain!);
+			movie.SurfaceWater = model.SurfaceWater != null
+				? _serviceHelper.TryParseInputToDouble(model.SurfaceWater)
+				: null;
+			movie.Population = model.Population != null
+				? _serviceHelper.TryParseInputToInt(model.Population)
+				: null;
+
+			await _repository.SaveChangesAsync();
+		}
+
 		public async Task<bool> ExistByIdAsync(int id) =>
 			await _repository
 				.AllReadOnly<Planet>()
@@ -109,6 +134,30 @@ namespace UniverseApp.Core.Services
 			};
 
 			return planetAllQueryModels;
+		}
+
+		public async Task<PlanetFormModel> GetPlanetFormByIdAsync(int id)
+		{
+			var planet = await _repository
+				.GetEntityByIdAsync<Planet>(id);
+
+			var planetFormModel = new PlanetFormModel
+			{
+				Name = planet.Name,
+				RotationPeriod = planet.RotationPeriod.ToString(),
+				OrbitalPeriod = planet.OrbitalPeriod.ToString(),
+				Climate = planet.Climate != null
+					? string.Join(", ", planet.Climate)
+					: string.Empty,
+				Gravity = planet.Gravity,
+				Terrain = planet.Terrain != null
+					? string.Join(", ", planet.Terrain)
+					: string.Empty,
+				SurfaceWater = planet.SurfaceWater.ToString(),
+				Population = planet.Population.ToString()
+			};
+
+			return planetFormModel;
 		}
 
 		public async Task<PlanetDetailsViewModel> GetSpecieDetailsByIdAsync(int id)

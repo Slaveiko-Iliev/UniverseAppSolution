@@ -68,6 +68,44 @@ namespace UniverseApp.Core.Services
 			return newStarship.Id;
 		}
 
+		public async Task EditStarshipAsync(int id, StarshipFormModel model)
+		{
+			var starship = await _repository
+				.GetEntityByIdAsync<Starship>(id);
+
+			starship.Name = model.Name;
+			starship.Model = model.StarshipModel;
+			starship.Manufacturer = model.Manufacturer;
+			starship.CostInCredits = model.CostInCredits != null
+				? _serviceHelper.TryParseInputToInt(model.CostInCredits)
+				: null;
+			starship.Length = model.Length != null
+				? _serviceHelper.TryParseInputToDouble(model.Length)
+				: null;
+			starship.MaxAtmospheringSpeed = model.MaxAtmospheringSpeed != null
+				? _serviceHelper.TryParseInputToInt(model.MaxAtmospheringSpeed)
+				: null;
+			starship.Crew = model.Crew != null
+				? _serviceHelper.TryParseInputToInt(model.Crew)
+				: null;
+			starship.Passengers = model.Passengers != null
+				? _serviceHelper.TryParseInputToInt(model.Passengers)
+				: null;
+			starship.CargoCapacity = model.CargoCapacity != null
+				? _serviceHelper.TryParseInputToInt(model.CargoCapacity)
+				: null;
+			starship.Consumables = model.Consumables;
+			starship.Class = model.Class;
+			starship.HyperdriveRating = model.HyperdriveRating != null
+				? _serviceHelper.TryParseInputToDouble(model.HyperdriveRating)
+				: null;
+			starship.MGLT = model.MGLT != null
+				? _serviceHelper.TryParseInputToInt(model.MGLT)
+				: null;
+
+			await _repository.SaveChangesAsync();
+		}
+
 		public async Task<bool> ExistByIdAsync(int id) =>
 			await _repository
 				.AllReadOnly<Starship>()
@@ -127,7 +165,7 @@ namespace UniverseApp.Core.Services
 			return starshipAllQueryModels;
 		}
 
-		public async Task<StarshipDetailsViewModel> GetSpecieDetailsByIdAsync(int id)
+		public async Task<StarshipDetailsViewModel> GetStarshipDetailsByIdAsync(int id)
 		{
 			var starship = await _repository
 				.GetEntityByIdAsync<Starship>(id);
@@ -156,6 +194,31 @@ namespace UniverseApp.Core.Services
 			};
 
 			return starshipDetails;
+		}
+
+		public async Task<StarshipFormModel> GetStarshipFormByIdAsync(int id)
+		{
+			var starship = await _repository
+				.GetEntityByIdAsync<Starship>(id);
+
+			var starshipFormModel = new StarshipFormModel
+			{
+				Name = starship.Name,
+				StarshipModel = starship.Model,
+				Manufacturer = starship.Manufacturer,
+				CostInCredits = starship.CostInCredits.ToString(),
+				Length = starship.Length.ToString(),
+				MaxAtmospheringSpeed = starship.MaxAtmospheringSpeed.ToString(),
+				Crew = starship.Crew.ToString(),
+				Passengers = starship.Passengers.ToString(),
+				CargoCapacity = starship.CargoCapacity.ToString(),
+				Consumables = starship.Consumables,
+				Class = starship.Class,
+				HyperdriveRating = starship.HyperdriveRating.ToString(),
+				MGLT = starship.MGLT.ToString()
+			};
+
+			return starshipFormModel;
 		}
 	}
 }

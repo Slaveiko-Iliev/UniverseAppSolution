@@ -50,7 +50,7 @@ namespace UniverseApp.Controllers
 
 		public async Task<IActionResult> All([FromQuery] CharacterAllQueryModel model)
 		{
-			CharacterQueryServiceModel queryResult = await _characterService.GetAllCharactersAsync(model.SearchMovie, model.SearchSpecie, model.SearchVehicle, model.SearchStarship, model.CurrentPage, CharacterAllQueryModel.CharactersPerPage);
+			var queryResult = await _characterService.GetAllCharactersAsync(model.SearchMovie, model.SearchSpecie, model.SearchVehicle, model.SearchStarship, model.CurrentPage, CharacterAllQueryModel.CharactersPerPage);
 
 			model.Characters = queryResult.Characters;
 			model.TotalCharactersCount = queryResult.TotalCharactersCount;
@@ -58,7 +58,7 @@ namespace UniverseApp.Controllers
 			return View(model);
 		}
 
-		[CheckIsDeleted<Specie>]
+		[CheckIsDeleted<Character>]
 		public async Task<IActionResult> Details(int id)
 		{
 			if (await _characterService.ExistByIdAsync(id) == false)
@@ -66,9 +66,52 @@ namespace UniverseApp.Controllers
 				return BadRequest();
 			}
 
-			CharacterDetailsViewModel model = await _characterService.GetSpecieDetailsByIdAsync(id);
+			CharacterDetailsViewModel model = await _characterService.GetCharacterDetailsByIdAsync(id);
 
 			return View(model);
+		}
+
+		[HttpGet]
+		[CheckIsDeleted<Character>]
+		public async Task<IActionResult> Edit(int id)
+		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
+			if (await _characterService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			var model = await _characterService.GetCharacterFormByIdAsync(id);
+
+			return View(model);
+		}
+
+		[HttpPost]
+		[CheckIsDeleted<Character>]
+		public async Task<IActionResult> Edit(int id, CharacterFormModel model)
+		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			if (await _characterService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			await _characterService.EditCharacterAsync(id, model);
+
+			return RedirectToAction(nameof(Details), new { id });
 		}
 	}
 }

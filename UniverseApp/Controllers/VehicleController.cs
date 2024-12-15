@@ -64,9 +64,52 @@ namespace UniverseApp.Controllers
 				return BadRequest();
 			}
 
-			var model = await _vehicleService.GetSpecieDetailsByIdAsync(id);
+			var model = await _vehicleService.GetVehicleDetailsByIdAsync(id);
 
 			return View(model);
+		}
+
+		[HttpGet]
+		[CheckIsDeleted<Vehicle>]
+		public async Task<IActionResult> Edit(int id)
+		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
+			if (await _vehicleService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			var movie = await _vehicleService.GetVehicleFormByIdAsync(id);
+
+			return View(movie);
+		}
+
+		[HttpPost]
+		[CheckIsDeleted<Vehicle>]
+		public async Task<IActionResult> Edit(int id, VehicleFormModel model)
+		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			if (await _vehicleService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			await _vehicleService.EditVehicleAsync(id, model);
+
+			return RedirectToAction(nameof(Details), new { id });
 		}
 	}
 }

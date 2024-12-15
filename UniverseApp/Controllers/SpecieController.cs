@@ -68,5 +68,48 @@ namespace UniverseApp.Controllers
 
 			return View(model);
 		}
+
+		[HttpGet]
+		[CheckIsDeleted<Specie>]
+		public async Task<IActionResult> Edit(int id)
+		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
+			if (await _specieService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			var model = await _specieService.GetSpecieFormByIdAsync(id);
+
+			return View(model);
+		}
+
+		[HttpPost]
+		[CheckIsDeleted<Specie>]
+		public async Task<IActionResult> Edit(int id, SpecieFormModel model)
+		{
+			if (!User.IsInRole(PadawanRoleName) && !User.IsInRole(YodaRoleName))
+			{
+				return Unauthorized();
+			}
+
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			if (await _specieService.ExistByIdAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			await _specieService.EditSpecieAsync(id, model);
+
+			return RedirectToAction(nameof(Details), new { id });
+		}
 	}
 }
