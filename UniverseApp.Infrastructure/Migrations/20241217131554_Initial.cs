@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace UniverseApp.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -32,6 +34,7 @@ namespace UniverseApp.Infrastructure.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, comment: "Is the user active"),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -57,14 +60,14 @@ namespace UniverseApp.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false, comment: "Movie Identifier"),
-                    Title = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false, comment: "Movie Title"),
+                    Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false, comment: "Movie Title"),
                     EpisodeId = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false, comment: "Movie Episode Identifier"),
                     Description = table.Column<string>(type: "nvarchar(800)", maxLength: 800, nullable: false, comment: "Movie Description"),
                     Director = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, comment: "Movie Director"),
                     Producer = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, comment: "Movie Producer"),
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Movie Release Date"),
                     Url = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ImageUrl = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, comment: "Movie Image Url"),
+                    ImageUrl = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true, comment: "Movie Image Url"),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, comment: "Whether the Entity has been deleted")
                 },
                 constraints: table =>
@@ -314,11 +317,11 @@ namespace UniverseApp.Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false, comment: "Specie Name"),
                     Classification = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false, comment: "Specie Classification"),
                     Designation = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false, comment: "Specie Designation"),
-                    AverageHeight = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true, comment: "Specie Average Height"),
+                    AverageHeight = table.Column<int>(type: "int", maxLength: 3, nullable: true, comment: "Specie Average Height"),
                     SkinColors = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true, comment: "Specie SkinColor"),
                     HairColors = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true, comment: "Specie HairColor"),
                     EyeColors = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true, comment: "Specie EyeColor"),
-                    AverageLifespan = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true, comment: "Specie Average Lifespan"),
+                    AverageLifespan = table.Column<int>(type: "int", maxLength: 4, nullable: true, comment: "Specie Average Lifespan"),
                     PlanetId = table.Column<int>(type: "int", maxLength: 50, nullable: true, comment: "Specie Homeworld"),
                     Language = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, comment: "Specie Language"),
                     Url = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true, comment: "Specie Url"),
@@ -502,6 +505,38 @@ namespace UniverseApp.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "234e651b-2617-450d-838e-b8a6d072b35c", null, "Padawan", "PADAWAN" },
+                    { "6468123d-a641-4305-9a52-533361297ed3", null, "Yoda", "YODA" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsActive", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "18990560-1cca-49b8-b4db-5adb987559c3", 0, "110f1c3e-d794-4ef3-96d2-507a8444c670", "user@mail.com", true, "First", true, "User", false, null, "USER@MAIL.COM", "USER@MAIL.COM", "AQAAAAIAAYagAAAAENQflYYTTCHHxJZy/JCxARVZZHWabKNqU8dGt9mTV0NA5d3vUpiR8jrCiBPUWpvoIQ==", null, false, "16fc401b-aab9-4a22-b8e6-3559a4c9741a", false, "user@mail.com" },
+                    { "cfcc5c95-4666-4fe1-b26a-50c4016dac21", 0, "c8a02291-e9e2-416a-97e8-1ed44ed2fa8e", "yoda@mail.com", true, "Yoda", true, "Master", false, null, "YODA@MAIL.COM", "YODA@MAIL.COM", "AQAAAAIAAYagAAAAELtMPX1Kif5VwliqSeTA1GAwqypizyU5tNLCp72YVVC0GLNraJO7lUfmEuivmIK1Fw==", null, false, "0686fddf-1214-481f-a78d-8d53aa9aa0ea", false, "yoda@mail.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserClaims",
+                columns: new[] { "Id", "ClaimType", "ClaimValue", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "user:fullname", "Yoda Master", "cfcc5c95-4666-4fe1-b26a-50c4016dac21" },
+                    { 2, "user:fullname", "First User", "18990560-1cca-49b8-b4db-5adb987559c3" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "6468123d-a641-4305-9a52-533361297ed3", "cfcc5c95-4666-4fe1-b26a-50c4016dac21" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
