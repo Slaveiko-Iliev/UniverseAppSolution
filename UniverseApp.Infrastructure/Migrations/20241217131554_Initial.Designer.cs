@@ -12,7 +12,7 @@ using UniverseApp.Infrastructure.Data;
 namespace UniverseApp.Infrastructure.Migrations
 {
     [DbContext(typeof(UniverseDbContext))]
-    [Migration("20241210074937_Initial")]
+    [Migration("20241217131554_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -110,6 +110,20 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6468123d-a641-4305-9a52-533361297ed3",
+                            Name = "Yoda",
+                            NormalizedName = "YODA"
+                        },
+                        new
+                        {
+                            Id = "234e651b-2617-450d-838e-b8a6d072b35c",
+                            Name = "Padawan",
+                            NormalizedName = "PADAWAN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -160,6 +174,22 @@ namespace UniverseApp.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Yoda Master",
+                            UserId = "cfcc5c95-4666-4fe1-b26a-50c4016dac21"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "First User",
+                            UserId = "18990560-1cca-49b8-b4db-5adb987559c3"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -199,6 +229,13 @@ namespace UniverseApp.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "cfcc5c95-4666-4fe1-b26a-50c4016dac21",
+                            RoleId = "6468123d-a641-4305-9a52-533361297ed3"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -375,7 +412,6 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasComment("Movie Episode Identifier");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasComment("Movie Image Url");
@@ -383,6 +419,12 @@ namespace UniverseApp.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit")
                         .HasComment("Whether the Entity has been deleted");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasComment("Movie Title");
 
                     b.Property<string>("Producer")
                         .IsRequired()
@@ -393,12 +435,6 @@ namespace UniverseApp.Infrastructure.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2")
                         .HasComment("Movie Release Date");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)")
-                        .HasComment("Movie Title");
 
                     b.Property<string>("Url")
                         .HasMaxLength(100)
@@ -487,14 +523,14 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Specie Identifier");
 
-                    b.Property<string>("AverageHeight")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
+                    b.Property<int?>("AverageHeight")
+                        .HasMaxLength(3)
+                        .HasColumnType("int")
                         .HasComment("Specie Average Height");
 
-                    b.Property<string>("AverageLifespan")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)")
+                    b.Property<int?>("AverageLifespan")
+                        .HasMaxLength(4)
+                        .HasColumnType("int")
                         .HasComment("Specie Average Lifespan");
 
                     b.Property<string>("Classification")
@@ -672,6 +708,10 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasComment("Is the user active");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -721,6 +761,46 @@ namespace UniverseApp.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "18990560-1cca-49b8-b4db-5adb987559c3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "110f1c3e-d794-4ef3-96d2-507a8444c670",
+                            Email = "user@mail.com",
+                            EmailConfirmed = true,
+                            FirstName = "First",
+                            IsActive = true,
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@MAIL.COM",
+                            NormalizedUserName = "USER@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAENQflYYTTCHHxJZy/JCxARVZZHWabKNqU8dGt9mTV0NA5d3vUpiR8jrCiBPUWpvoIQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "16fc401b-aab9-4a22-b8e6-3559a4c9741a",
+                            TwoFactorEnabled = false,
+                            UserName = "user@mail.com"
+                        },
+                        new
+                        {
+                            Id = "cfcc5c95-4666-4fe1-b26a-50c4016dac21",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c8a02291-e9e2-416a-97e8-1ed44ed2fa8e",
+                            Email = "yoda@mail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Yoda",
+                            IsActive = true,
+                            LastName = "Master",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "YODA@MAIL.COM",
+                            NormalizedUserName = "YODA@MAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAELtMPX1Kif5VwliqSeTA1GAwqypizyU5tNLCp72YVVC0GLNraJO7lUfmEuivmIK1Fw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "0686fddf-1214-481f-a78d-8d53aa9aa0ea",
+                            TwoFactorEnabled = false,
+                            UserName = "yoda@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Vehicle", b =>
@@ -985,7 +1065,7 @@ namespace UniverseApp.Infrastructure.Migrations
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Specie", b =>
                 {
                     b.HasOne("UniverseApp.Infrastructure.Data.Models.Planet", "Planet")
-                        .WithMany()
+                        .WithMany("Species")
                         .HasForeignKey("PlanetId");
 
                     b.Navigation("Planet");
@@ -994,6 +1074,8 @@ namespace UniverseApp.Infrastructure.Migrations
             modelBuilder.Entity("UniverseApp.Infrastructure.Data.Models.Planet", b =>
                 {
                     b.Navigation("Characters");
+
+                    b.Navigation("Species");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,5 +11,7 @@
         int? TryParseInputToInt(string input);
 
         double? TryParseInputToDouble(string input);
+
+        public int GetEntityIdFromUrl(string url);
     }
 }

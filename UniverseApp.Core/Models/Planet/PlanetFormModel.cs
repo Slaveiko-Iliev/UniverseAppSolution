@@ -38,12 +38,6 @@ namespace UniverseApp.Core.Models.Planet
         [RegularExpression(@"^\d*$", ErrorMessage = NumberFieldErrorMesssage)]
         public string? Population { get; set; }
 
-        [StringLength(CharacterIdsMaxLenght, MinimumLength = CharacterIdsMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public string? CharacterIds { get; set; }
-
-        [StringLength(MovieIdsMaxLenght, MinimumLength = MovieIdsMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
-        public string? MovieIds { get; set; }
-
         [StringLength(UrlMaxLenght, MinimumLength = UrlMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
         [Display(Name = "Planet Url")]
         public string? Url { get; set; }

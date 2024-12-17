@@ -38,9 +38,6 @@ namespace UniverseApp.Infrastructure.Data.DTOs
         [StringLength(PopulationMaxLenght, MinimumLength = PopulationMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]
         public string? Population { get; set; }
 
-        [MaxLength(FilmsMaxLenght)]
-        public string[]? Films { get; set; }
-
         [Required]
         [Url]
         [StringLength(UrlMaxLenght, MinimumLength = UrlMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]

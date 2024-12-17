@@ -2,6 +2,7 @@
 using UniverseApp.Core.Models.Movie;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
+using UniverseApp.Infrastructure.Data.DTOs;
 using UniverseApp.Infrastructure.Data.Models;
 
 namespace UniverseApp.Core.Services
@@ -9,10 +10,12 @@ namespace UniverseApp.Core.Services
     public class MovieService : IMovieService
     {
         private readonly IRepository _repository;
+        private readonly IServiceHelper _serviceHelper;
 
-        public MovieService(IRepository repository)
+        public MovieService(IRepository repository, IServiceHelper serviceHelper)
         {
             _repository = repository;
+            _serviceHelper = serviceHelper;
         }
 
         public async Task<int> AddMovieAsync(MovieFormModel model)
@@ -194,6 +197,37 @@ namespace UniverseApp.Core.Services
             };
 
             return movieDeleteModel;
+        }
+
+        public async Task AddMovieRangeAsync(ICollection<MovieInfoDto> movieDtoList)
+        {
+            ICollection<Movie> movies = new List<Movie>();
+
+            foreach (var movieDto in movieDtoList)
+            {
+                var movieId = _serviceHelper.GetEntityIdFromUrl(movieDto.Url);
+
+                if (!await _repository.AllReadOnly<Movie>().AnyAsync(p => p.Id == movieId)
+                    && !await _repository.AllReadOnly<Movie>().AnyAsync(p => p.Name == movieDto.Name))
+                {
+                    var newMovie = new Movie()
+                    {
+                        Id = movieId,
+                        Name = movieDto.Name,
+                        EpisodeId = movieDto.EpisodeId.ToString(),
+                        Description = movieDto.Description.Replace("\r\n", " ").Replace("\r\n", " "),
+                        Director = movieDto.Director,
+                        Producer = movieDto.Producer,
+                        ReleaseDate = DateTime.Parse(movieDto.ReleaseDate),
+                        Url = movieDto.Url
+                    };
+
+                    movies.Add(newMovie);
+                }
+            }
+
+            await _repository.AddRangeAsync<Movie>(movies);
+            await _repository.SaveChangesAsync();
         }
     }
 }

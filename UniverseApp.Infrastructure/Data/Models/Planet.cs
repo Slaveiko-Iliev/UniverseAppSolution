@@ -37,7 +37,7 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         [MaxLength(ClimateMaxLenght)]
         [Comment("Climate of Planet")]
-        public string[]? Climate { get; set; }
+        public string? Climate { get; set; }
 
         [MaxLength(GravityMaxLenght)]
         [Comment("Gravity of Planet")]
@@ -45,7 +45,7 @@ namespace UniverseApp.Infrastructure.Data.Models
 
         [MaxLength(TerrainMaxLenght)]
         [Comment("Terrain of Planet")]
-        public string[]? Terrain { get; set; }
+        public string? Terrain { get; set; }
 
         [MaxLength(SurfaceWaterMaxLenght)]
         [Column(TypeName = "decimal(5, 2)")]

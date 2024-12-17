@@ -68,5 +68,10 @@ namespace UniverseApp.Infrastructure.Common
                     }))
                 .ToListAsync();
         }
+
+        public async Task AddRangeAsync<T>(ICollection<T> entities) where T : class
+        {
+            await DbSet<T>().AddRangeAsync(entities);
+        }
     }
 }
