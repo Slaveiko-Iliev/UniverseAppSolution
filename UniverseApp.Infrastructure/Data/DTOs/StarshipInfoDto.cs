@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using UniverseApp.Infrastructure.Data.Models;
 using static UniverseApp.Infrastructure.Constants.ModelsConstants.General;
 using static UniverseApp.Infrastructure.Constants.ModelsConstants.StarshipConst;
 using static UniverseApp.Infrastructure.Constants.ModelsConstants.VehicleConst;
 
 namespace UniverseApp.Infrastructure.Data.DTOs
 {
-    internal class StarshipInfoDto
+    public class StarshipInfoDto
     {
         [Required]
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]

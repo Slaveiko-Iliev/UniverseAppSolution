@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using UniverseApp.Infrastructure.Data.Models;
 using static UniverseApp.Infrastructure.Constants.ModelsConstants.General;
 using static UniverseApp.Infrastructure.Constants.ModelsConstants.VehicleConst;
 
 namespace UniverseApp.Infrastructure.Data.DTOs
 {
-    internal class VehicleInfoDto
+    public class VehicleInfoDto
     {
         [Required]
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]

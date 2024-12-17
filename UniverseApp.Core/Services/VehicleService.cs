@@ -2,6 +2,7 @@
 using UniverseApp.Core.Models.Vehicle;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
+using UniverseApp.Infrastructure.Data.DTOs;
 using UniverseApp.Infrastructure.Data.Models;
 
 namespace UniverseApp.Core.Services
@@ -58,6 +59,69 @@ namespace UniverseApp.Core.Services
             await _repository.SaveChangesAsync();
 
             return newVehicle.Id;
+        }
+
+        public async Task AddVehiclesRangeAsync(List<VehicleInfoDto> vehiclesDtoList)
+        {
+            ICollection<Vehicle> vehicles = new List<Vehicle>();
+
+            foreach (var vehicleDto in vehiclesDtoList)
+            {
+                var vehicleId = _serviceHelper.GetEntityIdFromUrl(vehicleDto.Url);
+
+                if (!await _repository.AllReadOnly<Vehicle>().AnyAsync(p => p.Id == vehicleId)
+                    && !await _repository.AllReadOnly<Vehicle>().AnyAsync(p => p.Name == vehicleDto.Name))
+                {
+                    var newVehicle = new Vehicle()
+                    {
+                        Id = vehicleId,
+                        Name = vehicleDto.Name,
+                        Model = vehicleDto.Model,
+                        Manufacturer = vehicleDto.Manufacturer,
+                        CostInCredits = vehicleDto.CostInCredits != null
+                            ? _serviceHelper.TryParseInputToInt(vehicleDto.CostInCredits)
+                            : null,
+                        Length = vehicleDto.Length != null
+                        ? _serviceHelper.TryParseInputToDouble(vehicleDto.Length)
+                            : null,
+                        MaxAtmospheringSpeed = vehicleDto.MaxAtmospheringSpeed != null
+                        ? _serviceHelper.TryParseInputToInt(vehicleDto.MaxAtmospheringSpeed)
+                            : null,
+                        Crew = vehicleDto.Crew != null
+                        ? _serviceHelper.TryParseInputToInt(vehicleDto.Crew)
+                            : null,
+                        Passengers = vehicleDto.Passengers != null
+                        ? _serviceHelper.TryParseInputToInt(vehicleDto.Passengers)
+                            : null,
+                        CargoCapacity = vehicleDto.CargoCapacity != null
+                        ? _serviceHelper.TryParseInputToInt(vehicleDto.CargoCapacity)
+                            : null,
+                        Consumables = vehicleDto.Consumables,
+                        Class = vehicleDto.Class,
+                        Url = vehicleDto.Url
+                    };
+
+                    if (vehicleDto.Pilots != null)
+                    {
+                        foreach (var characterUrl in vehicleDto.Pilots)
+                        {
+                            var characterId = _serviceHelper.GetEntityIdFromUrl(characterUrl);
+                            if (!await _repository.AllReadOnly<Character>().AnyAsync(ch => ch.Id == characterId))
+                            {
+                                continue;
+                            }
+
+                            var character = await _repository.GetEntityByIdAsync<Character>(characterId);
+                            newVehicle.Characters.Add(character);
+                            character.Vehicles.Add(newVehicle);
+                        }
+                    }
+
+                    vehicles.Add(newVehicle);
+                }
+            }
+            await _repository.AddRangeAsync(vehicles);
+            await _repository.SaveChangesAsync();
         }
 
         public async Task DeleteVehicleAsync(int id)

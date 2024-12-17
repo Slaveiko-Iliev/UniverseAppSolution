@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using static UniverseApp.Infrastructure.Constants.JediConstants
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,33 +17,45 @@
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 btn-group">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Movies</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Movie" asp-action="All">All Movies</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Movie" asp-action="Add">Add Movie</a></li>
+                                @if (User.IsInRole(YodaRoleName) || User.IsInRole(PadawanRoleName))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Movie" asp-action="Add">Add Movie</a></li>
+                                }
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Planets</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Planet" asp-action="All">All Planets</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Planet" asp-action="Add">Add Planet</a></li>
+                                @if (User.IsInRole(YodaRoleName) || User.IsInRole(PadawanRoleName))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Planet" asp-action="Add">Add Planet</a></li>
+                                }
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Species</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Specie" asp-action="All">All Species</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Specie" asp-action="Add">Add Specie</a></li>
+                                @if (User.IsInRole(YodaRoleName) || User.IsInRole(PadawanRoleName))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Specie" asp-action="Add">Add Specie</a></li>
+                                }
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Characters</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Character" asp-action="All">All Characters</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Character" asp-action="Add">Add Character</a></li>
+                                @if (User.IsInRole(YodaRoleName) || User.IsInRole(PadawanRoleName))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Character" asp-action="Add">Add Character</a></li>
+                                }
                             </ul>
                         </li>
 
@@ -48,25 +63,24 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Vehicles</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Vehicle" asp-action="All">All Vehicles</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Vehicle" asp-action="Add">Add Vehicle</a></li>
+                                @if (User.IsInRole(YodaRoleName) || User.IsInRole(PadawanRoleName))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Vehicle" asp-action="Add">Add Vehicle</a></li>
+                                }
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Starships</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Starship" asp-action="All">All Starships</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Starship" asp-action="Add">Add Starship</a></li>
+                                @if (User.IsInRole(YodaRoleName) || User.IsInRole(PadawanRoleName))
+                                {
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Starship" asp-action="Add">Add Starship</a></li>
+                                }
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
-                    @* <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form> *@
                 </div>
             </div>
         </nav>

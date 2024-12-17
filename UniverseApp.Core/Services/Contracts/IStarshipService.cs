@@ -1,10 +1,12 @@
 ﻿using UniverseApp.Core.Models.Starship;
+using UniverseApp.Infrastructure.Data.DTOs;
 
 namespace UniverseApp.Core.Services.Contracts
 {
 	public interface IStarshipService
 	{
 		Task<int> AddStarshipAsync(StarshipFormModel model);
+        Task AddStarshipRangeAsync(List<StarshipInfoDto> starshipDtoList);
         Task DeleteStarshipAsync(int id);
         Task EditStarshipAsync(int id, StarshipFormModel model);
 		Task<bool> ExistByIdAsync(int id);

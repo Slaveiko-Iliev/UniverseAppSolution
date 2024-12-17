@@ -2,6 +2,7 @@
 using UniverseApp.Core.Models.Starship;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
+using UniverseApp.Infrastructure.Data.DTOs;
 using UniverseApp.Infrastructure.Data.Models;
 
 namespace UniverseApp.Core.Services
@@ -66,6 +67,74 @@ namespace UniverseApp.Core.Services
             await _repository.SaveChangesAsync();
 
             return newStarship.Id;
+        }
+
+        public async Task AddStarshipRangeAsync(List<StarshipInfoDto> starshipDtoList)
+        {
+            ICollection<Starship> starships = new List<Starship>();
+
+            foreach (var starshipDto in starshipDtoList)
+            {
+                var starshipId = _serviceHelper.GetEntityIdFromUrl(starshipDto.Url);
+
+                if (!await _repository.AllReadOnly<Starship>().AnyAsync(p => p.Id == starshipId)
+                    && !await _repository.AllReadOnly<Starship>().AnyAsync(p => p.Name == starshipDto.Name))
+                {
+                    var newStarship = new Starship()
+                    {
+                        Id = starshipId,
+                        Name = starshipDto.Name,
+                        Model = starshipDto.Model,
+                        Manufacturer = starshipDto.Manufacturer,
+                        CostInCredits = starshipDto.CostInCredits != null
+                            ? _serviceHelper.TryParseInputToInt(starshipDto.CostInCredits)
+                            : null,
+                        Length = starshipDto.Length != null
+                        ? _serviceHelper.TryParseInputToDouble(starshipDto.Length)
+                            : null,
+                        MaxAtmospheringSpeed = starshipDto.MaxAtmospheringSpeed != null
+                        ? _serviceHelper.TryParseInputToInt(starshipDto.MaxAtmospheringSpeed)
+                            : null,
+                        Crew = starshipDto.Crew != null
+                        ? _serviceHelper.TryParseInputToInt(starshipDto.Crew)
+                            : null,
+                        Passengers = starshipDto.Passengers != null
+                        ? _serviceHelper.TryParseInputToInt(starshipDto.Passengers)
+                            : null,
+                        CargoCapacity = starshipDto.CargoCapacity != null
+                        ? _serviceHelper.TryParseInputToInt(starshipDto.CargoCapacity)
+                            : null,
+                        Consumables = starshipDto.Consumables,
+                        Class = starshipDto.Class,
+                        HyperdriveRating = starshipDto.HyperdriveRating != null
+                        ? _serviceHelper.TryParseInputToDouble(starshipDto.HyperdriveRating)
+                            : null,
+                        MGLT = starshipDto.MGLT != null
+                        ? _serviceHelper.TryParseInputToInt(starshipDto.MGLT)
+                            : null,
+                        Url = starshipDto.Url
+                    };
+
+                    if (starshipDto.Pilots != null)
+                    {
+                        foreach (var characterUrl in starshipDto.Pilots)
+                        {
+                            var characterId = _serviceHelper.GetEntityIdFromUrl(characterUrl);
+                            if (!await _repository.AllReadOnly<Character>().AnyAsync(ch => ch.Id == characterId))
+                            {
+                                continue;
+                            }
+
+                            var character = await _repository.GetEntityByIdAsync<Character>(characterId);
+                            newStarship.Characters.Add(character);
+                        }
+                    }
+
+                    starships.Add(newStarship);
+                }
+            }
+            await _repository.AddRangeAsync(starships);
+            await _repository.SaveChangesAsync();
         }
 
         public async Task DeleteStarshipAsync(int id)

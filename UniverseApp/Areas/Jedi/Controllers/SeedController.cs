@@ -12,14 +12,18 @@ namespace UniverseApp.Areas.Jedi.Controllers
         private readonly IMovieService _movieService;
         private readonly ISpecieService _specieService;
         private readonly ICharacterService _characterService;
+        private readonly IStarshipService _starshipService;
+        private readonly IVehicleService _vehicleService;
 
-        public SeedController(ISeedHelper seedHelper, IPlanetService planetService, IMovieService movieService, ISpecieService specieService, ICharacterService characterService)
+        public SeedController(ISeedHelper seedHelper, IPlanetService planetService, IMovieService movieService, ISpecieService specieService, ICharacterService characterService, IStarshipService starshipService, IVehicleService vehicleService)
         {
             _seedHelper = seedHelper;
             _planetService = planetService;
             _movieService = movieService;
             _specieService = specieService;
             _characterService = characterService;
+            _starshipService = starshipService;
+            _vehicleService = vehicleService;
         }
 
         public async Task<IActionResult> SeedMovies()
@@ -60,6 +64,28 @@ namespace UniverseApp.Areas.Jedi.Controllers
             var specieDtoList = await _seedHelper.GetEntityDtoInfoAsync<SpecieInfoDto>(specieIdDtoList);
 
             await _specieService.AddSpecieRangeAsync(specieDtoList);
+
+            return View();
+        }
+
+        public async Task<IActionResult> SeedStarships()
+        {
+            var starshipIdDtoList = await _seedHelper.GetEntityIdDtoAsync<StarshipInfoDto>();
+
+            var starshipDtoList = await _seedHelper.GetEntityDtoInfoAsync<StarshipInfoDto>(starshipIdDtoList);
+
+            await _starshipService.AddStarshipRangeAsync(starshipDtoList);
+
+            return View();
+        }
+
+        public async Task<IActionResult> SeedVehicles()
+        {
+            var vehiclesIdDtoList = await _seedHelper.GetEntityIdDtoAsync<VehicleInfoDto>();
+
+            var vehiclesDtoList = await _seedHelper.GetEntityDtoInfoAsync<VehicleInfoDto>(vehiclesIdDtoList);
+
+            await _vehicleService.AddVehiclesRangeAsync(vehiclesDtoList);
 
             return View();
         }
