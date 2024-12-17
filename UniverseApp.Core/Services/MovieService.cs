@@ -258,6 +258,56 @@ namespace UniverseApp.Core.Services
                         }
                     }
 
+                    if (movieDto.Species != null)
+                    {
+                        foreach (var specieUrl in movieDto.Species)
+                        {
+                            var specieId = _serviceHelper.GetEntityIdFromUrl(specieUrl);
+                            var specie = await _repository.All<Specie>().FirstOrDefaultAsync(v => v.Id == specieId);
+
+                            if (specie != null
+                                && !movie.Vehicles.Any(v => v.Id == specieId)
+                                && !specie.Movies.Any(m => m.Id == movieId))
+                            {
+                                movie.Species.Add(specie);
+                                specie.Movies.Add(movie);
+                            }
+                        }
+                    }
+
+                    if (movieDto.Characters != null)
+                    {
+                        foreach (var characterUrl in movieDto.Characters)
+                        {
+                            var characterId = _serviceHelper.GetEntityIdFromUrl(characterUrl);
+                            var character = await _repository.All<Character>().FirstOrDefaultAsync(v => v.Id == characterId);
+
+                            if (character != null
+                                && !movie.Characters.Any(v => v.Id == characterId)
+                                && !character.Movies.Any(m => m.Id == movieId))
+                            {
+                                movie.Characters.Add(character);
+                                character.Movies.Add(movie);
+                            }
+                        }
+                    }
+
+                    if (movieDto.Planets != null)
+                    {
+                        foreach (var planetUrl in movieDto.Planets)
+                        {
+                            var planetId = _serviceHelper.GetEntityIdFromUrl(planetUrl);
+                            var planet = await _repository.All<Planet>().FirstOrDefaultAsync(v => v.Id == planetId);
+
+                            if (planet != null
+                                && !movie.Planets.Any(v => v.Id == planetId)
+                                && !planet.Movies.Any(m => m.Id == movieId))
+                            {
+                                movie.Planets.Add(planet);
+                                planet.Movies.Add(movie);
+                            }
+                        }
+                    }
                 }
             }
 
