@@ -89,5 +89,14 @@ namespace UniverseApp.Areas.Jedi.Controllers
 
             return View();
         }
+
+        public async Task<IActionResult> SeedMovieRelationship()
+        {
+            var movieDtoList = await _seedHelper.GetMovieDtoInfoAsync<MovieInfoDto>();
+
+            await _movieService.AddMovieRelationshipAsync(movieDtoList);
+
+            return View();
+        }
     }
 }

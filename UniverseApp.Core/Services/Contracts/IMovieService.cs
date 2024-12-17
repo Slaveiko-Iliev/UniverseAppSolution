@@ -14,5 +14,6 @@ namespace UniverseApp.Core.Services.Contracts
         Task DeleteMovieAsync(int id);
         Task<MovieDeleteViewModel> GetMovieDeleteModelByIdAsync(int id);
         Task AddMovieRangeAsync(ICollection<MovieInfoDto> movieDtoList);
+        Task AddMovieRelationshipAsync(ICollection<MovieInfoDto> movieDtoList);
     }
 }

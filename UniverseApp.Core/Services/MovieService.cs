@@ -229,5 +229,39 @@ namespace UniverseApp.Core.Services
             await _repository.AddRangeAsync<Movie>(movies);
             await _repository.SaveChangesAsync();
         }
+
+        public async Task AddMovieRelationshipAsync(ICollection<MovieInfoDto> movieDtoList)
+        {
+            foreach (var movieDto in movieDtoList)
+            {
+                var movieId = _serviceHelper.GetEntityIdFromUrl(movieDto.Url);
+
+                if (await _repository.AllReadOnly<Movie>().AnyAsync(p => p.Id == movieId)
+                    && await _repository.AllReadOnly<Movie>().AnyAsync(p => p.Name == movieDto.Name))
+                {
+                    var movie = await _repository.GetEntityByIdAsync<Movie>(movieId);
+
+                    if (movieDto.Vehicles != null)
+                    {
+                        foreach (var vehicleUrl in movieDto.Vehicles)
+                        {
+                            var vehicleId = _serviceHelper.GetEntityIdFromUrl(vehicleUrl);
+                            var vehicle = await _repository.All<Vehicle>().FirstOrDefaultAsync(v => v.Id == vehicleId);
+
+                            if (vehicle != null
+                                && !movie.Vehicles.Any(v => v.Id == vehicleId)
+                                && !vehicle.Movies.Any(m => m.Id == movieId))
+                            {
+                                movie.Vehicles.Add(vehicle);
+                                vehicle.Movies.Add(movie);
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            await _repository.SaveChangesAsync();
+        }
     }
 }
