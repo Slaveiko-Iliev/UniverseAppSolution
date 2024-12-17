@@ -18,7 +18,7 @@
 		}
 	</td>
 	<td>
-		<a asp-area="Jedi" asp-controller="User" asp-action="ManageUserPadawanRole" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+		<a asp-area="Jedi" asp-controller="User" asp-action="ManageUserPadawanRole" asp-route-id="@Model.Id" class="btn btn-primary">Change Padawan Status</a>
 		
 		@if(await UserService.IsUserActiveAsync(Model.Id)){
 			<a asp-area="Jedi" asp-controller="User" asp-action="ChangeActivity" asp-route-id="@Model.Id" class="btn btn-danger">Block</a>

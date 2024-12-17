@@ -2,4 +2,45 @@
     ViewData["Title"] = "Yoda Home Page";
 }
 
-<h4>May the Force be with you!</h4>
+<div class="text-center">
+    <h4>Follow the correct order!</h4>
+    <h4>May the Force be with you!</h4>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Entities</th>
+            <th scope="col">Seed</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Movies</th>
+            <td>
+                <a asp-area="Jedi" asp-controller="Seed" asp-action="SeedMovies" class="btn btn-success">Action</a>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Planets</th>
+            <td><a asp-area="Jedi" asp-controller="Seed" asp-action="SeedPlanets" class="btn btn-success">Action</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Planets</th>
+            <td><a asp-area="Jedi" asp-controller="Seed" asp-action="SeedCharacters" class="btn btn-success">Action</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Planets</th>
+            <td><a asp-area="Jedi" asp-controller="Seed" asp-action="SeedSpecies" class="btn btn-success">Action</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Planets</th>
+            <td><a asp-area="Jedi" asp-controller="Seed" asp-action="SeedStarships" class="btn btn-success">Action</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Planets</th>
+            <td><a asp-area="Jedi" asp-controller="Seed" asp-action="SeedVehicles" class="btn btn-success">Action</a></td>
+        </tr>
+    </tbody>
+</table>

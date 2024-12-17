@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UniverseApp.Core.Services;
 using UniverseApp.Core.Services.Contracts;
@@ -15,11 +16,19 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<UniverseUser>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = true;
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<UniverseDbContext>();
-builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllersWithViews(option =>
+{
+    option.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+});
 
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<ISeedHelper, SeedHelper>();
@@ -37,6 +46,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
 }
 else
