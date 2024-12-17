@@ -1,19 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UniverseApp.Infrastructure.Data.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using static UniverseApp.Infrastructure.Constants.ModelsConstants.CharacterConst;
 using static UniverseApp.Infrastructure.Constants.ModelsConstants.General;
-using System.Text.Json.Serialization;
 
 namespace UniverseApp.Infrastructure.Data.DTOs
 {
-    internal class CharacterInfoDto
+    public class CharacterInfoDto
     {
         [Required]
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght, ErrorMessage = FieldMinMaxLengthErrorMesssage)]

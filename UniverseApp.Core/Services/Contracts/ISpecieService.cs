@@ -1,10 +1,12 @@
 ﻿using UniverseApp.Core.Models.Specie;
+using UniverseApp.Infrastructure.Data.DTOs;
 
 namespace UniverseApp.Core.Services.Contracts
 {
 	public interface ISpecieService
 	{
 		Task<int> AddSpecieAsync(SpecieFormModel model);
+        Task AddSpecieRangeAsync(List<SpecieInfoDto> specieDtoList);
         Task DeleteSpecieAsync(int id);
         Task EditSpecieAsync(int id, SpecieFormModel model);
 

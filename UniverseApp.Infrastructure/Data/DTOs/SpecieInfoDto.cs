@@ -47,10 +47,10 @@ namespace UniverseApp.Infrastructure.Data.DTOs
         public string? Language { get; set; }
 
         [JsonPropertyName("people")]
-        public string[] Characters { get; set; } = null!;
+        public string[]? Characters { get; set; }
 
         [JsonPropertyName("films")]
-        public string[] Movies { get; set; } = null!;
+        public string[]? Movies { get; set; }
 
         [Required]
         [StringLength(UrlMaxLenght)]

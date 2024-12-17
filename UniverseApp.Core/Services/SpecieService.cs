@@ -2,6 +2,7 @@
 using UniverseApp.Core.Models.Specie;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
+using UniverseApp.Infrastructure.Data.DTOs;
 using UniverseApp.Infrastructure.Data.Models;
 
 namespace UniverseApp.Core.Services
@@ -44,6 +45,62 @@ namespace UniverseApp.Core.Services
             await _repository.SaveChangesAsync();
 
             return newSpecie.Id;
+        }
+
+        public async Task AddSpecieRangeAsync(List<SpecieInfoDto> specieDtoList)
+        {
+            ICollection<Specie> species = new List<Specie>();
+
+            foreach (var specieDto in specieDtoList)
+            {
+                var specieId = _serviceHelper.GetEntityIdFromUrl(specieDto.Url);
+
+                if (!await _repository.AllReadOnly<Specie>().AnyAsync(p => p.Id == specieId)
+                    && !await _repository.AllReadOnly<Specie>().AnyAsync(p => p.Name == specieDto.Name))
+                {
+                    var newSpecie = new Specie()
+                    {
+                        Id = specieId,
+                        Name = specieDto.Name,
+                        Classification = specieDto.Classification,
+                        Designation = specieDto.Designation,
+                        AverageHeight = specieDto.AverageHeight != null
+                            ? _serviceHelper.TryParseInputToInt(specieDto.AverageHeight)
+                            : null,
+                        SkinColors = specieDto.SkinColors,
+                        HairColors = specieDto.HairColors,
+                        EyeColors = specieDto.EyeColors,
+                        AverageLifespan = specieDto.AverageLifespan != null
+                            ? _serviceHelper.TryParseInputToInt(specieDto.AverageLifespan)
+                            : null,
+                        Language = specieDto.Language,
+                        PlanetId = specieDto.PlanetId != null
+                            ? _serviceHelper.GetEntityIdFromUrl(specieDto.PlanetId)
+                            : null,
+                        Url = specieDto.Url
+                    };
+
+                    if (specieDto.Characters != null)
+                    {
+                        foreach (var characterUrl in specieDto.Characters)
+                        {
+                            var characterId = _serviceHelper.GetEntityIdFromUrl(characterUrl);
+                            if (!await _repository.AllReadOnly<Character>().AnyAsync(ch => ch.Id == characterId))
+                            {
+                                continue;
+                            }
+
+                            var character = await _repository.GetEntityByIdAsync<Character>(characterId);
+                            newSpecie.Characters.Add(character);
+                        }
+                    }
+
+                    species.Add(newSpecie);
+                }
+            }
+
+            await _repository.AddRangeAsync<Specie>(species);
+            await _repository.SaveChangesAsync();
         }
 
         public async Task DeleteSpecieAsync(int id)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
 
@@ -40,5 +41,14 @@ namespace UniverseApp.Core.Services
 
         public double? TryParseInputToDouble(string input) =>
             double.TryParse(input, out double result) ? result : null;
+
+        public int GetEntityIdFromUrl(string url)
+        {
+            string pattern = @"(\d+)";
+            Regex regex = new Regex(pattern);
+            Match match = regex.Match(url);
+
+            return int.Parse(match.Value);
+        }
     }
 }

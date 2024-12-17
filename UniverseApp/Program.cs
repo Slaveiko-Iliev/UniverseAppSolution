@@ -22,6 +22,7 @@ builder.Services.AddDefaultIdentity<UniverseUser>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<ISeedHelper, SeedHelper>();
 builder.Services.AddScoped<IServiceHelper, ServicesHelper>();
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
@@ -40,15 +41,24 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Home/Error/500");
+    app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
     app.UseHsts();
 }
+
+app.Use((context, next) =>
+{
+    context.Request.Scheme = "https";
+    return next();
+}
+);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 #pragma warning disable ASP0014

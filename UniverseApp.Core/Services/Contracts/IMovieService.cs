@@ -1,4 +1,5 @@
 ﻿using UniverseApp.Core.Models.Movie;
+using UniverseApp.Infrastructure.Data.DTOs;
 
 namespace UniverseApp.Core.Services.Contracts
 {
@@ -12,5 +13,6 @@ namespace UniverseApp.Core.Services.Contracts
         Task<MovieDetailsViewModel> GetMovieDetailsByIdAsync(int id);
         Task DeleteMovieAsync(int id);
         Task<MovieDeleteViewModel> GetMovieDeleteModelByIdAsync(int id);
+        Task AddMovieRangeAsync(ICollection<MovieInfoDto> movieDtoList);
     }
 }

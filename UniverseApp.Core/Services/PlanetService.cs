@@ -2,6 +2,7 @@
 using UniverseApp.Core.Models.Planet;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
+using UniverseApp.Infrastructure.Data.DTOs;
 using UniverseApp.Infrastructure.Data.Models;
 
 namespace UniverseApp.Core.Services
@@ -19,42 +20,75 @@ namespace UniverseApp.Core.Services
 
         public async Task<int> AddPlanetAsync(PlanetFormModel model)
         {
-            int? rotationPeriod = model.RotationPeriod != null
-                ? int.Parse(model.RotationPeriod)
-                : null;
-            int? orbitalPeriod = model.OrbitalPeriod != null
-                ? int.Parse(model.OrbitalPeriod)
-                : null;
-            double? surfaceWater = model.SurfaceWater != null
-                ? double.Parse(model.SurfaceWater)
-                : null;
-            int? population = model.Population != null
-                ? int.Parse(model.Population)
-                : null;
-
             var newPlanet = new Planet()
             {
                 Id = _repository.AllReadOnly<Planet>().Count() + 1,
                 Name = model.Name,
-                RotationPeriod = rotationPeriod,
-                OrbitalPeriod = orbitalPeriod,
-                Climate = _serviceHelper.SplitInput(model.Climate!),
+                RotationPeriod = model.RotationPeriod != null
+                    ? _serviceHelper.TryParseInputToInt(model.RotationPeriod)
+                    : null,
+                OrbitalPeriod = model.OrbitalPeriod != null
+                    ? _serviceHelper.TryParseInputToInt(model.OrbitalPeriod)
+                    : null,
+                Climate = model.Climate,
                 Gravity = model.Gravity,
-                Terrain = _serviceHelper.SplitInput(model.Terrain!),
-                SurfaceWater = surfaceWater,
-                Population = population,
-                Characters = model.CharacterIds != null
-                    ? await _serviceHelper.GetEntitiesByIds<Character>(_serviceHelper.GetParsedIds(model.CharacterIds))
-                    : [],
-                Movies = model.MovieIds != null
-                    ? await _serviceHelper.GetEntitiesByIds<Movie>(_serviceHelper.GetParsedIds(model.MovieIds))
-                    : []
+                Terrain = model.Terrain,
+                SurfaceWater = model.SurfaceWater != null
+                    ? _serviceHelper.TryParseInputToDouble(model.SurfaceWater)
+                    : null,
+                Population = model.Population != null
+                    ? _serviceHelper.TryParseInputToInt(model.Population)
+                    : null
             };
 
             await _repository.AddAsync(newPlanet);
             await _repository.SaveChangesAsync();
 
             return newPlanet.Id;
+        }
+
+        public async Task AddPlanetRangeAsync(List<PlanetInfoDto> planetDtoList)
+        {
+            ICollection<Planet> planets = new List<Planet>();
+
+            foreach (var planetDto in planetDtoList)
+            {
+                var planetId = _serviceHelper.GetEntityIdFromUrl(planetDto.Url);
+
+                if (!await _repository.AllReadOnly<Planet>().AnyAsync(p => p.Id == planetId)
+                    && !await _repository.AllReadOnly<Planet>().AnyAsync(p => p.Name == planetDto.Name))
+                {
+                    var newPlanet = new Planet()
+                    {
+                        Id = planetId,
+                        Name = planetDto.Name,
+                        Diameter = planetDto.Diameter != null
+                            ? _serviceHelper.TryParseInputToInt(planetDto.Diameter)
+                            : null,
+                        RotationPeriod = planetDto.RotationPeriod != null
+                            ? _serviceHelper.TryParseInputToInt(planetDto.Diameter)
+                            : null,
+                        OrbitalPeriod = planetDto.OrbitalPeriod != null
+                            ? _serviceHelper.TryParseInputToInt(planetDto.OrbitalPeriod)
+                            : null,
+                        Climate = planetDto.Climate,
+                        Gravity = planetDto.Gravity,
+                        Terrain = planetDto.Terrain,
+                        SurfaceWater = planetDto.SurfaceWater != null
+                            ? _serviceHelper.TryParseInputToDouble(planetDto.SurfaceWater)
+                            : null,
+                        Population = planetDto.Population != null
+                            ? _serviceHelper.TryParseInputToInt(planetDto.Population)
+                            : null,
+                        Url = planetDto.Url
+                    };
+
+                    planets.Add(newPlanet);
+                }
+            }
+
+            await _repository.AddRangeAsync<Planet>(planets);
+            await _repository.SaveChangesAsync();
         }
 
         public async Task DeletePlanetAsync(int id)
@@ -79,9 +113,9 @@ namespace UniverseApp.Core.Services
             movie.OrbitalPeriod = model.OrbitalPeriod != null
                 ? _serviceHelper.TryParseInputToInt(model.OrbitalPeriod)
                 : null;
-            movie.Climate = _serviceHelper.SplitInput(model.Climate!);
+            movie.Climate = model.Climate;
             movie.Gravity = model.Gravity;
-            movie.Terrain = _serviceHelper.SplitInput(model.Terrain!);
+            movie.Terrain = model.Terrain;
             movie.SurfaceWater = model.SurfaceWater != null
                 ? _serviceHelper.TryParseInputToDouble(model.SurfaceWater)
                 : null;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UniverseApp.Infrastructure.Data.Models;
+using UniverseApp.Infrastructure.Extension;
 
 namespace UniverseApp.Infrastructure.Data
 {
@@ -20,7 +21,7 @@ namespace UniverseApp.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.Seed();
+            builder.Seed();
 
             base.OnModelCreating(builder);
         }

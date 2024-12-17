@@ -2,6 +2,7 @@
 using UniverseApp.Core.Models.Character;
 using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
+using UniverseApp.Infrastructure.Data.DTOs;
 using UniverseApp.Infrastructure.Data.Models;
 
 namespace UniverseApp.Core.Services
@@ -43,6 +44,46 @@ namespace UniverseApp.Core.Services
             await _repository.SaveChangesAsync();
 
             return newCharacter.Id;
+        }
+
+        public async Task AddCharactersRangeAsync(List<CharacterInfoDto> charactersDtoList)
+        {
+            ICollection<Character> characters = new List<Character>();
+
+            foreach (var characterDto in charactersDtoList)
+            {
+                var characterId = _serviceHelper.GetEntityIdFromUrl(characterDto.Url);
+
+                if (!await _repository.AllReadOnly<Character>().AnyAsync(p => p.Id == characterId)
+                    && !await _repository.AllReadOnly<Character>().AnyAsync(p => p.Name == characterDto.Name))
+                {
+                    var newCharacter = new Character()
+                    {
+                        Id = characterId,
+                        Name = characterDto.Name,
+                        Height = characterDto.Height != null
+                            ? _serviceHelper.TryParseInputToInt(characterDto.Height)
+                            : null,
+                        Mass = characterDto.Mass != null
+                            ? _serviceHelper.TryParseInputToInt(characterDto.Mass)
+                            : null,
+                        HairColor = characterDto.HairColor,
+                        SkinColor = characterDto.SkinColor,
+                        EyeColor = characterDto.EyeColor,
+                        BirthYear = characterDto.BirthYear,
+                        Gender = characterDto.Gender,
+                        PlanetId = characterDto.PlanetId != null
+                            ? _serviceHelper.GetEntityIdFromUrl(characterDto.PlanetId)
+                            : null,
+                        Url = characterDto.Url
+                    };
+
+                    characters.Add(newCharacter);
+                }
+            }
+
+            await _repository.AddRangeAsync<Character>(characters);
+            await _repository.SaveChangesAsync();
         }
 
         public async Task DeleteCharacterAsync(int id)
