@@ -35,9 +35,7 @@ namespace UniverseApp.Core.Tests
                 Gravity = "1g",
                 Terrain = "Various",
                 SurfaceWater = "70",
-                Population = "70000000",
-                CharacterIds = "1,2,3",
-                MovieIds = "1,2"
+                Population = "70000000"
             };
 
             _repositoryMock.Setup(r => r.AllReadOnly<Planet>()).Returns(new List<Planet>().AsQueryable());

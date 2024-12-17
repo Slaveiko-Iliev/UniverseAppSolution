@@ -2,6 +2,7 @@ using MockQueryable;
 using Moq;
 using UniverseApp.Core.Models.Movie;
 using UniverseApp.Core.Services;
+using UniverseApp.Core.Services.Contracts;
 using UniverseApp.Infrastructure.Common;
 using UniverseApp.Infrastructure.Data.Models;
 
@@ -11,12 +12,14 @@ namespace UniverseApp.Core.Tests
     {
         private Mock<IRepository> _repositoryMock;
         private MovieService _movieService;
+        private Mock<IServiceHelper> _serviceHelperMock;
 
         [SetUp]
         public void Setup()
         {
             _repositoryMock = new Mock<IRepository>();
-            _movieService = new MovieService(_repositoryMock.Object);
+            _serviceHelperMock = new Mock<IServiceHelper>();
+            _movieService = new MovieService(_repositoryMock.Object, _serviceHelperMock.Object);
         }
 
         [Test]
@@ -88,28 +91,6 @@ namespace UniverseApp.Core.Tests
             Assert.That(result.TotalMoviesCount, Is.EqualTo(2));
             Assert.That(result.Movies.Count(), Is.EqualTo(2));
         }
-
-        //[Test]
-        //public async Task GetMovieDetailsByIdAsync_ShouldReturnMovieDetails()
-        //{
-        //    // Arrange
-        //    var movieId = 1;
-        //    var movie = new Movie { Id = movieId, Name = "Test Movie" };
-        //    _repositoryMock.Setup(r => r.GetEntityByIdAsync<Movie>(movieId)).ReturnsAsync(movie);
-        //    _repositoryMock.Setup(r => r.GetEntitiesNames<Character>(It.IsAny<ICollection<Character>>())).ReturnsAsync(new List<string>());
-        //    _repositoryMock.Setup(r => r.GetEntitiesNames<Planet>(It.IsAny<ICollection<Planet>>())).ReturnsAsync(new List<string>());
-        //    _repositoryMock.Setup(r => r.GetEntitiesNames<Starship>(It.IsAny<ICollection<Starship>>())).ReturnsAsync(new List<string>());
-        //    _repositoryMock.Setup(r => r.GetEntitiesNames<Vehicle>(It.IsAny<ICollection<Vehicle>>())).ReturnsAsync(new List<string>());
-        //    _repositoryMock.Setup(r => r.GetEntitiesNames<Specie>(It.IsAny<ICollection<Specie>>())).ReturnsAsync(new List<string>());
-
-        //    // Act
-        //    var result = await _movieService.GetMovieDetailsByIdAsync(movieId);
-
-        //    // Assert
-        //    Assert.AreEqual(movieId, result.Id);
-        //    Assert.AreEqual("Test Movie", result.Name);
-        //}
-
         [Test]
         public async Task EditMovieAsync_ShouldEditMovie()
         {
